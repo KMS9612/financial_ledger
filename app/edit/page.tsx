@@ -25,7 +25,7 @@ export default function EditPage() {
           onClick={() => setIsOpenToday((prev) => !prev)}
           className="w-80 h-10 flex justify-center items-center border rounded transition ease-in-out hover:-translate-y-1"
         >
-          오늘 지출 등록
+          오늘 입/출 등록
         </button>
       </div>
       <div className="table border">
