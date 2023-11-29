@@ -1,9 +1,15 @@
 "use client";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 export default function Header() {
+  const hidden = ["/edit"];
+  const path = usePathname();
   const router = useRouter();
+
+  if (hidden.includes(path)) {
+    return;
+  }
   return (
     <div className="absolute w-full h-12 bg-slate-700 flex justify-between items-center p-8 ">
       <div className="container flex items-center ">

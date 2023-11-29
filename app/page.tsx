@@ -31,9 +31,10 @@ export default function Home() {
       style={{ backgroundColor: "#708D81" }}
       className="w-full h-full flex flex-col justify-center items-center gap-12"
     >
-      {boxArr.map((el) => {
+      {boxArr.map((el, index) => {
         return (
           <div
+            key={index + el.title + el.subText}
             onClick={() => {
               onClickRoute(el.path);
             }}
