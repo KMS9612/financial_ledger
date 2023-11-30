@@ -1,11 +1,15 @@
 import { SetStateAction } from "react";
+import { IPropsIsOpenModal } from "../../types/modalTypes/ModalProps";
 
-export default function EditModal({
-  isOpen,
-  setIsOpen,
+export default function FixPayModal({
+  isOpenFunction,
+  isOpenObject,
 }: {
-  isOpen: Boolean;
-  setIsOpen: React.Dispatch<React.SetStateAction<Boolean>>;
+  isOpenFunction: (
+    modalType: keyof IPropsIsOpenModal,
+    changeType: Boolean
+  ) => void;
+  isOpenObject: IPropsIsOpenModal;
 }) {
   const inputObj = [
     { label: "수입", labelName: "income", type: "number" },
@@ -16,10 +20,10 @@ export default function EditModal({
   return (
     <div
       className={`${
-        isOpen
+        isOpenObject.edit
           ? "opacity-100 pointer-events-auto"
           : "opacity-0 pointer-events-none"
-      } absolute w-1/2 h-fit py-10 bg-white border-2 top-1/2 left-1/2 w-1/5 -translate-x-1/2 -translate-y-1/2 text-center transition ease-in-out rounded z-10`}
+      } absolute w-screen lg:w-96 h-fit py-10 bg-white border-2 top-1/2 left-1/2 w-1/5 -translate-x-1/2 -translate-y-1/2 text-center transition ease-in-out rounded z-10`}
     >
       <div className="mb-10 text-lg font-bold">고정 비용 설정</div>
       <div className="flex flex-col justify-center items-center gap-10">
@@ -31,7 +35,7 @@ export default function EditModal({
                 <input
                   type={el.type}
                   name={el.labelName}
-                  className="w-60 h-10 pl-2 border rounded focus:outline-none focus:ring focus:border-slate-700 focus:border-none"
+                  className="w-80 lg:w-60 h-10 pl-2 border rounded focus:outline-none focus:ring focus:border-slate-700 focus:border-none"
                 />
                 <span className="absolute top-8 right-2 text-gray-400">원</span>
               </div>
@@ -39,11 +43,11 @@ export default function EditModal({
           );
         })}
         <div className="flex flex-col gap-5">
-          <button className="w-60 h-10 border rounded">저장</button>
+          <button className="w-80 lg:w-60 h-10 border rounded">저장</button>
           <button
-            className="w-60 h-10 border rounded"
+            className="w-80 lg:w-60 h-10 border rounded"
             onClick={() => {
-              setIsOpen(false);
+              isOpenFunction("edit", false);
             }}
           >
             닫기

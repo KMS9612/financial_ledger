@@ -1,9 +1,14 @@
+import { IPropsIsOpenModal } from "../../types/modalTypes/ModalProps";
+
 export default function TodayPayModal({
-  isOpenToday,
-  setIsOpenToday,
+  isOpenFunction,
+  isOpenObject,
 }: {
-  isOpenToday: Boolean;
-  setIsOpenToday: React.Dispatch<React.SetStateAction<Boolean>>;
+  isOpenFunction: (
+    modalType: keyof IPropsIsOpenModal,
+    changeType: Boolean
+  ) => void;
+  isOpenObject: IPropsIsOpenModal;
 }) {
   const inputObj = [
     {
@@ -25,11 +30,11 @@ export default function TodayPayModal({
   return (
     <div
       className={`${
-        isOpenToday
+        isOpenObject.today
           ? "opacity-100  pointer-events-auto"
           : "opacity-0  pointer-events-none"
       }
-      absolute w-1/2 h-fit py-10 bg-white border-2 top-1/2 left-1/2 w-1/5 -translate-x-1/2 -translate-y-1/2 text-center transition ease-in-out rounded z-10`}
+      absolute w-screen lg:w-96 h-fit py-10 bg-white border-2 top-1/2 left-1/2 w-1/5 -translate-x-1/2 -translate-y-1/2 text-center transition ease-in-out rounded z-10`}
     >
       <div className="mb-10 text-lg font-bold">오늘 지출 등록</div>
       <div className="flex flex-col justify-center items-center gap-10">
@@ -42,7 +47,7 @@ export default function TodayPayModal({
                   <input
                     type={el.type}
                     name={el.labelName}
-                    className="w-60 h-10 pl-2 border rounded focus:outline-none focus:ring focus:border-slate-700 focus:border-none"
+                    className="w-80 lg:w-60 h-10 pl-2 border rounded focus:outline-none focus:ring focus:border-slate-700 focus:border-none"
                   />
                   <span className="absolute top-8 right-2 text-gray-400">
                     {el.inputAdd}
@@ -62,12 +67,12 @@ export default function TodayPayModal({
             );
           } else {
             return (
-              <div key={el.label} className="relative flex flex-col text-left">
+              <div key={el.label} className=" relative flex flex-col text-left">
                 <div className="relative flex flex-col max-w-fit">
                   <label htmlFor={el.labelName}>{el.label}</label>
                   <select
                     name={el.labelName}
-                    className="w-60 h-10 pl-2 border rounded focus:outline-none focus:ring focus:border-slate-700 focus:border-none"
+                    className="w-80 lg:w-60 h-10 pl-2 border rounded focus:outline-none focus:ring focus:border-slate-700 focus:border-none"
                   >
                     <option value="out">지출</option>
                     <option value="income">수입</option>
@@ -78,10 +83,10 @@ export default function TodayPayModal({
           }
         })}
         <div className="flex flex-col gap-5">
-          <button className="w-60 h-10 border rounded">저장</button>
+          <button className="w-80 lg:w-60 h-10 border rounded">저장</button>
           <button
-            className="w-60 h-10 border rounded"
-            onClick={() => setIsOpenToday(false)}
+            className="w-80 lg:w-60 h-10 border rounded"
+            onClick={() => isOpenFunction("today", false)}
           >
             닫기
           </button>

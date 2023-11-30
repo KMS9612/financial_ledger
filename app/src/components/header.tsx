@@ -7,11 +7,12 @@ export default function Header() {
   const path = usePathname();
   const router = useRouter();
 
-  if (hidden.includes(path)) {
-    return;
-  }
+  // Header 숨기기
+  // if (hidden.includes(path)) {
+  //   return;
+  // }
   return (
-    <div className="absolute w-full h-12 bg-slate-700 flex justify-between items-center p-8 ">
+    <div className="absolute w-full h-14 bg-slate-700 flex justify-between items-center px-6 ">
       <div className="container flex items-center ">
         <Image
           className="cursor-pointer"
@@ -25,9 +26,9 @@ export default function Header() {
         onClick={() => {
           router.push("/edit");
         }}
-        className="w-96 h-8 rounded bg-white text-lg font-bold hover:bg-gray-300 transition ease-in-out  hover:-translate-y-1"
+        className="w-60 h-8 rounded bg-white text-lg font-bold hover:bg-gray-300 transition ease-in-out  hover:-translate-y-1"
       >
-        체험하기
+        Menu
       </button>
     </div>
   );
