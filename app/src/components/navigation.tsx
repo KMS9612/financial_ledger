@@ -22,7 +22,13 @@ export default function Navigation() {
       <div className="container h-4/6 mx-auto flex flex-col justify-start items-center gap-10 ">
         <div className="w-5/6 h-32 flex flex-col justify-center text-white font-bold items-center gap-4 border rounded">
           로그인이 필요합니다.
-          <button className="w-5/6 h-8 border-2 rounded transition ease-in-out hover:-translate-y-1 hover:bg-white hover:text-slate-700">
+          <button
+            onClick={() => {
+              setIsOpen(false);
+              router.push("/login");
+            }}
+            className="w-5/6 h-8 border-2 rounded transition ease-in-out hover:-translate-y-1 hover:bg-white hover:text-slate-700"
+          >
             로그인
           </button>
         </div>
