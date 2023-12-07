@@ -1,36 +1,27 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+나만의 가계부
+=============
 
-## Getting Started
+# 개요
+***
+개인용 가계부 웹사이트입니다. 본인의 아이디를 이용해 등록정보를 DB에 저장하여 소비,수입 정보를 한눈에 볼 수 있게 해줍니다.
+Next14 / Tailwind / Axios / RestAPI / Express / MongoDB를 사용해서 제작한 포트폴리오 사이트입니다.
+디자이너가 아니기때문에 웹사이트가 다소 깔끔하지 않은 점 양해 부탁드립니다.
 
-First, run the development server:
+# 사용 스택
+***
+1. Front-End
+* Next.js 14
+* TypeScript
+* TailWind
+* Recoil
+2. Back-End
+* Express
+* TypeScript
+* Node.js (NodeMon)
+* MongoDB / Mongoose
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+# 페이지 소개
+***
+## 메인페이지
+## 설정 및 등록페이지
+## 대쉬보드 페이지
