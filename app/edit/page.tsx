@@ -9,7 +9,12 @@ export default function EditPage() {
     edit: false,
     today: false,
   });
-
+  const [formData, setFormData] = useState({
+    date: "",
+    type: "",
+    amount: 0,
+    place: "",
+  });
   const onChangeStateOfModal = (
     modalType: keyof IPropsIsOpenModal,
     changeType: Boolean
@@ -34,6 +39,8 @@ export default function EditPage() {
       <TodayPayModal
         isOpenFunction={onChangeStateOfModal}
         isOpenObject={isOpen}
+        setFormData={setFormData}
+        formData={formData}
       />
       <div className="flex justify-between items-end gap-20">
         <button

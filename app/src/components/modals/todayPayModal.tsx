@@ -1,31 +1,78 @@
+import {
+  ChangeEvent,
+  Dispatch,
+  MouseEvent,
+  SetStateAction,
+  useState,
+} from "react";
 import { IPropsIsOpenModal } from "../../types/modalTypes/ModalProps";
+
+interface FormData {
+  date: string;
+  type: string;
+  amount: number;
+  place: string;
+}
 
 export default function TodayPayModal({
   isOpenFunction,
   isOpenObject,
+  setFormData,
+  formData,
 }: {
   isOpenFunction: (
     modalType: keyof IPropsIsOpenModal,
     changeType: Boolean
   ) => void;
   isOpenObject: IPropsIsOpenModal;
+  setFormData: Dispatch<
+    SetStateAction<{
+      date: string;
+      type: string;
+      amount: number;
+      place: string;
+    }>
+  >;
+  formData: FormData;
 }) {
+  const [currentDate, setCurrentDate] = useState<string>("");
   const inputObj = [
     {
       label: "등록일시",
       inputAdd: "일/시",
-      labelName: "income",
-      type: "number",
+      labelName: "date",
+      type: "text",
     },
-    { label: "종류", inputAdd: "종류", labelName: "income", type: "select" },
+    { label: "종류", inputAdd: "종류", labelName: "type", type: "select" },
     {
       label: "사용처",
       inputAdd: "사용처",
-      labelName: "income",
+      labelName: "place",
       type: "text",
     },
-    { label: "금액", inputAdd: "원", labelName: "income", type: "number" },
+    { label: "금액", inputAdd: "원", labelName: "amount", type: "number" },
   ];
+
+  const onClickSetCurrentDate = (event: MouseEvent<HTMLInputElement>) => {
+    if (event.currentTarget.checked) {
+      const date = new Date();
+      const year = date.getFullYear();
+      const month = ("0" + (date.getMonth() + 1)).slice(-2);
+      const day = ("0" + date.getDate()).slice(-2);
+      const hours = ("0" + date.getHours()).slice(-2);
+      const minutes = ("0" + date.getMinutes()).slice(-2);
+      const currentTime = `${year}/${month}/${day} ${hours}:${minutes}`;
+      const onlyDate = `${year}/${month}/${day}`;
+      setFormData({ ...formData, ["date"]: currentTime });
+    } else {
+      setFormData({ ...formData, ["date"]: "" });
+    }
+  };
+
+  const onChageSetState = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.currentTarget;
+    setFormData({ ...formData, [name]: value });
+  };
 
   return (
     <div
@@ -47,6 +94,8 @@ export default function TodayPayModal({
                   <input
                     type={el.type}
                     name={el.labelName}
+                    value={formData[el.labelName]}
+                    onChange={onChageSetState}
                     className="w-80 lg:w-60 h-10 pl-2 border rounded focus:outline-none focus:ring focus:border-slate-700 focus:border-none"
                   />
                   <span className="absolute top-8 right-2 text-gray-400">
@@ -56,6 +105,7 @@ export default function TodayPayModal({
                 {el.label === "등록일시" && (
                   <div>
                     <input
+                      onClick={onClickSetCurrentDate}
                       type="checkbox"
                       name="currentTimeCheck"
                       id="currentTimeCheck"
