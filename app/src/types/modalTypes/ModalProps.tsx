@@ -1,4 +1,4 @@
 export interface IPropsIsOpenModal {
-  edit: Boolean;
-  today: Boolean;
+  edit: boolean;
+  today: boolean;
 }

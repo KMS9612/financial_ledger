@@ -1,16 +1,17 @@
 "use client";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 type FocusOBJ = {
-  id: Boolean;
-  pw: Boolean;
-  [key: string]: Boolean;
+  id: boolean;
+  pw: boolean;
+  [key: string]: boolean;
 };
 
 type UserDataOBJ = {
-  id: String;
-  pw: String;
-  [key: string]: String;
+  id: string;
+  pw: string;
+  [key: string]: string;
 };
 
 export default function LoginPage() {
@@ -19,8 +20,9 @@ export default function LoginPage() {
     id: "",
     pw: "",
   });
+  const router = useRouter();
 
-  const onFocusInput = (inputType: String) => {
+  const onFocusInput = (inputType: string) => {
     let newObj = { ...isFocus };
     if (inputType === "id") {
       newObj.id = true;
@@ -48,12 +50,13 @@ export default function LoginPage() {
   };
 
   const onClickLogin = () => {
+    console.log(userData);
     // 백엔드 작업 끝난 후 userData를 전달해서 로그인 로직 시작
     // jwt토큰은 sessionStorage에 저장
   };
   return (
     <div className="container w-full h-full flex justify-center items-center mx-auto">
-      <div className="w-2/4 flex flex-col justify-center items-center border-4 border-slate-700 rounded py-20 gap-20">
+      <div className="w-1/4 h-1/2 flex flex-col justify-center items-center border-4 border-slate-700 rounded py-20 gap-20">
         <span className="text-3xl text-slate-700 font-bold">Login</span>
         {/* Login Form */}
         <div className="w-full flex flex-col justify-center items-center gap-6">
@@ -96,10 +99,16 @@ export default function LoginPage() {
         </div>
         {/* Login Form End */}
         <div className="w-full flex flex-col justify-center items-center gap-6">
-          <button className="w-5/6 h-12 rounded-full bg-slate-700 text-white font-bold transition duration-300 ease-in-out hover:-translate-y-1">
+          <button
+            onClick={onClickLogin}
+            className="w-5/6 h-12 rounded-full bg-slate-700 text-white font-bold transition duration-300 ease-in-out hover:-translate-y-1"
+          >
             로그인
           </button>
-          <button className="w-5/6 h-12 rounded-full border-4 border-slate-700 text-slate-700 font-bold transition duration-300 ease-in-out hover:-translate-y-1">
+          <button
+            onClick={() => router.push("/signup")}
+            className="w-5/6 h-12 rounded-full border-2 border-slate-700 text-slate-700 font-bold transition duration-300 ease-in-out hover:-translate-y-1"
+          >
             회원가입
           </button>
         </div>

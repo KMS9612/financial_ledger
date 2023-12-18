@@ -1,6 +1,6 @@
 interface IPropsResultSmall {
-  title: String;
-  subText: String;
+  title: string;
+  subText: string;
 }
 
 export default function ResultBoxSmall(props: IPropsResultSmall) {

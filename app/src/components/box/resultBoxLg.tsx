@@ -1,6 +1,6 @@
 interface IPropsResultLarge {
-  title: String;
-  subText: String;
+  title: string;
+  subText: string;
 }
 
 export default function ResultBoxLarge(props: IPropsResultLarge) {
