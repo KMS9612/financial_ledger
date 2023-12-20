@@ -2,6 +2,7 @@
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, useState } from "react";
+import SignUpAlertModal from "../src/components/modals/signUpModal";
 interface IFormSignupInner {
   text: string;
   isErr: boolean;
@@ -22,7 +23,8 @@ export default function SignUp() {
     pw: { text: "", isErr: false, errMessage: "" },
     pw_check: { text: "", isErr: false, errMessage: "" },
   });
-  const [err, setErr] = useState();
+  const [modalText, setModalText] = useState<string>("");
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const onChangeSetFormData = (e: ChangeEvent<HTMLInputElement>) => {
     const target = e.currentTarget;
@@ -123,19 +125,25 @@ export default function SignUp() {
         .post("http://localhost:5000/createUser", { email, password })
         .then((res) => {
           console.log(res.data);
-          // 회원가입 성공 Modal 표시하기
-          // ...
-          // 로그인페이지로 이동
-          router.push("/login");
+          // Modal 표시하기
+          setIsOpen(true);
+          setModalText(res.data.message);
         })
         .catch((err) => {
-          console.log(err);
+          // Modal 표시하기
+          setIsOpen(true);
+          setModalText(err.response.data.message);
         });
     }
   };
 
   return (
-    <div className="container mx-auto w-full h-full flex justify-center items-center pt-10">
+    <div className="relative container mx-auto w-full h-full flex justify-center items-center pt-10">
+      <SignUpAlertModal
+        text={modalText}
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+      />
       <div className="w-1/4 h-3/4 flex flex-col justify-center items-center gap-8 border-4 border-slate-700 rounded py-20 px-10">
         <span className="text-3xl text-slate-700 font-bold">회원가입</span>
         <div className="w-full flex flex-col">
