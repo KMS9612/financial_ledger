@@ -1,4 +1,5 @@
 "use client";
+import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -22,6 +23,7 @@ export default function LoginPage() {
   });
   const router = useRouter();
 
+  // 로그인 Input이 focus되었을때 작동하는 함수 (애니메이션 용)
   const onFocusInput = (inputType: string) => {
     let newObj = { ...isFocus };
     if (inputType === "id") {
@@ -31,6 +33,8 @@ export default function LoginPage() {
     }
     setIsFocus(newObj);
   };
+
+  // 로그인 Input이 Blur(focus out)되었을때 작동하는 함수 (애니메이션 용)
   const onBlurInput = (event: React.FocusEvent<HTMLInputElement>) => {
     let newObj = { ...isFocus };
     if (event.currentTarget.value) {
@@ -42,6 +46,7 @@ export default function LoginPage() {
     setIsFocus(newObj);
   };
 
+  // Input의 값이 변경될대 해당값을 State에 저장하는 함수
   const onChangeSetState = (event: React.ChangeEvent<HTMLInputElement>) => {
     const inputID = event.currentTarget.id;
     let newObj = { ...userData };
@@ -49,10 +54,22 @@ export default function LoginPage() {
     setUserData(newObj);
   };
 
-  const onClickLogin = () => {
-    console.log(userData);
-    // 백엔드 작업 끝난 후 userData를 전달해서 로그인 로직 시작
-    // jwt토큰은 sessionStorage에 저장
+  // 로그인 버튼 클릭시 로그인 요청을 보내는 함수
+  const onClickLogin = async () => {
+    const email = userData.id;
+    const password = userData.pw;
+
+    await axios
+      .post("http://localhost:5000/login", { email, password })
+      .then((res) => {
+        // jwt토큰과 유저정보는 sessionStorage에 저장
+        sessionStorage.setItem("access", res.data.accessToken);
+        sessionStorage.setItem("refresh", res.data.refreshToken);
+        sessionStorage.setItem("email", res.data.email);
+      })
+      .catch((err) => {
+        console.log(err.response.data.message);
+      });
   };
   return (
     <div className="container w-full h-full flex justify-center items-center mx-auto">

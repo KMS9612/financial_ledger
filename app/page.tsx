@@ -6,7 +6,7 @@ export default function Home() {
     {
       title: "환영합니다!",
       subText: `해당 가계부는 Next.js, TypeScript, TailWindCss, Vercel을 활용해 개발, 배포되었습니다.`,
-      path: "/",
+      path: "/login",
     },
     {
       title: "작성하기!",

@@ -120,9 +120,13 @@ export default function SignUp() {
       const email = formData.email.text;
       const password = formData.pw.text;
       axios
-        .post("localhost:5000/createUser", { email, password })
+        .post("http://localhost:5000/createUser", { email, password })
         .then((res) => {
           console.log(res.data);
+          // 회원가입 성공 Modal 표시하기
+          // ...
+          // 로그인페이지로 이동
+          router.push("/login");
         })
         .catch((err) => {
           console.log(err);
