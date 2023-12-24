@@ -7,7 +7,7 @@ export default function FixPayModal({
 }: {
   isOpenFunction: (
     modalType: keyof IPropsIsOpenModal,
-    changeType: Boolean
+    changeType: boolean
   ) => void;
   isOpenObject: IPropsIsOpenModal;
 }) {

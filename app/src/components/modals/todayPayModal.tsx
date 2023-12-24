@@ -22,7 +22,7 @@ export default function TodayPayModal({
 }: {
   isOpenFunction: (
     modalType: keyof IPropsIsOpenModal,
-    changeType: Boolean
+    changeType: boolean
   ) => void;
   isOpenObject: IPropsIsOpenModal;
   setFormData: Dispatch<
