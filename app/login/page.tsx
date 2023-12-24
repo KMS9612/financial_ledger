@@ -20,7 +20,6 @@ type UserDataOBJ = {
 export default function LoginPage() {
   const router = useRouter();
   useCheckLogin(router);
-  const [isLogin, setIsLogin] = useState<boolean>(false);
   const [isFocus, setIsFocus] = useState<FocusOBJ>({ id: false, pw: false });
   const [userData, setUserData] = useState<UserDataOBJ>({
     id: "",
@@ -82,10 +81,21 @@ export default function LoginPage() {
       });
   };
 
+  const onClickTestAccountLogin = async () => {
+    setIsFocus({ id: true, pw: true });
+    setUserData({
+      id: "test@naver.com",
+      pw: "test",
+    });
+  };
+
   return (
     <div className="container w-full h-full flex justify-center items-center mx-auto">
       <LoginErrModal text={errText} isOpen={isOpen} setIsOpen={setIsOpen} />
-      <div className="w-1/4 h-1/2 flex flex-col justify-center items-center border-4 border-slate-700 rounded py-20 gap-20">
+      <div
+        onClick={onClickTestAccountLogin}
+        className="w-1/4 h-3/5 flex flex-col justify-center items-center border-4 border-slate-700 rounded py-20 gap-20"
+      >
         <span className="text-3xl text-slate-700 font-bold">Login</span>
         {/* Login Form */}
         <div className="w-full flex flex-col justify-center items-center gap-6">
@@ -102,6 +112,7 @@ export default function LoginPage() {
               onFocus={() => onFocusInput("id")}
               onBlur={(event) => onBlurInput(event)}
               onChange={onChangeSetState}
+              value={userData.id}
               type="text"
               id="id"
               className="w-full border-b-2 outline-none"
@@ -120,6 +131,7 @@ export default function LoginPage() {
               onChange={onChangeSetState}
               onFocus={() => onFocusInput("pw")}
               onBlur={(event) => onBlurInput(event)}
+              value={userData.pw}
               id="pw"
               type="password"
               className="w-full border-b-2 outline-none"
@@ -128,6 +140,9 @@ export default function LoginPage() {
         </div>
         {/* Login Form End */}
         <div className="w-full flex flex-col justify-center items-center gap-6">
+          <button className="w-5/6 h-12 rounded-full bg-slate-700 text-white font-bold transition duration-300 ease-in-out hover:-translate-y-1">
+            테스트계정 사용
+          </button>
           <button
             onClick={onClickLogin}
             className="w-5/6 h-12 rounded-full bg-slate-700 text-white font-bold transition duration-300 ease-in-out hover:-translate-y-1"
