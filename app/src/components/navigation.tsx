@@ -2,11 +2,18 @@
 import { useRecoilState } from "recoil";
 import { isOpenNavi } from "./recoil/navi";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export default function Navigation() {
   const [isOpen, setIsOpen] = useRecoilState(isOpenNavi);
+  const [isLogin, setIsLogin] = useState<string | null>();
   const router = useRouter();
-  console.log(isOpen);
+
+  useEffect(() => {
+    const loginData: string | null = sessionStorage.getItem("access");
+    setIsLogin(loginData);
+  });
+
   return (
     <div
       className={`absolute w-96 h-screen bg-slate-600 transition duration-300 ease-in-out right-0 z-20 ${
@@ -21,15 +28,21 @@ export default function Navigation() {
       </button>
       <div className="container h-4/6 mx-auto flex flex-col justify-start items-center gap-10 ">
         <div className="w-5/6 h-32 flex flex-col justify-center text-white font-bold items-center gap-4 border rounded">
-          로그인이 필요합니다.
+          {!isLogin ? `로그인이 필요합니다.` : `환영합니다!`}
           <button
             onClick={() => {
-              setIsOpen(false);
-              router.push("/login");
+              if (!isLogin) {
+                setIsOpen(false);
+                router.push("/login");
+              } else {
+                setIsOpen(false);
+                sessionStorage.removeItem("access");
+                sessionStorage.removeItem("refresh");
+              }
             }}
             className="w-5/6 h-8 border-2 rounded transition ease-in-out hover:-translate-y-1 hover:bg-white hover:text-slate-700"
           >
-            로그인
+            {!isLogin ? `로그인` : `로그아웃`}
           </button>
         </div>
         <div className="w-5/6 border rounded flex flex-col jutify-center text-white font-bold items-center gap-6 py-6">

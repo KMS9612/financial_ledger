@@ -1,8 +1,9 @@
 "use client";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import LoginErrModal from "../src/components/modals/loginErrModal";
+import useCheckLogin from "../functions/checkLogin";
 
 type FocusOBJ = {
   id: boolean;
@@ -17,6 +18,9 @@ type UserDataOBJ = {
 };
 
 export default function LoginPage() {
+  const router = useRouter();
+  useCheckLogin(router);
+  const [isLogin, setIsLogin] = useState<boolean>(false);
   const [isFocus, setIsFocus] = useState<FocusOBJ>({ id: false, pw: false });
   const [userData, setUserData] = useState<UserDataOBJ>({
     id: "",
@@ -24,7 +28,6 @@ export default function LoginPage() {
   });
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [errText, setErrText] = useState<string>("");
-  const router = useRouter();
 
   // 로그인 Input이 focus되었을때 작동하는 함수 (애니메이션 용)
   const onFocusInput = (inputType: string) => {
@@ -66,9 +69,11 @@ export default function LoginPage() {
       .post("http://localhost:5000/login", { email, password })
       .then((res) => {
         // jwt토큰과 유저정보는 sessionStorage에 저장
-        sessionStorage.setItem("access", res.data.accessToken);
-        sessionStorage.setItem("refresh", res.data.refreshToken);
-        sessionStorage.setItem("email", res.data.email);
+        sessionStorage.setItem("access", JSON.stringify(res.data.accessToken));
+        sessionStorage.setItem(
+          "refresh",
+          JSON.stringify(res.data.refreshToken)
+        );
         router.push("/");
       })
       .catch((err) => {
@@ -76,6 +81,7 @@ export default function LoginPage() {
         setIsOpen(true);
       });
   };
+
   return (
     <div className="container w-full h-full flex justify-center items-center mx-auto">
       <LoginErrModal text={errText} isOpen={isOpen} setIsOpen={setIsOpen} />

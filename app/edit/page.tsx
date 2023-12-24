@@ -1,11 +1,15 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import TodayPayModal from "../src/components/modals/todayPayModal";
 import FixPayModal from "../src/components/modals/fixPayModal";
 import { IPropsIsOpenModal } from "../src/types/modalTypes/ModalProps";
 import TableInfomation from "./tableInfo";
+import useCheckLogin from "../functions/checkLogin";
+import { useRouter } from "next/navigation";
 
 export default function EditPage() {
+  const router = useRouter();
+  useCheckLogin(router);
   const [isOpen, setIsOpen] = useState<IPropsIsOpenModal>({
     edit: false,
     today: false,
