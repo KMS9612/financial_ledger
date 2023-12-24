@@ -2,6 +2,7 @@
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import LoginErrModal from "../src/components/modals/loginErrModal";
 
 type FocusOBJ = {
   id: boolean;
@@ -21,6 +22,8 @@ export default function LoginPage() {
     id: "",
     pw: "",
   });
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [errText, setErrText] = useState<string>("");
   const router = useRouter();
 
   // 로그인 Input이 focus되었을때 작동하는 함수 (애니메이션 용)
@@ -66,13 +69,16 @@ export default function LoginPage() {
         sessionStorage.setItem("access", res.data.accessToken);
         sessionStorage.setItem("refresh", res.data.refreshToken);
         sessionStorage.setItem("email", res.data.email);
+        router.push("/");
       })
       .catch((err) => {
-        console.log(err.response.data.message);
+        setErrText(err.response.data.message);
+        setIsOpen(true);
       });
   };
   return (
     <div className="container w-full h-full flex justify-center items-center mx-auto">
+      <LoginErrModal text={errText} isOpen={isOpen} setIsOpen={setIsOpen} />
       <div className="w-1/4 h-1/2 flex flex-col justify-center items-center border-4 border-slate-700 rounded py-20 gap-20">
         <span className="text-3xl text-slate-700 font-bold">Login</span>
         {/* Login Form */}
