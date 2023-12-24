@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import TodayPayModal from "../src/components/modals/todayPayModal";
 import FixPayModal from "../src/components/modals/fixPayModal";
 import { IPropsIsOpenModal } from "../src/types/modalTypes/ModalProps";
@@ -16,11 +16,12 @@ export default function EditPage() {
   });
   const [formData, setFormData] = useState({
     date: "",
-    type: "",
+    type: "지출",
     amount: 0,
     place: "",
   });
 
+  // 일일등록 모달과 고정비용 모달의 on/off를 조절하는 함수
   const onChangeStateOfModal = (
     modalType: keyof IPropsIsOpenModal,
     changeType: boolean

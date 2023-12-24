@@ -1,41 +1,13 @@
-import {
-  ChangeEvent,
-  Dispatch,
-  MouseEvent,
-  SetStateAction,
-  useState,
-} from "react";
-import { IPropsIsOpenModal } from "../../types/modalTypes/ModalProps";
-
-interface FormData {
-  date: string;
-  type: string;
-  amount: number;
-  place: string;
-}
+import { ChangeEvent, MouseEvent, useEffect, useState } from "react";
+import { IPropsTodayModal } from "../../types/modalTypes/todayPayModalType";
+import api from "@/app/axios/instance";
 
 export default function TodayPayModal({
   isOpenFunction,
   isOpenObject,
   setFormData,
   formData,
-}: {
-  isOpenFunction: (
-    modalType: keyof IPropsIsOpenModal,
-    changeType: boolean
-  ) => void;
-  isOpenObject: IPropsIsOpenModal;
-  setFormData: Dispatch<
-    SetStateAction<{
-      date: string;
-      type: string;
-      amount: number;
-      place: string;
-    }>
-  >;
-  formData: FormData;
-}) {
-  const [currentDate, setCurrentDate] = useState<string>("");
+}: IPropsTodayModal) {
   const inputObj = [
     {
       label: "등록일시",
@@ -45,8 +17,8 @@ export default function TodayPayModal({
     },
     { label: "종류", inputAdd: "종류", labelName: "type", type: "select" },
     {
-      label: "사용처",
-      inputAdd: "사용처",
+      label: "출처",
+      inputAdd: "출처",
       labelName: "place",
       type: "text",
     },
@@ -62,16 +34,29 @@ export default function TodayPayModal({
       const hours = ("0" + date.getHours()).slice(-2);
       const minutes = ("0" + date.getMinutes()).slice(-2);
       const currentTime = `${year}/${month}/${day} ${hours}:${minutes}`;
-      const onlyDate = `${year}/${month}/${day}`;
       setFormData({ ...formData, ["date"]: currentTime });
     } else {
       setFormData({ ...formData, ["date"]: "" });
     }
   };
 
-  const onChageSetState = (e: ChangeEvent<HTMLInputElement>) => {
+  const onChangeSetState = (
+    e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
     const { name, value } = e.currentTarget;
     setFormData({ ...formData, [name]: value });
+  };
+
+  const onClickSendRequest = () => {
+    console.log(formData);
+    api.post("http://localhost:5000/createEdit", {
+      email: formData.email,
+      date: formData.date,
+      financial_type: formData.type,
+      amount: formData.amount,
+      place: formData.place,
+    });
+    isOpenFunction("today", false);
   };
 
   return (
@@ -95,7 +80,7 @@ export default function TodayPayModal({
                     type={el.type}
                     name={el.labelName}
                     value={formData[el.labelName]}
-                    onChange={onChageSetState}
+                    onChange={onChangeSetState}
                     className="w-80 lg:w-60 h-10 pl-2 border rounded focus:outline-none focus:ring focus:border-slate-700 focus:border-none"
                   />
                   <span className="absolute top-8 right-2 text-gray-400">
@@ -121,11 +106,12 @@ export default function TodayPayModal({
                 <div className="relative flex flex-col max-w-fit">
                   <label htmlFor={el.labelName}>{el.label}</label>
                   <select
+                    onChange={onChangeSetState}
                     name={el.labelName}
                     className="w-80 lg:w-60 h-10 pl-2 border rounded focus:outline-none focus:ring focus:border-slate-700 focus:border-none"
                   >
-                    <option value="out">지출</option>
-                    <option value="income">수입</option>
+                    <option value="지출">지출</option>
+                    <option value="수입">수입</option>
                   </select>
                 </div>
               </div>
@@ -133,10 +119,18 @@ export default function TodayPayModal({
           }
         })}
         <div className="flex flex-col gap-5">
-          <button className="w-80 lg:w-60 h-10 border rounded">저장</button>
+          <button
+            onClick={onClickSendRequest}
+            className="w-80 lg:w-60 h-10 border rounded"
+          >
+            저장
+          </button>
           <button
             className="w-80 lg:w-60 h-10 border rounded"
-            onClick={() => isOpenFunction("today", false)}
+            onClick={() => {
+              isOpenFunction("today", false),
+                setFormData({ date: "", type: "지출", amount: 0, place: "" });
+            }}
           >
             닫기
           </button>
