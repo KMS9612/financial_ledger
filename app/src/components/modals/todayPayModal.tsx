@@ -48,9 +48,10 @@ export default function TodayPayModal({
   };
 
   const onClickSendRequest = () => {
-    console.log(formData);
-    api.post("http://localhost:5000/createEdit", {
-      email: formData.email,
+    // 23.12.25 추후 연달아 클릭하는 거 방지하는 기능 필요함
+    const email = sessionStorage.getItem("email");
+    api.post("http://localhost:5000/edit/createEdit", {
+      email: email,
       date: formData.date,
       financial_type: formData.type,
       amount: formData.amount,
