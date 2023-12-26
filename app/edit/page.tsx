@@ -1,11 +1,13 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import TodayPayModal from "../src/components/modals/todayPayModal";
 import FixPayModal from "../src/components/modals/fixPayModal";
 import { IPropsIsOpenModal } from "../src/types/modalTypes/ModalProps";
 import TableInfomation from "./tableInfo";
 import useCheckLogin from "../functions/checkLogin";
 import { useRouter } from "next/navigation";
+import api from "../axios/instance";
+import { ResponseType } from "axios";
 
 export default function EditPage() {
   const router = useRouter();
@@ -20,6 +22,7 @@ export default function EditPage() {
     amount: 0,
     place: "",
   });
+  const [financialData, setFinancialData] = useState([]);
 
   // 일일등록 모달과 고정비용 모달의 on/off를 조절하는 함수
   const onChangeStateOfModal = (
@@ -37,8 +40,28 @@ export default function EditPage() {
     setIsOpen(newObject);
   };
 
+  const fetchTableData = async () => {
+    // const email = JSON.parse(sessionStorage.getItem("email") || "");
+    const email = sessionStorage.getItem("email");
+    const payload = { email: email };
+    console.log(email);
+    const response = await api
+      .get("/edit/fetchAllFinancial", {
+        params: payload,
+      })
+      .then((res) => {
+        setFinancialData(res.data.data.data);
+        console.log(res.data.data.data);
+      });
+  };
+
+  useEffect(() => {
+    fetchTableData();
+  }, []);
+
   return (
     <div className="relative h-full mx-auto flex flex-col pt-20 gap-8 xl:px-20 md:px-5  ">
+      <button onClick={fetchTableData}>fetchButton</button>
       <FixPayModal
         isOpenFunction={onChangeStateOfModal}
         isOpenObject={isOpen}
@@ -87,7 +110,9 @@ export default function EditPage() {
           </div>
         </div>
         {/* Table Infomation */}
-        <TableInfomation tableInfo={""} />
+        {financialData.map((el) => (
+          <TableInfomation financialData={el} />
+        ))}
       </div>
     </div>
   );

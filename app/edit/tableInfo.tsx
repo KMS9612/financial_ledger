@@ -1,6 +1,10 @@
 interface IPropsTableInfo {}
 
-export default function TableInfomation({ tableInfo }: { tableInfo: any }) {
+export default function TableInfomation({
+  financialData,
+}: {
+  financialData: any;
+}) {
   return (
     <div className="flex text-xs xl:text-sm sm:text-xs">
       <div className="w-1/3 flex border-r border-slate-600 justify-center items-center h-16 lg:h-8">

@@ -23,7 +23,7 @@ const api = axios.create({ baseURL: TestURL, withCredentials: true });
 api.interceptors.request.use(
   function (config) {
     const token = JSON.parse(sessionStorage.getItem("access") || "");
-
+    console.log(token);
     // 요청이 전달되기 전에 작업 수행;
     config.headers["Content-Type"] = "application/json";
 
