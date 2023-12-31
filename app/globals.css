@@ -23,6 +23,18 @@ input[type="number"] {
 label {
   user-select: none;
 }
+
+::-webkit-scrollbar {
+  width: 0.1rem; /* 스크롤바의 너비를 조정합니다. 필요에 따라 조정해주세요. */
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent; /* 스크롤바 트랙의 배경색을 투명하게 설정합니다. */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: transparent; /* 스크롤바 썸의 배경색을 투명하게 설정합니다. */
+}
 @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;

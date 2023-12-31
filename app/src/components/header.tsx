@@ -15,7 +15,7 @@ export default function Header() {
   //   return;
   // }
   return (
-    <div className="absolute w-full h-14 bg-slate-700 flex justify-between items-center px-6 z-10">
+    <div className="sticky w-full h-14 bg-slate-700 flex justify-between items-center px-6 z-10">
       <div className="container flex items-center ">
         <Image
           className="cursor-pointer"

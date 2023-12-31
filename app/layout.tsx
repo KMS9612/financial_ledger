@@ -22,7 +22,7 @@ export default function RootLayout({
       <RecoilRoot>
         <body
           className={`${inter.className} relative m-auto w-screen h-screen flex flex-col justify-start items-center overflow-x-hidden`}
-          style={{ minWidth: "380px", margin: "0 auto", minHeight: "100vh" }}
+          style={{ minWidth: "380px", margin: "0 auto" }}
         >
           <Header />
           <Navigation />
