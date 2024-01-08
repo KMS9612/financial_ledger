@@ -6,6 +6,7 @@ import { WheelEvent, useEffect, useRef, useState } from "react";
 export default function Home() {
   const [isScrollOver, setIsScrollOver] = useState<boolean>(false);
   const scrollWrapRef = useRef<HTMLDivElement | null>(null);
+  const secWrapRef = useRef<HTMLDivElement | null>(null);
 
   const boxArr = [
     {
@@ -22,9 +23,6 @@ export default function Home() {
     },
   ];
   const router = useRouter();
-  useEffect(() => {
-    console.log(window);
-  });
 
   const onClickRoute = (path: string) => {
     router.push(path);
@@ -78,11 +76,24 @@ export default function Home() {
         <div className="min-w-full flex justify-center items-center h-full snap-center">
           그런데 엑셀을 할 줄 모른다구요?
         </div>
-        <div className="min-w-full flex justify-center items-center h-full snap-center">
-          이젠 웹으로 간편하게 가계부 써봐요!
+        <div className="min-w-full flex flex-col justify-center items-center h-full snap-center gap-10">
+          <p>이젠 웹으로 간편하게 가계부 써봐요! </p>
+          <button
+            onClick={() => {
+              setIsScrollOver(true);
+              window.scrollTo({
+                behavior: "smooth",
+                top: secWrapRef.current?.clientHeight,
+              });
+            }}
+            className="w-32 border-2 border-slate-600 rounded-md bg-white text-slate-600 text-xl p-2"
+          >
+            시작하기
+          </button>
         </div>
       </div>
       <div
+        ref={secWrapRef}
         style={{ minHeight: "100vh" }}
         className="w-full flex justify-center items-center gap-12"
       >
