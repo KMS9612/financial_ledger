@@ -7,7 +7,6 @@ import TableInfomation from "./tableInfo";
 import useCheckLogin from "../functions/checkLogin";
 import { useRouter } from "next/navigation";
 import api from "../axios/instance";
-import { ResponseType } from "axios";
 
 export default function EditPage() {
   const router = useRouter();

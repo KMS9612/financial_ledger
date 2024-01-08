@@ -100,6 +100,7 @@ export default function Home() {
         {boxArr.map((el, index) => {
           return (
             <MainNaviBox
+              key={el.path + index}
               el={el}
               index={index}
               onClickRoute={onClickRoute}

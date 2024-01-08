@@ -15,7 +15,6 @@ export default function MainNaviBox({
 }) {
   return (
     <div
-      key={index + el.title + el.subText}
       onClick={() => {
         onClickRoute(el.path);
       }}

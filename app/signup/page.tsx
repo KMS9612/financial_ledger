@@ -122,7 +122,7 @@ export default function SignUp() {
       const email = formData.email.text;
       const password = formData.pw.text;
       axios
-        .post("http://localhost:5000/createUser", { email, password })
+        .post("http://localhost:8080/createUser", { email, password })
         .then((res) => {
           console.log(res.data);
           // Modal 표시하기

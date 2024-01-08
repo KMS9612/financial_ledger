@@ -65,7 +65,7 @@ export default function LoginPage() {
     const password = userData.pw;
 
     await axios
-      .post("http://localhost:5000/login", { email, password })
+      .post("http://localhost:8080/login", { email, password })
       .then((res) => {
         // jwt토큰과 유저정보는 sessionStorage에 저장
         sessionStorage.setItem("access", JSON.stringify(res.data.accessToken));
@@ -73,7 +73,7 @@ export default function LoginPage() {
           "refresh",
           JSON.stringify(res.data.refreshToken)
         );
-        sessionStorage.setItem("email", JSON.stringify(res.data.email))
+        sessionStorage.setItem("email", JSON.stringify(res.data.email));
         router.push("/");
       })
       .catch((err) => {
