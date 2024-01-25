@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 import api from "../axios/instance";
 import MonthList from "./monthList";
 import { IPropsFetchedData } from "../src/types/editTypes/editTypes";
+import { ITableData } from "../src/types/editTypes/tableType";
 
 export default function EditPage() {
   const router = useRouter();
@@ -26,6 +27,8 @@ export default function EditPage() {
   const [financialData, setFinancialData] = useState<Array<IPropsFetchedData>>(
     []
   );
+  const [openTable, setOpenTable] = useState<boolean>(false);
+  const [tableData, setTableData] = useState<Array<ITableData>>([]);
 
   // 일일등록 모달과 고정비용 모달의 on/off를 조절하는 함수
   const onChangeStateOfModal = (
@@ -43,12 +46,12 @@ export default function EditPage() {
     setIsOpen(newObject);
   };
 
+  // 해당 유저가 등록한 모든 일일 가계부 정보를 불러오는 함수
   const fetchTableData = async () => {
     // const email = JSON.parse(sessionStorage.getItem("email") || "");
     const email = sessionStorage.getItem("email");
     const payload = { email: email };
-    console.log(email);
-    const response = await api
+    await api
       .get("/edit/fetchAllFinancial", {
         params: payload,
       })
@@ -74,26 +77,33 @@ export default function EditPage() {
         setFormData={setFormData}
         formData={formData}
       />
-      <div className="flex justify-between items-end gap-20">
-        <button
-          onClick={() => onChangeStateOfModal("edit", !isOpen.edit)}
-          className="w-80 h-10 flex justify-center items-center border-2 border-slate-600 rounded text-slate-600 font-bold transition ease-in-out hover:-translate-y-1"
-        >
-          고정 비용 설정
-        </button>
-        <button
-          onClick={() => onChangeStateOfModal("today", !isOpen.today)}
-          className="w-80 h-10 flex justify-center items-center border-2 border-slate-600 rounded text-slate-600 font-bold transition ease-in-out hover:-translate-y-1"
-        >
-          오늘 입/출 등록
-        </button>
+      <div className="flex justify-between items-center gap-20">
+        <div>
+          <h2 className="font-bold text-xl text-slate-700">
+            지출 / 수입 정보 등록
+          </h2>
+        </div>
+        <div className="flex gap-5">
+          <button
+            onClick={() => onChangeStateOfModal("edit", !isOpen.edit)}
+            className="w-80 h-10 flex justify-center items-center border-2 border-slate-600 rounded text-slate-600 font-bold transition ease-in-out hover:-translate-y-1"
+          >
+            고정 비용 설정
+          </button>
+          <button
+            onClick={() => onChangeStateOfModal("today", !isOpen.today)}
+            className="w-80 h-10 flex justify-center items-center border-2 border-slate-600 rounded text-slate-600 font-bold transition ease-in-out hover:-translate-y-1"
+          >
+            오늘 입/출 등록
+          </button>
+        </div>
       </div>
       {/* Table Infomation */}
-      {financialData.map((el: IPropsFetchedData, index) => (
-        <MonthList key={el.month + index} el={el} />
-      ))}
-      {/* MonthList 내부에 TableInfomation을 넣는것보다 외부에 두고 state값을 클릭한 값에 따라 다르게 변경시키는게 더 효육적으로 보임 */}
-      <TableInfomation />
+      <div className="w-full flex gap-10">
+        {financialData.map((el: IPropsFetchedData, index) => (
+          <MonthList key={el.month + index} el={el} />
+        ))}
+      </div>
     </div>
   );
 }
