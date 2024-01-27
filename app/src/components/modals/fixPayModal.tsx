@@ -60,12 +60,10 @@ export default function FixPayModal({
     api
       .post("/fix/createFixedData", params)
       .then((res) => {
-        console.log(res.data);
         alert("저장완료");
         isOpenFunction("edit", false);
       })
       .catch((err) => {
-        console.log(err);
         alert("저장실패 다시 시도하세요.");
         isOpenFunction("edit", false);
       });

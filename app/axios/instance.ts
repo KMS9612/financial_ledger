@@ -10,7 +10,7 @@ const refreshAccessToken = async (refreshToken: string) => {
   });
   const accessToken = response.data.newAccessToken;
 
-  sessionStorage.setItem("accessToken", JSON.stringify(accessToken));
+  sessionStorage.setItem("access", JSON.stringify(accessToken));
 
   return accessToken;
 };

@@ -24,4 +24,5 @@ export interface IPropsTodayModal {
     }>
   >;
   formData: FormData;
+  fetchTableData: () => void;
 }

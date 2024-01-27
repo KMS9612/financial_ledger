@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import TodayPayModal from "../src/components/modals/todayPayModal";
 import FixPayModal from "../src/components/modals/fixPayModal";
 import { IPropsIsOpenModal } from "../src/types/modalTypes/ModalProps";
-import TableInfomation from "./tableInfo";
 import useCheckLogin from "../functions/checkLogin";
 import { useRouter } from "next/navigation";
 import api from "../axios/instance";
@@ -57,7 +56,7 @@ export default function EditPage() {
       })
       .then((res) => {
         setFinancialData(res.data.data.data);
-        console.log(res.data.data.data);
+        sessionStorage.setItem("monthData", JSON.stringify(res.data.data.data));
       });
   };
 
@@ -72,6 +71,7 @@ export default function EditPage() {
         isOpenObject={isOpen}
       />
       <TodayPayModal
+        fetchTableData={fetchTableData}
         isOpenFunction={onChangeStateOfModal}
         isOpenObject={isOpen}
         setFormData={setFormData}

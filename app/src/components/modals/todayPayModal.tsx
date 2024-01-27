@@ -7,6 +7,7 @@ export default function TodayPayModal({
   isOpenObject,
   setFormData,
   formData,
+  fetchTableData,
 }: IPropsTodayModal) {
   const inputObj = [
     {
@@ -58,6 +59,7 @@ export default function TodayPayModal({
       place: formData.place,
     });
     isOpenFunction("today", false);
+    fetchTableData();
   };
 
   return (

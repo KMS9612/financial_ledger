@@ -124,7 +124,6 @@ export default function SignUp() {
       axios
         .post("http://localhost:8080/createUser", { email, password })
         .then((res) => {
-          console.log(res.data);
           // Modal 표시하기
           setIsOpen(true);
           setModalText(res.data.message);
