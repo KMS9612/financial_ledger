@@ -48,10 +48,10 @@ export default function TodayPayModal({
     setFormData({ ...formData, [name]: value });
   };
 
-  const onClickSendRequest = () => {
+  const onClickSendRequest = async () => {
     // 23.12.25 추후 연달아 클릭하는 거 방지하는 기능 필요함
     const email = sessionStorage.getItem("email");
-    api.post("/edit/createEdit", {
+    await api.post("/edit/createEdit", {
       email: email,
       date: formData.date,
       financial_type: formData.type,

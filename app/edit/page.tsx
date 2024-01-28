@@ -47,7 +47,6 @@ export default function EditPage() {
 
   // 해당 유저가 등록한 모든 일일 가계부 정보를 불러오는 함수
   const fetchTableData = async () => {
-    // const email = JSON.parse(sessionStorage.getItem("email") || "");
     const email = sessionStorage.getItem("email");
     const payload = { email: email };
     await api
@@ -62,7 +61,7 @@ export default function EditPage() {
 
   useEffect(() => {
     fetchTableData();
-  }, []);
+  });
 
   return (
     <div className="relative h-full mx-auto flex flex-col pt-20 gap-8 xl:px-20 md:px-5  ">
