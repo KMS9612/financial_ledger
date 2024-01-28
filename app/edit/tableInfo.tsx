@@ -23,8 +23,11 @@ export default function TableInfomation({
         </div>
       </div>
       {/* 클릭된 년/월에 대한 데이터 기입하기 */}
-      {tableData.map((el) => (
-        <div className="flex text-xs xl:text-sm sm:text-xs border-b-2 border-l-2 border-r-2">
+      {tableData.map((el, index) => (
+        <div
+          key={el.value.amount + index}
+          className="flex text-xs xl:text-sm sm:text-xs border-b-2 border-l-2 border-r-2"
+        >
           <div className="w-1/3 flex border-r justify-center items-center h-16 lg:h-8">
             {el.day}일
           </div>

@@ -54,6 +54,20 @@ export default function EditPage() {
         params: payload,
       })
       .then((res) => {
+        const resData = res.data.data.data;
+        // Fetch된 데이터 날짜별 정렬
+        resData.sort((a: IPropsFetchedData, b: IPropsFetchedData) => {
+          const monthA = a.month;
+          const monthB = b.month;
+          if (monthA < monthB) {
+            return 1;
+          }
+          if (monthA > monthB) {
+            return -1;
+          }
+          return 0;
+        });
+        // Fetch된 후 정렬된 데이터 State(monthList 용)와 SessionStorage(monthDetail용)에 저장
         setFinancialData(res.data.data.data);
         sessionStorage.setItem("monthData", JSON.stringify(res.data.data.data));
       });
@@ -61,7 +75,7 @@ export default function EditPage() {
 
   useEffect(() => {
     fetchTableData();
-  });
+  }, []);
 
   return (
     <div className="relative h-full mx-auto flex flex-col pt-20 gap-8 xl:px-20 md:px-5  ">

@@ -15,13 +15,26 @@ export default function MonthDetail({
   const [year, month] = propsData.split("/");
   const [tableData, setTableData] = useState<Array<any>>([]);
 
+  // sessionStorage에 저장한 monthData에서 클릭된 년/월의 일별 데이터를 가져오기
   const monthData = JSON.parse(
     sessionStorage.getItem("monthData") || ""
   ).filter((el: any) => el.month === propsData)[0].date;
 
+  // 선택된 달의 일별 데이터 테이블을 정렬
+  monthData.sort((a: any, b: any) => {
+    const dayA = a.day;
+    const dayB = b.day;
+
+    if (dayA > dayB) {
+      return 1;
+    } else {
+      return -1;
+    }
+  });
+
   useEffect(() => {
     setTableData(monthData);
-  });
+  }, []);
 
   return (
     <div className="w-full h-screen p-20">
