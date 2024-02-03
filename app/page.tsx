@@ -74,10 +74,10 @@ export default function Home() {
           가계부 시작하려 하나요?
         </div>
         <div className="min-w-full flex justify-center items-center h-full snap-center">
-          그런데 엑셀을 할 줄 모른다구요?
+          엑셀을 할 줄 모른다구요?
         </div>
         <div className="min-w-full flex flex-col justify-center items-center h-full snap-center gap-10">
-          <p>이젠 웹으로 간편하게 가계부 써봐요! </p>
+          <p>웹으로 간편하게 가계부 써봐요! </p>
           <button
             onClick={() => {
               setIsScrollOver(true);

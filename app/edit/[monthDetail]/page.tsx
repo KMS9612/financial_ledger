@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import TableInfomation from "../tableInfo";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import FixedDataBox from "@/app/src/components/box/fixedDataBox";
 
 export default function MonthDetail({
   params,
@@ -38,18 +39,21 @@ export default function MonthDetail({
 
   return (
     <div className="w-full h-screen p-20">
-      <div className="flex gap-2">
-        <button onClick={() => router.back()}>
-          <Image
-            src={"/arrowLeft.png"}
-            width={20}
-            height={20}
-            alt={"뒤로가기 버튼 이미지"}
-          ></Image>
-        </button>
-        <h2 className="font-bold text-xl text-slate-700">
-          {`${year} - ${month}월의 지출 / 수입 정보`}
-        </h2>
+      <div className="flex justify-between items-center mb-4">
+        <div className="flex gap-2">
+          <button onClick={() => router.back()}>
+            <Image
+              src={"/arrowLeft.png"}
+              width={20}
+              height={20}
+              alt={"뒤로가기 버튼 이미지"}
+            ></Image>
+          </button>
+          <h2 className="font-bold text-xl text-slate-700">
+            {`${year} - ${month}월의 지출 / 수입 정보`}
+          </h2>
+        </div>
+        <FixedDataBox />
       </div>
       {/* <TableInfomation /> */}
       <TableInfomation tableData={tableData} />
