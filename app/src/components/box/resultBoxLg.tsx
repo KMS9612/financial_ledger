@@ -5,11 +5,9 @@ interface IPropsResultLarge {
 
 export default function ResultBoxLarge(props: IPropsResultLarge) {
   return (
-    <div className="w-full h-72 border-2 border-slate-700 rounded-lg">
-      <div className="text-white font-bold rounded-t bg-slate-700 pl-2">
-        {props.title}
-      </div>
-      <div className="h-5/6 overflow-auto pl-2">{props.subText}</div>
+    <div className="w-full h-full border rounded-lg shadow-md p-2">
+      <div className="text-slate-700 text-2xl font-bold">{props.title}</div>
+      <div className="h-5/6">{props.subText}</div>
     </div>
   );
 }
