@@ -16,7 +16,7 @@ export default function Navigation() {
 
   return (
     <div
-      className={`absolute w-96 h-screen bg-slate-600 transition duration-300 ease-in-out right-0 z-20 ${
+      className={`absolute w-96 h-[900px] bg-slate-600 transition duration-300 ease-in-out right-0 z-20 ${
         isOpen ? "block -translate-x-0" : "hidden translate-x-96 "
       }`}
     >
@@ -26,7 +26,7 @@ export default function Navigation() {
       >
         Close
       </button>
-      <div className="container h-4/6 mx-auto flex flex-col justify-start items-center gap-10 ">
+      <div className="container m-h-4/6 mx-auto flex flex-col justify-start items-center gap-10 ">
         <div className="w-5/6 h-32 flex flex-col justify-center text-white font-bold items-center gap-4 border rounded">
           {!isLogin ? `로그인이 필요합니다.` : `환영합니다!`}
           <button

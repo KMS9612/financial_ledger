@@ -91,11 +91,11 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="container w-full h-full flex justify-center items-center mx-auto">
+    <div className="w-full h-full flex justify-center items-center pt-20">
       <LoginErrModal text={errText} isOpen={isOpen} setIsOpen={setIsOpen} />
       <div
         onClick={onClickTestAccountLogin}
-        className="w-1/4 h-3/5 flex flex-col justify-center items-center border-4 border-slate-700 rounded py-20 gap-20"
+        className="sm:w-96 w-full sm:m-h-4/5 h-full flex flex-col justify-center items-center border-4 border-slate-700 rounded py-20 gap-20"
       >
         <span className="text-3xl text-slate-700 font-bold">Login</span>
         {/* Login Form */}

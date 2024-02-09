@@ -137,13 +137,13 @@ export default function SignUp() {
   };
 
   return (
-    <div className="relative container mx-auto w-full h-full flex justify-center items-center pt-10">
+    <div className="relative w-full h-full flex justify-center items-center pt-20">
       <SignUpAlertModal
         text={modalText}
         isOpen={isOpen}
         setIsOpen={setIsOpen}
       />
-      <div className="w-1/4 h-3/4 flex flex-col justify-center items-center gap-8 border-4 border-slate-700 rounded py-20 px-10">
+      <div className="sm:m-w-1/4 w-96 h-3/4 flex flex-col justify-center items-center gap-8 border-4 border-slate-700 rounded py-20 px-10">
         <span className="text-3xl text-slate-700 font-bold">회원가입</span>
         <div className="w-full flex flex-col">
           <label htmlFor="email">Email</label>

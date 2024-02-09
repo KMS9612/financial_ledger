@@ -21,12 +21,12 @@ export default function RootLayout({
     <html lang="en">
       <RecoilRoot>
         <body
-          className={`${inter.className} relative m-auto w-screen h-screen flex flex-col justify-start items-center overflow-x-hidden`}
+          className={`${inter.className} relative m-auto w-screen m-h-screen flex flex-col justify-start items-center overflow-x-hidden`}
           style={{ minWidth: "380px", margin: "0 auto" }}
         >
           <Header />
           <Navigation />
-          <main className="absolute w-full h-full">{children}</main>
+          <main className="absolute w-full m-h-full">{children}</main>
         </body>
       </RecoilRoot>
     </html>
