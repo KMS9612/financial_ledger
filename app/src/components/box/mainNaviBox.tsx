@@ -18,7 +18,7 @@ export default function MainNaviBox({
       onClick={() => {
         onClickRoute(el.path);
       }}
-      className="w-2/5 h-full border-2 border-slate-700 flex bg-white rounded p-6 cursor-pointer transition ease-in-out hover:-translate-y-1"
+      className="md:w-2/5 w-4/5 h-80 border-2 border-slate-700 flex bg-white rounded p-6 cursor-pointer transition ease-in-out hover:-translate-y-1"
     >
       <div className="w-5/6">
         <h2 className="text-3xl">{el.title}</h2>

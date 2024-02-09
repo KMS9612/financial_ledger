@@ -7,7 +7,9 @@ export default function Home() {
   const [isScrollOver, setIsScrollOver] = useState<boolean>(false);
   const scrollWrapRef = useRef<HTMLDivElement | null>(null);
   const secWrapRef = useRef<HTMLDivElement | null>(null);
+  const router = useRouter();
 
+  // 페이지 이동 버튼 종류를 배열로 담아놓은 데이터
   const boxArr = [
     {
       title: "작성하기!",
@@ -22,7 +24,6 @@ export default function Home() {
       path: "/result",
     },
   ];
-  const router = useRouter();
 
   const onClickRoute = (path: string) => {
     router.push(path);
@@ -67,7 +68,7 @@ export default function Home() {
         ref={scrollWrapRef}
         className={`${
           isScrollOver ? "block" : "fixed"
-        } hide_scroll w-full h-screen text-white bg-slate-700 font-bold text-5xl flex overflow-scroll snap-mandatory scroll-smooth`}
+        } hide_scroll w-full h-screen lg:flex text-white bg-slate-700 font-bold md:text-5xl text-2xl overflow-scroll snap-mandatory scroll-smooth`}
         onWheel={onWheelAnimation}
       >
         <div className="min-w-full flex justify-center items-center h-full snap-center">
@@ -95,7 +96,7 @@ export default function Home() {
       <div
         ref={secWrapRef}
         style={{ minHeight: "100vh" }}
-        className="w-full flex justify-center items-center gap-12"
+        className="w-full h-screen flex flex-col sm:flex-row justify-center items-center gap-12"
       >
         {boxArr.map((el, index) => {
           return (
