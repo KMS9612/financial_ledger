@@ -85,18 +85,24 @@ export default function ResultPage() {
           <ResultBoxLarge
             title={"FinancialGraph"}
             subText="이번년도 지출,수익 현황을 한눈에 볼 수 있는 그래프"
+            editData={editData}
+            fixedData={fixedData}
           />
         </div>
         <div className="flex flex-col gap-10">
           {/* 데이터 표시 박스 */}
-          {dataSet.map((el) => (
+          {dataSet.map((el, index) => (
             <ResultBoxSmall
+              key={el.title + index}
               title={el.title}
               subText={el.subText}
               data={el.data}
             />
           ))}
-          <button className="w-full h-24 border shadow-md bg-slate-600 text-white font-bold text-xl rounded">
+          <button
+            onClick={() => router.push("/edit")}
+            className="w-full h-24 border shadow-md bg-slate-600 text-white font-bold text-xl rounded"
+          >
             일일 지출/수입 작성하러 가기
           </button>
         </div>
