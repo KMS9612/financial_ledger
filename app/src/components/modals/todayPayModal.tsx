@@ -69,7 +69,7 @@ export default function TodayPayModal({
           ? "opacity-100  pointer-events-auto"
           : "opacity-0  pointer-events-none"
       }
-      absolute w-screen lg:w-96 h-fit py-10 bg-white border-slate-700 border-2 top-1/2 left-1/2 w-1/5 -translate-x-1/2 -translate-y-1/2 text-center transition ease-in-out rounded z-10`}
+      absolute w-screen min-w-[380px] lg:w-96 h-fit py-10 bg-white border-slate-700 border-2 top-1/2 left-1/2 w-1/5 -translate-x-1/2 -translate-y-1/2 text-center transition ease-in-out rounded z-10`}
     >
       <div className="mb-10 text-lg font-bold">오늘 지출 등록</div>
       <div className="flex flex-col justify-center items-center gap-10">

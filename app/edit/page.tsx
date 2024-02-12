@@ -26,8 +26,6 @@ export default function EditPage() {
   const [financialData, setFinancialData] = useState<Array<IPropsFetchedData>>(
     []
   );
-  const [openTable, setOpenTable] = useState<boolean>(false);
-  const [tableData, setTableData] = useState<Array<ITableData>>([]);
 
   // 일일등록 모달과 고정비용 모달의 on/off를 조절하는 함수
   const onChangeStateOfModal = (
@@ -78,7 +76,7 @@ export default function EditPage() {
   }, []);
 
   return (
-    <div className="relative h-full mx-auto flex flex-col pt-20 gap-8 xl:px-20 md:px-5  ">
+    <div className="relative h-screen flex flex-col pt-20 px-10 gap-8">
       <FixPayModal
         isOpenFunction={onChangeStateOfModal}
         isOpenObject={isOpen}
@@ -90,13 +88,14 @@ export default function EditPage() {
         setFormData={setFormData}
         formData={formData}
       />
-      <div className="flex justify-between items-center gap-20">
+      {/* Top Infomation / Buttons */}
+      <div className="flex flex-col lg:flex-row justify-between items-center gap-10">
         <div>
           <h2 className="font-bold text-xl text-slate-700">
-            지출 / 수입 정보 등록
+            지출 / 수입 표 형식 가계부
           </h2>
         </div>
-        <div className="flex gap-5">
+        <div className="flex flex-col sm:flex-row gap-5">
           <button
             onClick={() => onChangeStateOfModal("edit", !isOpen.edit)}
             className="w-80 h-10 flex justify-center items-center border-2 border-slate-600 rounded text-slate-600 font-bold transition ease-in-out hover:-translate-y-1"
@@ -112,7 +111,7 @@ export default function EditPage() {
         </div>
       </div>
       {/* Table Infomation */}
-      <div className="w-full flex gap-10">
+      <div className="w-full flex flex-wrap justify-center lg:justify-start gap-8">
         {financialData.map((el: IPropsFetchedData, index) => (
           <MonthList key={el.month + index} el={el} />
         ))}

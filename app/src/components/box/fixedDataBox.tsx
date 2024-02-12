@@ -20,14 +20,14 @@ export default function FixedDataBox() {
     });
   }, []);
   return (
-    <div className="flex gap-2 items-center">
-      <div className="border-2 border-slate-600 font-bold rounded-md h-10 flex items-center px-10">
+    <div className="flex flex-row flex-wrap gap-2 items-center">
+      <div className="border-2 border-slate-600 font-bold rounded-md h-10 flex justify-center items-center px-10 text-xs lg:text-base min-w-full xl:min-w-[215px]">
         고정수입: {fixedData?.income} 원
       </div>
-      <div className="border-2 border-slate-600 font-bold rounded-md h-10 flex items-center px-10">
+      <div className="border-2 border-slate-600 font-bold rounded-md h-10 flex justify-center items-center px-10 text-xs lg:text-base min-w-full xl:min-w-[215px]">
         고정지출: {fixedData?.fixed} 원
       </div>
-      <div className="border-2 border-slate-600 font-bold rounded-md h-10 flex items-center px-10">
+      <div className="border-2 border-slate-600 font-bold rounded-md h-10 flex justify-center items-center px-10 text-xs lg:text-base min-w-full xl:min-w-[215px]">
         저금: {fixedData?.saving} 원
       </div>
     </div>
