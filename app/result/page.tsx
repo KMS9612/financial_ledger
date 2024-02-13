@@ -2,11 +2,11 @@
 import { useEffect, useState } from "react";
 import api from "../axios/instance";
 import useCheckLogin from "../functions/checkLogin";
-import ResultBoxLarge from "../src/components/box/resultBoxLg";
 import ResultBoxSmall from "../src/components/box/resultBoxSm";
 import { useRouter } from "next/navigation";
 import { IFixedData } from "../src/types/fixedTypes/fixedDataType";
 import CalculateData from "../functions/calculateData";
+import ChartBox from "../src/components/chart/resultChart";
 
 export default function ResultPage() {
   const router = useRouter();
@@ -76,20 +76,15 @@ export default function ResultPage() {
   ];
 
   return (
-    <div className="w-full h-full pt-20 p-10">
+    <div className="w-full h-full pt-20 px-4">
       <h2 className="text-slate-700 font-bold text-4xl mb-10">
         내 가계부 확인하기
       </h2>
-      <div className="flex gap-10 h-full pb-10">
-        <div className="w-full h-full">
-          <ResultBoxLarge
-            title={"FinancialGraph"}
-            subText="이번년도 지출,수익 현황을 한눈에 볼 수 있는 그래프"
-            editData={editData}
-            fixedData={fixedData}
-          />
+      <div className="w-full flex flex-col xl:flex-row gap-4 h-screen pb-10">
+        <div className="w-full xl:w-3/4 h-96 xl:h-full">
+          <ChartBox editData={editData} fixedData={fixedData} />
         </div>
-        <div className="flex flex-col gap-10">
+        <div className="w-full xl:w-1/4 flex flex-row flex-wrap xl:flex-col gap-10">
           {/* 데이터 표시 박스 */}
           {dataSet.map((el, index) => (
             <ResultBoxSmall
@@ -101,7 +96,7 @@ export default function ResultPage() {
           ))}
           <button
             onClick={() => router.push("/edit")}
-            className="w-full h-24 border shadow-md bg-slate-600 text-white font-bold text-xl rounded"
+            className="w-full xl:w-full h-24 border shadow-md bg-slate-600 text-white font-bold text-xl rounded"
           >
             일일 지출/수입 작성하러 가기
           </button>

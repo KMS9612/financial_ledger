@@ -43,7 +43,7 @@ export default function ChartBox(props: IPropsChart) {
     ],
     datasets: [
       {
-        label: "연간 월 지출 비교(%)",
+        label: "연간 월 지출(%)",
         data: minus,
         backgroundColor: "rgba(224, 61, 61, 0.863)",
         borderColor: "rgba(75,192,192,1)",
@@ -51,7 +51,7 @@ export default function ChartBox(props: IPropsChart) {
         borderWidth: 1,
       },
       {
-        label: "연간 월 수입 비교(%)",
+        label: "연간 월 수입(%)",
         data: plus,
         backgroundColor: "rgba(119, 203, 150, 0.838)",
         borderColor: "rgba(75,192,192,1)",
@@ -63,6 +63,7 @@ export default function ChartBox(props: IPropsChart) {
 
   const options = {
     responsive: true,
+    maintainAspectRatio: false,
     scales: {
       y: {
         beginAtZero: true,
@@ -76,5 +77,13 @@ export default function ChartBox(props: IPropsChart) {
       },
     },
   };
-  return <Bar data={data} options={options}></Bar>;
+  return (
+    <div className="w-full h-full border rounded-lg shadow-md p-2 overflow-auto">
+      <Bar
+        className="min-w-[440px] w-full h-screen"
+        data={data}
+        options={options}
+      ></Bar>
+    </div>
+  );
 }
