@@ -8,9 +8,8 @@ import { IFixedData } from "../src/types/fixedTypes/fixedDataType";
 import CalculateData from "../functions/calculateData";
 import ChartBox from "../src/components/chart/resultChart";
 
-export default function ResultPage() {
+function ResultPage() {
   const router = useRouter();
-  useCheckLogin(router);
   const [editData, setEditData] = useState<any>([]);
   const [fixedData, setFixedData] = useState<IFixedData>({
     id: "",
@@ -31,7 +30,7 @@ export default function ResultPage() {
         setFixedData(res.data.fixedData);
       })
       .catch((err: any) => {
-        alert(err);
+        console.log(err);
       });
 
     // 일일 등록 정보 요청하기
@@ -41,7 +40,7 @@ export default function ResultPage() {
         setEditData(res.data.data.data);
       })
       .catch((err: any) => {
-        alert(err);
+        console.log(err);
       });
 
     // 요청한 일일 등록 정보 합산
@@ -105,3 +104,5 @@ export default function ResultPage() {
     </div>
   );
 }
+
+export default useCheckLogin(ResultPage);

@@ -8,11 +8,9 @@ import { useRouter } from "next/navigation";
 import api from "../axios/instance";
 import MonthList from "./monthList";
 import { IPropsFetchedData } from "../src/types/editTypes/editTypes";
-import { ITableData } from "../src/types/editTypes/tableType";
 
-export default function EditPage() {
+function EditPage() {
   const router = useRouter();
-  useCheckLogin(router);
   const [isOpen, setIsOpen] = useState<IPropsIsOpenModal>({
     edit: false,
     today: false,
@@ -68,6 +66,9 @@ export default function EditPage() {
         // Fetch된 후 정렬된 데이터 State(monthList 용)와 SessionStorage(monthDetail용)에 저장
         setFinancialData(res.data.data.data);
         sessionStorage.setItem("monthData", JSON.stringify(res.data.data.data));
+      })
+      .catch((err) => {
+        console.log(err);
       });
   };
 
@@ -119,3 +120,5 @@ export default function EditPage() {
     </div>
   );
 }
+
+export default useCheckLogin(EditPage);
