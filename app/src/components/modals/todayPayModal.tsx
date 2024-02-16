@@ -9,6 +9,7 @@ export default function TodayPayModal({
   formData,
   fetchTableData,
 }: IPropsTodayModal) {
+  // Edit에 필요한 Input의 정보를 모아놓은 객체
   const inputObj = [
     {
       label: "등록일시",
@@ -26,34 +27,31 @@ export default function TodayPayModal({
     { label: "금액", inputAdd: "원", labelName: "amount", type: "number" },
   ];
 
-  const onClickSetCurrentDate = (event: MouseEvent<HTMLInputElement>) => {
-    if (event.currentTarget.checked) {
-      const date = new Date();
-      const year = date.getFullYear();
-      const month = ("0" + (date.getMonth() + 1)).slice(-2);
-      const day = ("0" + date.getDate()).slice(-2);
-      const hours = ("0" + date.getHours()).slice(-2);
-      const minutes = ("0" + date.getMinutes()).slice(-2);
-      const currentTime = `${year}/${month}/${day} ${hours}:${minutes}`;
-      setFormData({ ...formData, ["date"]: currentTime });
-    } else {
-      setFormData({ ...formData, ["date"]: "" });
-    }
-  };
-
   const onChangeSetState = (
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
     const { name, value } = e.currentTarget;
+
     setFormData({ ...formData, [name]: value });
   };
 
   const onClickSendRequest = async () => {
     // 23.12.25 추후 연달아 클릭하는 거 방지하는 기능 필요함
+
+    if (
+      !formData.date ||
+      !formData.place ||
+      !formData.type ||
+      !formData.amount
+    ) {
+      alert("입력내용을 모두 입력해 주세요");
+      return;
+    }
+
     const email = sessionStorage.getItem("email");
     await api.post("/edit/createEdit", {
       email: email,
-      date: formData.date,
+      date: formData.date.replaceAll("-", "/"),
       financial_type: formData.type,
       amount: formData.amount,
       place: formData.place,
@@ -79,28 +77,29 @@ export default function TodayPayModal({
               <div key={el.label} className="relative flex flex-col text-left">
                 <div className="relative flex flex-col max-w-fit">
                   <label htmlFor={el.labelName}>{el.label}</label>
-                  <input
-                    type={el.type}
-                    name={el.labelName}
-                    value={formData[el.labelName]}
-                    onChange={onChangeSetState}
-                    className="w-80 lg:w-60 h-10 pl-2 border rounded focus:outline-none focus:ring focus:border-slate-700 focus:border-none"
-                  />
-                  <span className="absolute top-8 right-2 text-gray-400">
-                    {el.inputAdd}
-                  </span>
-                </div>
-                {el.label === "등록일시" && (
-                  <div>
+                  {el.label === "등록일시" ? (
                     <input
-                      onClick={onClickSetCurrentDate}
-                      type="checkbox"
-                      name="currentTimeCheck"
-                      id="currentTimeCheck"
+                      type="date"
+                      name={el.labelName}
+                      value={formData[el.labelName]}
+                      onChange={onChangeSetState}
+                      className="w-80 lg:w-60 h-10 pl-2 border rounded focus:outline-none focus:ring focus:border-slate-700 focus:border-none"
                     />
-                    <label htmlFor="currentTimeCheck">현재시간으로</label>
-                  </div>
-                )}
+                  ) : (
+                    <div>
+                      <input
+                        type={el.type}
+                        name={el.labelName}
+                        value={formData[el.labelName]}
+                        onChange={onChangeSetState}
+                        className="w-80 lg:w-60 h-10 pl-2 border rounded focus:outline-none focus:ring focus:border-slate-700 focus:border-none"
+                      />
+                      <span className="absolute top-8 right-2 text-gray-400">
+                        {el.inputAdd}
+                      </span>
+                    </div>
+                  )}
+                </div>
               </div>
             );
           } else {
