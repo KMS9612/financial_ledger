@@ -8,6 +8,10 @@ export default function useCheckLogin(Component: ComponentType) {
       sessionStorage.getItem("access") || ""
     );
 
+    useEffect(() => {
+      setIsLogin(sessionStorage.getItem("access") || "");
+    });
+
     // 로그인이 되어 있지 않다면 로딩 화면을 보여줍니다.
     if (!isLogin) {
       return <PleaseLogin />;
