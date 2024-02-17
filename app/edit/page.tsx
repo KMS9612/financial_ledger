@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import TodayPayModal from "../src/components/modals/todayPayModal";
 import FixPayModal from "../src/components/modals/fixPayModal";
 import { IPropsIsOpenModal } from "../src/types/modalTypes/ModalProps";
-import { useRouter } from "next/navigation";
 import api from "../axios/instance";
 import MonthList from "./monthList";
 import { IPropsFetchedData } from "../src/types/editTypes/editTypes";
@@ -11,7 +10,6 @@ import useCheckLogin from "../functions/checkLogin";
 
 export default function EditPage() {
   useCheckLogin();
-  const router = useRouter();
   const [isOpen, setIsOpen] = useState<IPropsIsOpenModal>({
     edit: false,
     today: false,
@@ -77,7 +75,7 @@ export default function EditPage() {
     fetchTableData();
   }, []);
 
-  return (
+  return financialData ? (
     <div className="relative h-screen flex flex-col pt-20 px-10 gap-8">
       <FixPayModal
         isOpenFunction={onChangeStateOfModal}
@@ -119,5 +117,7 @@ export default function EditPage() {
         ))}
       </div>
     </div>
+  ) : (
+    <></>
   );
 }

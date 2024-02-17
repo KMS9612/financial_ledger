@@ -1,4 +1,3 @@
-"use client";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
@@ -8,12 +7,10 @@ export default function useCheckLogin() {
 
   useEffect(() => {
     setIsLogin(sessionStorage.getItem("access") || "");
-  }, []);
 
-  // 로그인이 되어 있지 않다면 로딩 화면을 보여줍니다.
-  if (!isLogin) {
-    router.push("/errorPage");
-  }
-
-  return;
+    // 로그인이 되어 있지 않다면 에러 화면을 보여줍니다.
+    if (!isLogin) {
+      router.push("/errorPage");
+    }
+  }, [isLogin]);
 }

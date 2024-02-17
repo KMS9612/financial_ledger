@@ -5,7 +5,6 @@ import "./globals.css";
 import Header from "./src/components/header";
 import Navigation from "./src/components/navigation";
 import { RecoilRoot } from "recoil";
-import { useEffect } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 const metadata: Metadata = {

@@ -75,7 +75,7 @@ export default function ResultPage() {
     },
   ];
 
-  return (
+  return fixedData && editData ? (
     <div className="w-full h-full pt-20 px-4">
       <h2 className="text-slate-700 font-bold text-4xl mb-10">
         내 가계부 확인하기
@@ -103,5 +103,7 @@ export default function ResultPage() {
         </div>
       </div>
     </div>
+  ) : (
+    <></>
   );
 }
