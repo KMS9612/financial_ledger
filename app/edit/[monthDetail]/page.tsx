@@ -33,9 +33,7 @@ export default function MonthDetail({
     }
   });
 
-  useEffect(() => {
-    setTableData(monthData);
-  }, []);
+  setTableData(monthData);
 
   return (
     <div className="w-full h-screen p-4 pt-20 xl:p-20">

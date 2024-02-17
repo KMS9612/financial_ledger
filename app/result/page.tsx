@@ -1,14 +1,15 @@
 "use client";
 import { useEffect, useState } from "react";
 import api from "../axios/instance";
-import useCheckLogin from "../functions/checkLogin";
 import ResultBoxSmall from "../src/components/box/resultBoxSm";
 import { useRouter } from "next/navigation";
 import { IFixedData } from "../src/types/fixedTypes/fixedDataType";
 import CalculateData from "../functions/calculateData";
 import ChartBox from "../src/components/chart/resultChart";
+import useCheckLogin from "../functions/checkLogin";
 
-function ResultPage() {
+export default function ResultPage() {
+  useCheckLogin();
   const router = useRouter();
   const [editData, setEditData] = useState<any>([]);
   const [fixedData, setFixedData] = useState<IFixedData>({
@@ -104,5 +105,3 @@ function ResultPage() {
     </div>
   );
 }
-
-export default useCheckLogin(ResultPage);

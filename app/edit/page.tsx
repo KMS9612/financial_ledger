@@ -3,13 +3,14 @@ import { useEffect, useState } from "react";
 import TodayPayModal from "../src/components/modals/todayPayModal";
 import FixPayModal from "../src/components/modals/fixPayModal";
 import { IPropsIsOpenModal } from "../src/types/modalTypes/ModalProps";
-import useCheckLogin from "../functions/checkLogin";
 import { useRouter } from "next/navigation";
 import api from "../axios/instance";
 import MonthList from "./monthList";
 import { IPropsFetchedData } from "../src/types/editTypes/editTypes";
+import useCheckLogin from "../functions/checkLogin";
 
-function EditPage() {
+export default function EditPage() {
+  useCheckLogin();
   const router = useRouter();
   const [isOpen, setIsOpen] = useState<IPropsIsOpenModal>({
     edit: false,
@@ -120,5 +121,3 @@ function EditPage() {
     </div>
   );
 }
-
-export default useCheckLogin(EditPage);
