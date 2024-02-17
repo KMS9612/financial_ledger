@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const TestURL = "http://localhost:8080";
-export const PromotionURL = ""; // API배포시 url
+export const PromotionURL = "https://ggb-back-0b82d9178398.herokuapp.com"; // API배포시 url
 
 // refreshAccessToken 로직
 const refreshAccessToken = async (refreshToken: string) => {
@@ -17,7 +17,7 @@ const refreshAccessToken = async (refreshToken: string) => {
 
 // 모든 요청을 api.* (ex.api.post("/endpoint"))으로 사용해 interceptors를 활용한다.
 // const api = axios.create({ baseURL: PromotionURL, withCredentials: true });
-const api = axios.create({ baseURL: TestURL, withCredentials: true });
+const api = axios.create({ baseURL: PromotionURL, withCredentials: true });
 
 // 요청 인터셉트
 api.interceptors.request.use(

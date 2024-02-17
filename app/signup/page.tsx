@@ -122,7 +122,10 @@ export default function SignUp() {
       const email = formData.email.text;
       const password = formData.pw.text;
       axios
-        .post("http://localhost:8080/createUser", { email, password })
+        .post("https://ggb-back-0b82d9178398.herokuapp.com/createUser", {
+          email,
+          password,
+        })
         .then((res) => {
           // Modal 표시하기
           setIsOpen(true);

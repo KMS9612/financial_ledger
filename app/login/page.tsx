@@ -1,9 +1,8 @@
 "use client";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import LoginErrModal from "../src/components/modals/loginErrModal";
-import useCheckLogin from "../functions/checkLogin";
 
 type FocusOBJ = {
   id: boolean;
@@ -19,7 +18,6 @@ type UserDataOBJ = {
 
 export default function LoginPage() {
   const router = useRouter();
-  useCheckLogin(router);
   const [isFocus, setIsFocus] = useState<FocusOBJ>({ id: false, pw: false });
   const [userData, setUserData] = useState<UserDataOBJ>({
     id: "",
@@ -65,7 +63,10 @@ export default function LoginPage() {
     const password = userData.pw;
 
     await axios
-      .post("http://localhost:8080/login", { email, password })
+      .post("https://ggb-back-0b82d9178398.herokuapp.com/login", {
+        email,
+        password,
+      })
       .then((res) => {
         // jwt토큰과 유저정보는 sessionStorage에 저장
         sessionStorage.setItem("access", JSON.stringify(res.data.accessToken));
@@ -77,6 +78,7 @@ export default function LoginPage() {
         router.push("/");
       })
       .catch((err) => {
+        console.log(err);
         setErrText(err.response.data.message);
         setIsOpen(true);
       });
