@@ -12,7 +12,7 @@ export default function Navigation() {
   useEffect(() => {
     const loginData: string | null = sessionStorage.getItem("access");
     setIsLogin(loginData);
-  }, []);
+  });
 
   return (
     <div
@@ -38,6 +38,7 @@ export default function Navigation() {
                 setIsOpen(false);
                 sessionStorage.removeItem("access");
                 sessionStorage.removeItem("refresh");
+                router.push("/login");
               }
             }}
             className="w-5/6 h-8 border-2 rounded transition ease-in-out hover:-translate-y-1 hover:bg-white hover:text-slate-700"

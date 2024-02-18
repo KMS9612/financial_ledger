@@ -6,11 +6,12 @@ export default function useCheckLogin() {
   const router = useRouter();
 
   useEffect(() => {
-    setIsLogin(sessionStorage.getItem("access") || "");
+    const accessToken = sessionStorage.getItem("access") || "";
+    setIsLogin(accessToken);
 
     // 로그인이 되어 있지 않다면 에러 화면을 보여줍니다.
-    if (!isLogin) {
+    if (!accessToken) {
       router.push("/errorPage");
     }
-  }, [isLogin]);
+  });
 }
