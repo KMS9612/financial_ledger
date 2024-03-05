@@ -1,7 +1,7 @@
 "use client";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { MouseEvent, useState } from "react";
 import LoginErrModal from "../src/components/modals/loginErrModal";
 
 type FocusOBJ = {
@@ -84,7 +84,10 @@ export default function LoginPage() {
       });
   };
 
-  const onClickTestAccountLogin = async () => {
+  const onClickTestAccountLogin = async (
+    event: MouseEvent<HTMLButtonElement>
+  ) => {
+    event.stopPropagation;
     setIsFocus({ id: true, pw: true });
     setUserData({
       id: "test@naver.com",
@@ -95,10 +98,7 @@ export default function LoginPage() {
   return (
     <div className="w-full h-full flex justify-center items-center pt-20">
       <LoginErrModal text={errText} isOpen={isOpen} setIsOpen={setIsOpen} />
-      <div
-        onClick={onClickTestAccountLogin}
-        className="sm:w-96 w-full sm:m-h-4/5 h-full flex flex-col justify-center items-center border-4 border-slate-700 rounded py-20 gap-20"
-      >
+      <div className="sm:w-96 w-full sm:m-h-4/5 h-full flex flex-col justify-center items-center border-4 border-slate-700 rounded py-20 gap-20">
         <span className="text-3xl text-slate-700 font-bold">Login</span>
         {/* Login Form */}
         <div className="w-full flex flex-col justify-center items-center gap-6">
@@ -143,7 +143,10 @@ export default function LoginPage() {
         </div>
         {/* Login Form End */}
         <div className="w-full flex flex-col justify-center items-center gap-6">
-          <button className="w-5/6 h-12 rounded-full bg-slate-700 text-white font-bold transition duration-300 ease-in-out hover:-translate-y-1">
+          <button
+            onClick={onClickTestAccountLogin}
+            className="w-5/6 h-12 rounded-full bg-slate-700 text-white font-bold transition duration-300 ease-in-out hover:-translate-y-1"
+          >
             테스트계정 사용
           </button>
           <button
