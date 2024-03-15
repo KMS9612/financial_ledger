@@ -29,7 +29,9 @@ export default function ResultBoxSmall(props: IPropsResultSmall) {
           <span
             className={`text-lg font-bold ${
               props.title !== "이번 달 총 지출"
-                ? "text-lime-600"
+                ? props.data >= 0
+                  ? "text-lime-600"
+                  : "text-red-600"
                 : "text-red-600"
             }`}
           >
