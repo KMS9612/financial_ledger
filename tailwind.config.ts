@@ -8,6 +8,9 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      backgroundImage: {
+        landing: "url(/landing_bg.png)",
+      },
       fontFamily: {
         notokr: ["Noto Sans KR"],
       },

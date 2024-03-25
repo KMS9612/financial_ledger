@@ -7,6 +7,7 @@ import Header from "./src/components/header";
 import Navigation from "./src/components/navigation";
 import { RecoilRoot } from "recoil";
 import "@fontsource/noto-sans-kr";
+import BodyLayout from "./src/components/layouts/bodyLayout";
 
 const notoKR = Noto_Sans_KR({ subsets: ["latin"] });
 const metadata: Metadata = {
@@ -22,14 +23,10 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <RecoilRoot>
-        <body
-          className={`${notoKR.className} relative m-auto w-screen m-h-screen flex flex-col justify-start items-center overflow-x-hidden`}
-          style={{ minWidth: "380px", margin: "0 auto" }}
-        >
-          <Header />
-          <Navigation />
-          <main className="absolute w-full m-h-full">{children}</main>
-        </body>
+        <BodyLayout
+          notoFont={notoKR.className}
+          children={children}
+        ></BodyLayout>
       </RecoilRoot>
     </html>
   );
