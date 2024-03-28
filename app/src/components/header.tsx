@@ -5,15 +5,9 @@ import { useRecoilState } from "recoil";
 import { isOpenNavi } from "./recoil/navi";
 
 export default function Header() {
-  const hidden = ["/edit"];
-  const path = usePathname();
   const router = useRouter();
   const [isOpen, setIsOpen] = useRecoilState(isOpenNavi);
 
-  // Header 숨기기
-  // if (hidden.includes(path)) {
-  //   return;
-  // }
   return (
     <div className="sticky w-full h-14 bg-slate-700 flex justify-between items-center px-6 z-10">
       <div className="container flex items-center ">

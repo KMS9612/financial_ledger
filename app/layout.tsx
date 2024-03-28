@@ -3,8 +3,6 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { Noto_Sans_KR } from "next/font/google";
 import "./globals.css";
-import Header from "./src/components/header";
-import Navigation from "./src/components/navigation";
 import { RecoilRoot } from "recoil";
 import "@fontsource/noto-sans-kr";
 import BodyLayout from "./src/components/layouts/bodyLayout";

@@ -75,7 +75,7 @@ export default function LoginPage() {
           JSON.stringify(res.data.refreshToken)
         );
         sessionStorage.setItem("email", JSON.stringify(res.data.email));
-        router.push("/");
+        router.push("/edit");
       })
       .catch((err) => {
         console.log(err);
@@ -96,20 +96,20 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="w-full h-full flex justify-center items-center pt-20">
+    <div className="w-full h-full bg-gradient-to-t from-gray-300 to-gray-400 flex justify-center items-center">
       <LoginErrModal text={errText} isOpen={isOpen} setIsOpen={setIsOpen} />
-      <div className="sm:w-96 w-full sm:m-h-4/5 h-full flex flex-col justify-center items-center border-4 border-slate-700 rounded py-20 gap-20">
-        <span className="text-3xl text-slate-700 font-bold">Login</span>
+      <div className="sm:w-96 w-full sm:m-h-3/5 h-3/5 bg-gray-300 flex flex-col justify-center items-center border-4 border-white rounded py-20 gap-20">
+        <h2 className="text-2xl text-slate-700 font-bold">로그인</h2>
         {/* Login Form */}
         <div className="w-full flex flex-col justify-center items-center gap-6">
           <div className="w-5/6 relative flex justify-center items-center">
             <label
               className={`${
-                isFocus.id && "-translate-y-5"
-              } absolute bottom-0 left-0 text-gray-500 transition ease-in-out duration-150 cursor-text`}
+                isFocus.id && "-translate-y-6"
+              } absolute bottom-1 left-1 text-gray-500 transition ease-in-out duration-150 cursor-text`}
               htmlFor="id"
             >
-              ID
+              아이디
             </label>
             <input
               onFocus={() => onFocusInput("id")}
@@ -118,17 +118,17 @@ export default function LoginPage() {
               value={userData.id}
               type="text"
               id="id"
-              className="w-full border-b-2 outline-none"
+              className="w-full h-8 rounded-md outline-none pl-1"
             />
           </div>
           <div className="w-5/6 relative flex justify-center items-center">
             <label
               className={`${
-                isFocus.pw && "-translate-y-5"
-              } absolute bottom-0 left-0 text-gray-500 transition duration-150 ease-in-out cursor-text`}
+                isFocus.pw && "-translate-y-6"
+              } absolute bottom-1 left-1 text-gray-500 transition ease-in-out duration-150 cursor-text`}
               htmlFor="pw"
             >
-              Password
+              비밀번호
             </label>
             <input
               onChange={onChangeSetState}
@@ -137,7 +137,7 @@ export default function LoginPage() {
               value={userData.pw}
               id="pw"
               type="password"
-              className="w-full border-b-2 outline-none"
+              className="w-full h-8 rounded-md outline-none pl-1"
             />
           </div>
         </div>
@@ -145,13 +145,13 @@ export default function LoginPage() {
         <div className="w-full flex flex-col justify-center items-center gap-6">
           <button
             onClick={onClickTestAccountLogin}
-            className="w-5/6 h-12 rounded-full bg-slate-700 text-white font-bold transition duration-300 ease-in-out hover:-translate-y-1"
+            className="w-5/6 h-12 rounded-full bg-slate-600 text-white font-bold transition duration-300 ease-in-out hover:-translate-y-1"
           >
             테스트계정 사용
           </button>
           <button
             onClick={onClickLogin}
-            className="w-5/6 h-12 rounded-full bg-slate-700 text-white font-bold transition duration-300 ease-in-out hover:-translate-y-1"
+            className="w-5/6 h-12 rounded-full bg-slate-600 text-white font-bold transition duration-300 ease-in-out hover:-translate-y-1"
           >
             로그인
           </button>

@@ -16,7 +16,7 @@ export default function Navigation() {
 
   return (
     <div
-      className={`absolute w-96 h-screen bg-slate-600 transition duration-300 ease-in-out right-0 z-20 ${
+      className={`absolute w-96 h-full bg-slate-600 transition duration-300 ease-in-out right-0 z-20 ${
         isOpen ? "-translate-x-0" : "translate-x-96 "
       }`}
     >
