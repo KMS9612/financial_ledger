@@ -1,8 +1,9 @@
 "use client";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import { MouseEvent, useState } from "react";
+import { MouseEvent, useEffect, useState } from "react";
 import LoginErrModal from "../src/components/modals/loginErrModal";
+import CircleLoading from "../src/components/loading/circleLoading";
 
 type FocusOBJ = {
   id: boolean;
@@ -25,6 +26,12 @@ export default function LoginPage() {
   });
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [errText, setErrText] = useState<string>("");
+  const [loginLoading, setLoginLoading] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  useEffect(() => {
+    setIsLoading(true);
+  }, []);
 
   // 로그인 Input이 focus되었을때 작동하는 함수 (애니메이션 용)
   const onFocusInput = (inputType: string) => {
@@ -61,6 +68,7 @@ export default function LoginPage() {
   const onClickLogin = async () => {
     const email = userData.id;
     const password = userData.pw;
+    setLoginLoading(true);
 
     await axios
       .post("https://ggb-back-0b82d9178398.herokuapp.com/login", {
@@ -75,12 +83,13 @@ export default function LoginPage() {
           JSON.stringify(res.data.refreshToken)
         );
         sessionStorage.setItem("email", JSON.stringify(res.data.email));
-        router.push("/edit");
+        router.push("/result");
       })
       .catch((err) => {
         console.log(err);
         setErrText(err.response.data.message);
         setIsOpen(true);
+        setLoginLoading(false);
       });
   };
 
@@ -96,73 +105,84 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="w-full h-full bg-gradient-to-t from-gray-300 to-gray-400 flex justify-center items-center">
+    <div className="w-full h-full bg-gradient-to-br from-slate-500 to-slate-700 flex flex-col justify-center items-center">
       <LoginErrModal text={errText} isOpen={isOpen} setIsOpen={setIsOpen} />
-      <div className="sm:w-96 w-full sm:m-h-3/5 h-3/5 bg-gray-300 flex flex-col justify-center items-center border-4 border-white rounded py-20 gap-20">
-        <h2 className="text-2xl text-slate-700 font-bold">로그인</h2>
-        {/* Login Form */}
-        <div className="w-full flex flex-col justify-center items-center gap-6">
-          <div className="w-5/6 relative flex justify-center items-center">
-            <label
-              className={`${
-                isFocus.id && "-translate-y-6"
-              } absolute bottom-1 left-1 text-gray-500 transition ease-in-out duration-150 cursor-text`}
-              htmlFor="id"
-            >
-              아이디
-            </label>
-            <input
-              onFocus={() => onFocusInput("id")}
-              onBlur={(event) => onBlurInput(event)}
-              onChange={onChangeSetState}
-              value={userData.id}
-              type="text"
-              id="id"
-              className="w-full h-8 rounded-md outline-none pl-1"
-            />
+      {isLoading ? (
+        <div className="sm:w-96 w-full sm:m-h-3/5 h-3/5 bg-white flex flex-col justify-center items-center border-4 border-white rounded-lg py-20 gap-20 shadow-md">
+          <h2 className="text-2xl text-slate-700 font-bold">로그인</h2>
+          {/* Login Form */}
+          <div className="w-full flex flex-col justify-center items-center gap-6">
+            <div className="w-5/6 relative flex justify-center items-center">
+              <label
+                className={`${
+                  isFocus.id && "-translate-y-6"
+                } absolute bottom-1 left-1 text-gray-500 transition ease-in-out duration-150 cursor-text`}
+                htmlFor="id"
+              >
+                아이디
+              </label>
+              <input
+                onFocus={() => onFocusInput("id")}
+                onBlur={(event) => onBlurInput(event)}
+                onChange={onChangeSetState}
+                value={userData.id}
+                type="text"
+                id="id"
+                className="w-full h-8 border-b bg-transparent rounded-md outline-none pl-1"
+              />
+            </div>
+            <div className="w-5/6 relative flex justify-center items-center">
+              <label
+                className={`${
+                  isFocus.pw && "-translate-y-6"
+                } absolute bottom-1 left-1 text-gray-500 transition ease-in-out duration-150 cursor-text`}
+                htmlFor="pw"
+              >
+                비밀번호
+              </label>
+              <input
+                onChange={onChangeSetState}
+                onFocus={() => onFocusInput("pw")}
+                onBlur={(event) => onBlurInput(event)}
+                value={userData.pw}
+                id="pw"
+                type="password"
+                className="w-full h-8 border-b bg-transparent rounded-md outline-none pl-1"
+              />
+            </div>
           </div>
-          <div className="w-5/6 relative flex justify-center items-center">
-            <label
-              className={`${
-                isFocus.pw && "-translate-y-6"
-              } absolute bottom-1 left-1 text-gray-500 transition ease-in-out duration-150 cursor-text`}
-              htmlFor="pw"
+          {/* Login Form End */}
+          <div className="w-full flex flex-col justify-center items-center gap-6">
+            <button
+              onClick={onClickTestAccountLogin}
+              className="w-5/6 h-12 rounded-full bg-gradient-to-br from:bg-slate-300 to:bg-slate-500 text-white font-bold transition duration-300 ease-in-out hover:-translate-y-1"
             >
-              비밀번호
-            </label>
-            <input
-              onChange={onChangeSetState}
-              onFocus={() => onFocusInput("pw")}
-              onBlur={(event) => onBlurInput(event)}
-              value={userData.pw}
-              id="pw"
-              type="password"
-              className="w-full h-8 rounded-md outline-none pl-1"
-            />
+              테스트계정 사용
+            </button>
+            <button
+              disabled={loginLoading}
+              onClick={onClickLogin}
+              className={`w-5/6 h-12 flex justify-center items-center rounded-full ${
+                loginLoading
+                  ? "bg-gray-400"
+                  : "bg-gradient-to-r from:bg-slate-300 to:bg-slate-500"
+              } text-white font-bold transition duration-300 ease-in-out hover:-translate-y-1`}
+            >
+              {loginLoading ? <CircleLoading /> : "로그인"}
+            </button>
+            <button
+              onClick={() => router.push("/signup")}
+              className="w-5/6 h-12 rounded-full border-2 border-slate-700 text-slate-700 font-bold transition duration-300 ease-in-out hover:-translate-y-1"
+            >
+              회원가입
+            </button>
           </div>
         </div>
-        {/* Login Form End */}
-        <div className="w-full flex flex-col justify-center items-center gap-6">
-          <button
-            onClick={onClickTestAccountLogin}
-            className="w-5/6 h-12 rounded-full bg-slate-600 text-white font-bold transition duration-300 ease-in-out hover:-translate-y-1"
-          >
-            테스트계정 사용
-          </button>
-          <button
-            onClick={onClickLogin}
-            className="w-5/6 h-12 rounded-full bg-slate-600 text-white font-bold transition duration-300 ease-in-out hover:-translate-y-1"
-          >
-            로그인
-          </button>
-          <button
-            onClick={() => router.push("/signup")}
-            className="w-5/6 h-12 rounded-full border-2 border-slate-700 text-slate-700 font-bold transition duration-300 ease-in-out hover:-translate-y-1"
-          >
-            회원가입
-          </button>
+      ) : (
+        <div className="w-full h-full flex justify-center items-center">
+          <CircleLoading />
         </div>
-      </div>
+      )}
     </div>
   );
 }
