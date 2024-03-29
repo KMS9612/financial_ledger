@@ -7,7 +7,10 @@ export default function Home() {
   return (
     <div className="w-full flex flex-col justify-center items-center">
       <div
-        className={`bg-landing bg-center bg-cover w-full h-screen scroll-smooth`}
+        className={`bg-gradient-to-r
+        from-lime-500
+        via-red-500
+        to-slate-500 background-animate w-full h-screen scroll-smooth`}
       >
         <div className="w-full h-full flex justify-center items-center bg-gray-500 opacity-[0.8]">
           <div className="h-full flex flex-col justify-center items-center gap-4">
@@ -21,9 +24,9 @@ export default function Home() {
             >
               Login
             </button>
-            <button className="w-full h-12 border rounded text-white font-bold hover:bg-gray-300">
+            {/* <button className="w-full h-12 border rounded text-white font-bold hover:bg-gray-300">
               About
-            </button>
+            </button> */}
           </div>
         </div>
       </div>
