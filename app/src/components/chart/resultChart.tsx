@@ -78,7 +78,7 @@ export default function ChartBox(props: IPropsChart) {
     },
   };
   return (
-    <div className="w-full h-full border rounded-lg shadow-md p-2 overflow-auto">
+    <div className="w-full xl:h-full h-96 border rounded-lg shadow-md p-2 overflow-auto">
       <Bar
         className="min-w-[440px] w-full h-screen"
         data={data}
