@@ -7,6 +7,7 @@ import { RecoilRoot } from "recoil";
 import "@fontsource/noto-sans-kr";
 import BodyLayout from "./src/components/layouts/bodyLayout";
 
+const inter = Inter({ subsets: ["latin"] });
 const notoKR = Noto_Sans_KR({ subsets: ["latin"] });
 const metadata: Metadata = {
   title: "가계부",
@@ -21,7 +22,9 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <RecoilRoot>
-        <BodyLayout notoFont={notoKR.className}>{children}</BodyLayout>
+        <BodyLayout interFont={inter.className} notoFont={notoKR.className}>
+          {children}
+        </BodyLayout>
       </RecoilRoot>
     </html>
   );
