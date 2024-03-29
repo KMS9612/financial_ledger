@@ -7,9 +7,11 @@ import api from "../axios/instance";
 import MonthList from "./monthList";
 import { IPropsFetchedData } from "../src/types/editTypes/editTypes";
 import useCheckLogin from "../functions/checkLogin";
+import CircleLoading from "../src/components/loading/circleLoading";
 
 export default function EditPage() {
   useCheckLogin();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isOpen, setIsOpen] = useState<IPropsIsOpenModal>({
     edit: false,
     today: false,
@@ -72,11 +74,12 @@ export default function EditPage() {
   };
 
   useEffect(() => {
+    setIsLoading(true);
     fetchTableData();
   }, []);
 
-  return financialData ? (
-    <div className="relative h-screen flex flex-col pt-20 px-10 gap-8">
+  return isLoading ? (
+    <div className="w-full relative h-screen flex flex-col pt-10 px-10 gap-8">
       <FixPayModal
         isOpenFunction={onChangeStateOfModal}
         isOpenObject={isOpen}
@@ -112,12 +115,20 @@ export default function EditPage() {
       </div>
       {/* Table Infomation */}
       <div className="w-full flex flex-wrap justify-center lg:justify-start gap-8">
-        {financialData.map((el: IPropsFetchedData, index) => (
-          <MonthList key={el.month + index} el={el} />
-        ))}
+        {financialData.length !== 0 ? (
+          financialData.map((el: IPropsFetchedData, index) => (
+            <MonthList key={el.month + index} el={el} />
+          ))
+        ) : (
+          <div className="w-full flex justify-center items-center">
+            <CircleLoading />
+          </div>
+        )}
       </div>
     </div>
   ) : (
-    <></>
+    <div className="w-full h-full flex justify-center items-center">
+      <CircleLoading />
+    </div>
   );
 }

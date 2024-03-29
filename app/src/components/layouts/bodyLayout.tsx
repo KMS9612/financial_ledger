@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import Header from "../header";
 import Navigation from "../navigation";
 import { usePathname } from "next/navigation";
-import CircleLoading from "../loading/circleLoading";
 
 interface IPropsBodyLayout {
   interFont: string;
