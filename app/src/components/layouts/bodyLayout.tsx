@@ -21,7 +21,7 @@ export default function BodyLayout(props: IPropsBodyLayout) {
 
   return (
     <body
-      className={`${props.notoFont} relative m-auto w-screen h-screen m-h-screen flex flex-col justify-start items-center overflow-x-hidden`}
+      className={`${props.notoFont} relative m-auto w-screen h-screen m-h-screen bg-gray-300 flex flex-col justify-start items-center overflow-x-hidden`}
       style={{ minWidth: "380px", margin: "0 auto" }}
     >
       <Navigation></Navigation>

@@ -21,10 +21,7 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <RecoilRoot>
-        <BodyLayout
-          notoFont={notoKR.className}
-          children={children}
-        ></BodyLayout>
+        <BodyLayout notoFont={notoKR.className}>{children}</BodyLayout>
       </RecoilRoot>
     </html>
   );
