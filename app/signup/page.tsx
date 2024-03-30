@@ -140,21 +140,21 @@ export default function SignUp() {
   };
 
   return (
-    <div className="relative w-full h-full flex justify-center items-center pt-20">
+    <div className="relative w-full h-full bg-gradient-to-br from-slate-500 to-slate-700 flex justify-center items-center">
       <SignUpAlertModal
         text={modalText}
         isOpen={isOpen}
         setIsOpen={setIsOpen}
       />
-      <div className="sm:m-w-1/4 w-96 h-3/4 flex flex-col justify-center items-center gap-8 border-4 border-slate-700 rounded py-20 px-10">
+      <div className="sm:m-w-1/4 w-96 h-[500px] bg-white flex flex-col justify-center items-center gap-8 rounded py-20 px-10">
         <span className="text-3xl text-slate-700 font-bold">회원가입</span>
         <div className="w-full flex flex-col">
-          <label htmlFor="email">Email</label>
           <input
+            placeholder="Email"
             onChange={onChangeSetFormData}
             type="text"
             id="email"
-            className="border-2 rounded-md pl-2"
+            className="border-b outline-none pl-1"
           />
           {formData.email.isErr && (
             <span className="text-red-700 font-bold text-xs">
@@ -163,12 +163,12 @@ export default function SignUp() {
           )}
         </div>
         <div className="w-full flex flex-col">
-          <label htmlFor="pw">비밀번호</label>
           <input
+            placeholder="Password"
             onChange={onChangeSetFormData}
             type="password"
             id="pw"
-            className="border-2 rounded-md pl-2"
+            className="border-b outline-none pl-1"
           />
           {formData.pw.isErr && (
             <span className="text-red-700 font-bold text-xs">
@@ -177,12 +177,12 @@ export default function SignUp() {
           )}
         </div>
         <div className="w-full flex flex-col">
-          <label htmlFor="email">비밀번호 확인</label>
           <input
+            placeholder="Password Check"
             onChange={onChangeSetFormData}
             type="password"
             id="pw_check"
-            className="border-2 rounded-md pl-2"
+            className="border-b outline-none pl-1"
           />
           {formData.pw_check.isErr && (
             <span className="text-red-700 font-bold text-xs">

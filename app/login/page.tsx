@@ -128,7 +128,7 @@ export default function LoginPage() {
                 value={userData.id}
                 type="text"
                 id="id"
-                className="w-full h-8 border-b bg-transparent rounded-md outline-none pl-1"
+                className="w-full h-8 border-b bg-transparent outline-none pl-1"
               />
             </div>
             <div className="w-5/6 relative flex justify-center items-center">
@@ -147,7 +147,7 @@ export default function LoginPage() {
                 value={userData.pw}
                 id="pw"
                 type="password"
-                className="w-full h-8 border-b bg-transparent rounded-md outline-none pl-1"
+                className="w-full h-8 border-b bg-transparent outline-none pl-1"
               />
             </div>
           </div>
