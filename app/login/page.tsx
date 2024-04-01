@@ -108,7 +108,7 @@ export default function LoginPage() {
     <div className="w-full h-full bg-gradient-to-br from-slate-500 to-slate-700 flex flex-col justify-center items-center">
       <LoginErrModal text={errText} isOpen={isOpen} setIsOpen={setIsOpen} />
       {isLoading ? (
-        <div className="sm:w-96 w-full sm:m-h-3/5 h-3/5 bg-white flex flex-col justify-center items-center border-4 border-white rounded-lg py-20 gap-20 shadow-md">
+        <div className="sm:w-96 w-full sm:m-h-3/5 h-3/5 min-h-[500px] bg-white flex flex-col justify-center items-center border-4 border-white rounded-lg py-20 gap-20 shadow-md">
           <h2 className="text-2xl text-slate-700 font-bold">로그인</h2>
           {/* Login Form */}
           <div className="w-full flex flex-col justify-center items-center gap-6">
@@ -155,7 +155,7 @@ export default function LoginPage() {
           <div className="w-full flex flex-col justify-center items-center gap-6">
             <button
               onClick={onClickTestAccountLogin}
-              className="w-5/6 h-12 rounded-full bg-gradient-to-br from:bg-slate-300 to:bg-slate-500 text-white font-bold transition duration-300 ease-in-out hover:-translate-y-1"
+              className="w-5/6 h-12 rounded-full bg-gradient-to-br from-slate-400 to-slate-700 text-white font-bold transition duration-300 ease-in-out hover:-translate-y-1"
             >
               테스트계정 사용
             </button>
@@ -165,7 +165,7 @@ export default function LoginPage() {
               className={`w-5/6 h-12 flex justify-center items-center rounded-full ${
                 loginLoading
                   ? "bg-gray-400"
-                  : "bg-gradient-to-r from:bg-slate-300 to:bg-slate-500"
+                  : "bg-gradient-to-tl from-slate-400 to-slate-600"
               } text-white font-bold transition duration-300 ease-in-out hover:-translate-y-1`}
             >
               {loginLoading ? <CircleLoading /> : "로그인"}
