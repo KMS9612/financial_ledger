@@ -49,13 +49,21 @@ export default function TodayPayModal({
     }
 
     const email = sessionStorage.getItem("email");
-    await api.post("/edit/createEdit", {
-      email: email,
-      date: formData.date.replaceAll("-", "/"),
-      financial_type: formData.type,
-      amount: formData.amount,
-      place: formData.place,
-    });
+    await api
+      .post("/edit/createEdit", {
+        email: email,
+        date: formData.date.replaceAll("-", "/"),
+        financial_type: formData.type,
+        amount: formData.amount,
+        place: formData.place,
+      })
+      .then(() => {
+        // 요청 후 input 초기화
+        setFormData({ date: "", type: "지출", amount: 0, place: "" });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
     isOpenFunction("today", false);
     fetchTableData();
   };
