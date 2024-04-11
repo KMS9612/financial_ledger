@@ -87,7 +87,11 @@ export default function LoginPage() {
       })
       .catch((err) => {
         console.log(err);
-        setErrText(err.response.data.message);
+        setErrText(
+          err.response
+            ? err.response.data.message
+            : "알 수 없는 에러가 발생했습니다."
+        );
         setIsOpen(true);
         setLoginLoading(false);
       });

@@ -37,7 +37,7 @@ export default function MonthDetail({
   });
 
   return (
-    <div className="w-full h-screen p-4 pt-20 xl:p-20">
+    <div className="w-full h-screen pt-10 px-10">
       {/* Top Infomation */}
       <div className="flex flex-col xl:flex-row justify-between items-center mb-4 gap-10 xl:gap-0">
         <div className="flex gap-2">
