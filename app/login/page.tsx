@@ -5,13 +5,13 @@ import { MouseEvent, useEffect, useState } from "react";
 import LoginErrModal from "../src/components/modals/loginErrModal";
 import CircleLoading from "../src/components/loading/circleLoading";
 
-type FocusOBJ = {
+export type FocusOBJ = {
   id: boolean;
   pw: boolean;
   [key: string]: boolean;
 };
 
-type UserDataOBJ = {
+export type UserDataOBJ = {
   id: string;
   pw: string;
   [key: string]: string;
@@ -106,7 +106,13 @@ export default function LoginPage() {
 
   return (
     <div className="w-full h-full bg-gradient-to-br from-slate-500 to-slate-700 flex flex-col justify-center items-center">
-      <LoginErrModal text={errText} isOpen={isOpen} setIsOpen={setIsOpen} />
+      <LoginErrModal
+        text={errText}
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+        setUserData={setUserData}
+        setIsFocus={setIsFocus}
+      />
       {isLoading ? (
         <div className="sm:w-96 w-full sm:m-h-3/5 h-3/5 min-h-[500px] bg-white flex flex-col justify-center items-center border-4 border-white rounded-lg py-20 gap-20 shadow-md">
           <h2 className="text-2xl text-slate-700 font-bold">로그인</h2>
