@@ -114,7 +114,7 @@ export default function EditPage() {
         </div>
       </div>
       {/* Table Infomation */}
-      <div className="w-full flex flex-wrap justify-center lg:justify-start gap-8">
+      <div className="w-full flex flex-wrap justify-center lg:justify-start gap-4">
         {financialData.length !== 0 ? (
           financialData.map((el: IPropsFetchedData, index) => (
             <MonthList key={el.month + index} el={el} />
