@@ -34,7 +34,7 @@ export default function MonthDetail({
       }
     });
     setTableData(monthData);
-  });
+  }, [propsData]);
 
   return (
     <div className="w-full h-screen pt-10 px-10">
