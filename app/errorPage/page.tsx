@@ -5,7 +5,7 @@ export default function PleaseLogin() {
   const router = useRouter();
   return (
     <div className="relativew-full h-screen bg-slate-300">
-      <div className="absolute flex flex-col justify-between gap-4 w-[380px] h-[250px] top-1/2 left-1/2 w-1/5 -translate-x-1/2 -translate-y-1/2 bg-white rounded-md p-4">
+      <div className="absolute flex flex-col justify-between gap-4 w-[380px] h-[250px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white rounded-md p-4 shadow-xl shaodw-black">
         {/* Head */}
         <h2 className="text-xl h-[20px] font-bold">알림</h2>
         {/* Body */}
