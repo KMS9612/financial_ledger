@@ -82,7 +82,7 @@ export default function ResultPage() {
         <div className="w-full xl:w-3/4 xl:h-[700px] h-[500px]">
           <ChartBox editData={editData} fixedData={fixedData} />
         </div>
-        <div className="w-full xl:w-1/4 flex flex-row flex-wrap xl:flex-col gap-10">
+        <div className="w-full xl:w-1/4 flex flex-row flex-wrap xl:flex-col gap-4">
           {/* 데이터 표시 박스 */}
           {dataSet.map((el, index) => (
             <ResultBoxSmall
