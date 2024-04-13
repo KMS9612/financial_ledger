@@ -12,6 +12,7 @@ import CircleLoading from "../src/components/loading/circleLoading";
 export default function ResultPage() {
   useCheckLogin();
   const router = useRouter();
+  const [showMonthData, setShowMonthData] = useState(false);
   const [editData, setEditData] = useState<any>([]);
   const [fixedData, setFixedData] = useState<IFixedData>({
     id: "",
@@ -79,8 +80,18 @@ export default function ResultPage() {
     <div className="absolute w-full h-full flex flex-col gap-2 pt-20 px-4">
       <h2 className="text-slate-700 font-bold text-4xl">내 가계부 확인하기</h2>
       <div className="w-full h-full flex flex-col xl:flex-row gap-4 pb-2">
-        <div className="w-full xl:w-3/4 xl:h-[700px] h-[500px]">
-          <ChartBox editData={editData} fixedData={fixedData} />
+        <div className="relative w-full xl:w-3/4 xl:h-[700px] h-[500px]">
+          <button
+            onClick={() => setShowMonthData((prev) => !prev)}
+            className="absolute bg-slate-600 rounded right-2 top-2 text-white font-bold p-2"
+          >
+            {showMonthData ? "이번 년도 데이터 보기" : "현재 월 데이터 보기"}
+          </button>
+          <ChartBox
+            editData={editData}
+            fixedData={fixedData}
+            showMonthData={showMonthData}
+          />
         </div>
         <div className="w-full xl:w-1/4 flex flex-row flex-wrap xl:flex-col gap-4">
           {/* 데이터 표시 박스 */}

@@ -7,13 +7,16 @@ import {
   Title,
   Tooltip,
   Legend,
+  DoughnutController,
+  ArcElement,
 } from "chart.js";
-import { Bar } from "react-chartjs-2";
+import { Bar, Doughnut } from "react-chartjs-2";
 import { IFixedData } from "../../types/fixedTypes/fixedDataType";
 
 interface IPropsChart {
   editData: any;
   fixedData: IFixedData;
+  showMonthData: boolean;
 }
 
 ChartJS.register(
@@ -22,11 +25,39 @@ ChartJS.register(
   BarElement,
   Title,
   Tooltip,
-  Legend
+  Legend,
+  DoughnutController,
+  ArcElement
 );
 export default function ChartBox(props: IPropsChart) {
   const { plus, minus } = CalculateForChart(props.editData, props.fixedData);
-  const data = {
+  // const { fixIncome, fixOutcome, monthIncome, monthOutcome } = ;
+
+  console.log("fixed", props.fixedData);
+  // 월간 데이터 (고정 수입, 고정지출, 이번 월 일일 수익, 이번 월 일일 지출)
+  const monthData = {
+    labels: ["고정 수입", "고정 지출", "이번 달 수익", "이번 달 지출"],
+    datasets: [
+      {
+        label: "원 (Won)",
+        data: [2000000, 1500000, 10000, 13000],
+        backgroundColor: ["#9dda7c", "#da7171", "#bcf5b6", "#ff8375"],
+      },
+    ],
+  };
+  const monthOption = {
+    responsive: true,
+    Animation: true,
+    plugins: {
+      title: {
+        display: true,
+        fullSize: true,
+        text: "이번 달 데이터",
+      },
+    },
+  };
+  // 연간 데이터 (월별 총 수입, 총 지출의 퍼센테이지)
+  const yearData = {
     labels: [
       "1월",
       "2월",
@@ -78,12 +109,16 @@ export default function ChartBox(props: IPropsChart) {
     },
   };
   return (
-    <div className="w-full xl:h-full h-96 border rounded-lg shadow-md p-2 overflow-auto">
-      <Bar
-        className="min-w-[440px] w-full h-screen"
-        data={data}
-        options={options}
-      ></Bar>
+    <div className="w-full xl:h-full h-96 flex justify-center items-center border rounded-lg shadow-md p-2 overflow-auto">
+      {props.showMonthData ? (
+        <Doughnut data={monthData} options={monthOption}></Doughnut>
+      ) : (
+        <Bar
+          className="min-w-[440px] w-full h-screen"
+          data={yearData}
+          options={options}
+        ></Bar>
+      )}
     </div>
   );
 }
