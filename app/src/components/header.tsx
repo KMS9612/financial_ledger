@@ -9,7 +9,7 @@ export default function Header() {
   const [isOpen, setIsOpen] = useRecoilState(isOpenNavi);
 
   return (
-    <div className="sticky w-full h-14 bg-slate-700 flex justify-between items-center px-6 z-10">
+    <div className="sticky top-0 w-full h-14 bg-slate-700 flex justify-between items-center px-6 z-10">
       <div className="container flex items-center ">
         <Image
           className="cursor-pointer"

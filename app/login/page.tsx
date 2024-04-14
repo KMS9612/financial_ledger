@@ -109,7 +109,7 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="w-full h-full bg-gradient-to-br from-slate-500 to-slate-700 flex flex-col justify-center items-center">
+    <div className="absolute w-full h-full bg-gradient-to-br from-slate-500 to-slate-700 flex flex-col justify-center items-center px-8">
       <LoginErrModal
         text={errText}
         isOpen={isOpen}
