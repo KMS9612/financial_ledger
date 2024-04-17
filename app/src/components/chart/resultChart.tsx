@@ -12,6 +12,12 @@ import {
 } from "chart.js";
 import { Bar, Doughnut } from "react-chartjs-2";
 import { IFixedData } from "../../types/fixedTypes/fixedDataType";
+import {
+  IEditDataDate,
+  IPropsFetchedData,
+  IEditDataValue,
+} from "../../types/editTypes/editTypes";
+import CalculateForDoughnut from "@/app/functions/calculateForDoughnut";
 
 interface IPropsChart {
   editData: any;
@@ -31,17 +37,26 @@ ChartJS.register(
 );
 export default function ChartBox(props: IPropsChart) {
   const { plus, minus } = CalculateForChart(props.editData, props.fixedData);
-  // const { fixIncome, fixOutcome, monthIncome, monthOutcome } = ;
+  const { fixed, income, saving } = props.fixedData;
 
-  console.log("fixed", props.fixedData);
-  // 월간 데이터 (고정 수입, 고정지출, 이번 월 일일 수익, 이번 월 일일 지출)
+  // yyyy/mm 포맷으로 현재 달을 찾아 도넛형 그래프에 필요한 일일등록 정보를 반환하는 함수
+  const { monthMinusData, monthPlusData } = CalculateForDoughnut(
+    props.editData
+  );
+  // 월간 데이터 (고정 수입, 고정지출, 이번 월 일일 수익, 이번 월 일일 지출) / (백분율 X)
   const monthData = {
-    labels: ["고정 수입", "고정 지출", "이번 달 수익", "이번 달 지출"],
+    labels: ["고정 수입", "고정 지출", "이번 달 수익", "이번 달 지출", "저축"],
     datasets: [
       {
         label: "원 (Won)",
-        data: [2000000, 1500000, 10000, 13000],
-        backgroundColor: ["#9dda7c", "#da7171", "#bcf5b6", "#ff8375"],
+        data: [income, fixed, monthPlusData, monthMinusData, saving],
+        backgroundColor: [
+          "#B3D83F",
+          "#FF4823",
+          "#CFEB66",
+          "#FF8259",
+          "#84A9FF",
+        ],
       },
     ],
   };
