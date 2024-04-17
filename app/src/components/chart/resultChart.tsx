@@ -104,7 +104,7 @@ export default function ChartBox(props: IPropsChart) {
       title: {
         display: true,
         fullSize: true,
-        text: "월 고정수입 기준 지출/수입 그래프",
+        text: "연간 지출/수입 그래프",
       },
     },
   };
@@ -114,7 +114,7 @@ export default function ChartBox(props: IPropsChart) {
         <Doughnut data={monthData} options={monthOption}></Doughnut>
       ) : (
         <Bar
-          className="min-w-[440px] w-full h-screen"
+          className="min-w-[380px] w-full h-screen"
           data={yearData}
           options={options}
         ></Bar>

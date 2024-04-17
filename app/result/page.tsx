@@ -8,6 +8,7 @@ import CalculateData from "../functions/calculateData";
 import ChartBox from "../src/components/chart/resultChart";
 import useCheckLogin from "../functions/checkLogin";
 import CircleLoading from "../src/components/loading/circleLoading";
+import ChartCategoryBtn from "../src/components/chart/chartCategoryBtn";
 
 export default function ResultPage() {
   useCheckLogin();
@@ -81,12 +82,10 @@ export default function ResultPage() {
       <h2 className="text-slate-700 font-bold text-4xl">내 가계부 확인하기</h2>
       <div className="w-full h-full flex flex-col xl:flex-row gap-4 pb-2">
         <div className="relative w-full xl:w-3/4 xl:h-[700px] h-[500px]">
-          <button
-            onClick={() => setShowMonthData((prev) => !prev)}
-            className="absolute bg-slate-600 rounded right-2 top-2 text-white font-bold p-2"
-          >
-            {showMonthData ? "이번 년도 데이터 보기" : "현재 월 데이터 보기"}
-          </button>
+          <ChartCategoryBtn
+            setShowMonthData={setShowMonthData}
+            showMonthData={showMonthData}
+          ></ChartCategoryBtn>
           <ChartBox
             editData={editData}
             fixedData={fixedData}
