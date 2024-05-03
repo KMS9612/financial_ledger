@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import Header from "../header";
 import Navigation from "../navigation";
 import { usePathname } from "next/navigation";
+import { RecoilRoot } from "recoil";
 
 interface IPropsBodyLayout {
   interFont: string;
@@ -23,13 +24,15 @@ export default function BodyLayout(props: IPropsBodyLayout) {
   }, [currentPath]);
 
   return (
-    <body
-      className={`${Fonts} relative mx-auto w-screen h-screen m-h-screen flex flex-col justify-start items-center overflow-x-hidden`}
-      style={{ minWidth: "380px", margin: "0 auto" }}
-    >
-      <Navigation></Navigation>
-      {!isHidden && <Header></Header>}
-      {props.children}
-    </body>
+    <RecoilRoot>
+      <body
+        className={`${Fonts} relative mx-auto w-screen h-screen m-h-screen flex flex-col justify-start items-center overflow-x-hidden`}
+        style={{ minWidth: "380px", margin: "0 auto" }}
+        >
+        <Navigation></Navigation>
+        {!isHidden && <Header></Header>}
+        {props.children}
+      </body>
+    </RecoilRoot>
   );
 }
