@@ -17,7 +17,7 @@ export default function CalculateForDoughnut(editData: Array<IEditDataFull>) {
     (el: IPropsFetchedData) => el.month === currentMonth
   );
 
-  currentEditData[0].date.forEach((el: IEditDataDate) => {
+  currentEditData[0]?.date.forEach((el: IEditDataDate) => {
     if (el.value.financial_type === "지출") {
       monthMinusData += el.value.amount;
     } else {
