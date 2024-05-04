@@ -18,9 +18,9 @@ export default function ResultPage() {
   const [fixedData, setFixedData] = useState<IFixedData>({
     id: "",
     email: "",
-    saving: 0,
-    fixed: 0,
-    income: 0,
+    saving: NaN,
+    fixed: NaN,
+    income: NaN,
   });
 
   useEffect(() => {

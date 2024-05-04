@@ -1,3 +1,5 @@
+import TextSkeleton from "../loading/textSkeleton";
+
 interface IPropsResultSmall {
   title: string;
   subText: string;
@@ -13,15 +15,22 @@ export default function ResultBoxSmall(props: IPropsResultSmall) {
         <div className="min-w-[300px] w-full overflow-auto flex flex-col justify-end items-start px-4">
           <div className="w-full flex justify-between text-lg font-bold">
             <span>고정지출</span>
-            <span className="text-red-600">{props.data.fixed}</span>
+            <span className="text-red-600">
+              {isNaN(props.data.fixed) ? <TextSkeleton /> : props.data.fixed}
+              {/* <TextSkeleton /> */}
+            </span>
           </div>
           <div className="w-full flex justify-between text-lg font-bold">
             <span>고정수입</span>
-            <span className="text-lime-600">{props.data.income}</span>
+            <span className="text-lime-600">
+              {isNaN(props.data.income) ? <TextSkeleton /> : props.data.income}
+            </span>
           </div>
           <div className="w-full flex justify-between text-lg font-bold">
             <span>저금</span>
-            <span>{props.data.saving}</span>
+            <span>
+              {isNaN(props.data.saving) ? <TextSkeleton /> : props.data.saving}
+            </span>
           </div>
         </div>
       ) : (
@@ -35,7 +44,7 @@ export default function ResultBoxSmall(props: IPropsResultSmall) {
                 : "text-red-600"
             }`}
           >
-            {props.data}
+            {isNaN(props.data) ? <TextSkeleton /> : props.data}
           </span>
           <span className="text-lg font-bold">원</span>
         </div>
