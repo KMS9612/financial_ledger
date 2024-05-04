@@ -12,7 +12,7 @@ export default function Navigation() {
   useEffect(() => {
     const loginData: string | null = sessionStorage.getItem("access");
     setIsLogin(loginData);
-  });
+  }, []);
 
   return (
     <div

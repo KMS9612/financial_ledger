@@ -1,14 +1,14 @@
 "use client";
 import { useEffect, useState } from "react";
-import api from "../axios/instance";
 import ResultBoxSmall from "../src/components/box/resultBoxSm";
 import { useRouter } from "next/navigation";
 import { IFixedData } from "../src/types/fixedTypes/fixedDataType";
 import CalculateData from "../functions/calculateData";
 import ChartBox from "../src/components/chart/resultChart";
 import useCheckLogin from "../functions/checkLogin";
-import CircleLoading from "../src/components/loading/circleLoading";
 import ChartCategoryBtn from "../src/components/chart/chartCategoryBtn";
+import { getFixedData } from "../axios/getFixedData";
+import { getAllFinancial } from "../axios/getAllFinancial";
 
 export default function ResultPage() {
   useCheckLogin();
@@ -26,26 +26,11 @@ export default function ResultPage() {
   useEffect(() => {
     const email = sessionStorage.getItem("email");
     const params = { email };
-
     // 고정비용 요청하기
-    api
-      .get("/fix/fetchFixedData", { params })
-      .then((res) => {
-        setFixedData(res.data.fixedData);
-      })
-      .catch((err: any) => {
-        console.log(err);
-      });
+    getFixedData(params, setFixedData);
 
     // 일일 등록 정보 요청하기
-    api
-      .get("/edit/fetchAllFinancial", { params })
-      .then((res) => {
-        setEditData(res.data.data.data);
-      })
-      .catch((err: any) => {
-        console.log(err);
-      });
+    getAllFinancial(params, setEditData);
   }, []);
 
   // 요청한 일일 등록 정보 합산
@@ -77,7 +62,7 @@ export default function ResultPage() {
     },
   ];
 
-  return fixedData && editData.length !== 0 ? (
+  return (
     <div className="absolute w-full h-full flex flex-col gap-2 pt-20 px-4">
       <h2 className="text-slate-700 font-bold text-4xl">내 가계부 확인하기</h2>
       <div className="w-full h-full flex flex-col xl:flex-row gap-4 pb-2">
@@ -110,10 +95,6 @@ export default function ResultPage() {
           </button>
         </div>
       </div>
-    </div>
-  ) : (
-    <div className="w-full h-full flex justify-center items-center">
-      <CircleLoading />
     </div>
   );
 }
