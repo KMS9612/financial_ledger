@@ -37,11 +37,11 @@ export default function SignUp() {
           password,
         })
         .then((res) => {
+          // FixedData 기본값 설정
+          PostFixedData(email);
           // Modal 표시하기
           setIsOpen(true);
           setModalText(res.data.message);
-          // FixedData 기본값 설정
-          PostFixedData(email);
         })
         .catch((err) => {
           // Modal 표시하기
