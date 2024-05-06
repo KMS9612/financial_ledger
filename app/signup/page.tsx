@@ -23,7 +23,7 @@ export default function SignUp() {
     setFormData(newObj);
   };
 
-  const onClickSignUp = () => {
+  const onClickSignUp = async () => {
     // 이메일형식,비밀번호 일치 확인
     const isPass = checkFormData(formData, setFormData);
 
@@ -31,7 +31,7 @@ export default function SignUp() {
       // 회원가입 Post요청 보내기
       const email = formData.email.text;
       const password = formData.pw.text;
-      axios
+      await axios
         .post("https://ggb-back-0b82d9178398.herokuapp.com/createUser", {
           email,
           password,
