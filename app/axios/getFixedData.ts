@@ -9,7 +9,17 @@ export const getFixedData = async (
   await api
     .get("/fix/fetchFixedData", { params })
     .then((res) => {
-      setFixedData(res.data.fixedData);
+      if (res.data.fixedData === null) {
+        setFixedData({
+          id: "",
+          email: "",
+          saving: NaN,
+          fixed: NaN,
+          income: NaN,
+        });
+      } else {
+        setFixedData(res.data.fixedData);
+      }
     })
     .catch((err: any) => {
       console.log(err);
