@@ -12,7 +12,8 @@ export default function Navigation() {
   useEffect(() => {
     const loginData: string | null = sessionStorage.getItem("access");
     setIsLogin(loginData);
-  }, []);
+    console.log("is roop?");
+  }, [isOpen]);
 
   return (
     <div
