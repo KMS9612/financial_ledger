@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { IPropsIsOpenModal } from "../../types/modalTypes/ModalProps";
 import api from "@/app/axios/instance";
 
@@ -20,9 +20,9 @@ export default function FixPayModal({
   isOpenObject: IPropsIsOpenModal;
 }) {
   const [fixedData, setFixedData] = useState<IFixedData>({
-    income: -1,
-    saving: -1,
-    fixed: -1,
+    income: 0,
+    saving: 0,
+    fixed: 0,
   });
 
   const inputObj = [
@@ -30,6 +30,19 @@ export default function FixPayModal({
     { label: "월 저금금액", labelName: "saving", type: "number" },
     { label: "월 고정지출", labelName: "fixed", type: "number" },
   ];
+
+  useEffect(() => {
+    let params = { email: sessionStorage.getItem("email") };
+    api
+      .get("/fix/fetchFixedData", { params })
+      .then((res) => {
+        console.log(res.data.fixedData);
+        setFixedData(res.data.fixedData);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   const onChangeSetFixedData = (event: ChangeEvent<HTMLInputElement>) => {
     const target = event.currentTarget;
@@ -41,11 +54,7 @@ export default function FixPayModal({
   // 저장버튼 클릭시 DB에 고정지출, 수입에 대한 정보를 저장하는 함수
   const onClickSaveFixedData = () => {
     // 수입, 저금, 고정지출 input정보가 0이 아닐때만 작동
-    if (
-      fixedData.income === -1 ||
-      fixedData.saving === -1 ||
-      fixedData.fixed === -1
-    ) {
+    if (!fixedData.income || !fixedData.saving || !fixedData.fixed) {
       alert("고정수입, 고정지출, 저금금액을 모두 입력해주세요.");
       return;
     }
@@ -75,7 +84,7 @@ export default function FixPayModal({
         isOpenObject.edit
           ? "opacity-100 pointer-events-auto"
           : "opacity-0 pointer-events-none"
-      } absolute w-screen min-w-[380px] lg:w-96 h-fit py-10 bg-white border-slate-700 border-2 top-1/2 left-1/2 w-1/5 -translate-x-1/2 -translate-y-1/2 text-center transition ease-in-out rounded z-10`}
+      } absolute w-screen min-w-[380px] lg:w-96 h-fit py-10 bg-white border-slate-700 border-2 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center transition ease-in-out rounded z-10`}
     >
       <div className="mb-10 text-lg font-bold">고정 비용 설정</div>
       <div className="flex flex-col justify-center items-center gap-10">
@@ -86,6 +95,7 @@ export default function FixPayModal({
                 <label htmlFor={el.labelName}>{el.label}</label>
                 <input
                   autoComplete={"off"}
+                  value={fixedData[el.labelName]}
                   onChange={onChangeSetFixedData}
                   type={el.type}
                   name={el.labelName}
