@@ -36,7 +36,6 @@ export default function FixPayModal({
     api
       .get("/fix/fetchFixedData", { params })
       .then((res) => {
-        console.log(res.data.fixedData);
         setFixedData(res.data.fixedData);
       })
       .catch((err) => {

@@ -82,7 +82,7 @@ export default function LoginPage() {
           "refresh",
           JSON.stringify(res.data.refreshToken)
         );
-        sessionStorage.setItem("email", JSON.stringify(res.data.email));
+        sessionStorage.setItem("email", res.data.email);
         router.push("/result");
       })
       .catch((err) => {

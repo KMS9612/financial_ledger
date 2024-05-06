@@ -26,10 +26,10 @@ export default function CalculateData(editData: any, fixedData: IFixedData) {
   });
 
   // 고정 지출 + minus합산 = 이번달 지출
-  const monthMinus = fixedData.fixed + minus + fixedData.saving;
+  const monthMinus = fixedData?.fixed + minus + fixedData?.saving;
 
   // 고정 수입 + plus합산 = 이번달 수입
-  const monthPlus = fixedData.income + plus;
+  const monthPlus = fixedData?.income + plus;
 
   // 이번달 수입 - 이번달 지출 - 저금 = 사용가능 금액
   const leftMoney = monthPlus - monthMinus;

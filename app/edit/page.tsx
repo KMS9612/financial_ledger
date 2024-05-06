@@ -51,6 +51,11 @@ export default function EditPage() {
         params: payload,
       })
       .then((res) => {
+        // 가입 후 첫 진입 시 null값이  return되므로 모달 켜주기
+        if (res.data.data === null) {
+          onChangeStateOfModal("today", !isOpen.today);
+          return;
+        }
         const resData = res.data.data.data;
         // Fetch된 데이터 날짜별 정렬
         resData.sort((a: IPropsFetchedData, b: IPropsFetchedData) => {
