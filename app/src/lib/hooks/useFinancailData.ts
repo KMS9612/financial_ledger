@@ -20,7 +20,7 @@ function useFinancailData() {
 
     // 일일 등록 정보 요청하기
     getAllFinancial(params, setEditData);
-  });
+  }, []);
   return { editData, fixedData };
 }
 
