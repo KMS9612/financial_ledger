@@ -1,6 +1,6 @@
 "use client";
 import { useRecoilState } from "recoil";
-import { isOpenNavi } from "./recoil/navi";
+import { isOpenNavi } from "../recoil/store/navi";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 

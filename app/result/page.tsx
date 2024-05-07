@@ -1,14 +1,14 @@
 "use client";
 import { useEffect, useState } from "react";
-import ResultBoxSmall from "../src/components/box/resultBoxSm";
+import ResultBoxSmall from "../src/components/commons/boxes/resultBoxSm";
 import { useRouter } from "next/navigation";
 import { IFixedData } from "../src/types/fixedTypes/fixedDataType";
-import CalculateData from "../functions/calculateData";
+import CalculateData from "../src/lib/calculates/calculateData";
 import ChartBox from "../src/components/chart/resultChart";
-import useCheckLogin from "../functions/checkLogin";
-import ChartCategoryBtn from "../src/components/chart/chartCategoryBtn";
-import { getFixedData } from "../axios/getFixedData";
-import { getAllFinancial } from "../axios/getAllFinancial";
+import useCheckLogin from "../src/lib/checking/checkLogin";
+import ChartCategoryBtn from "../src/components/commons/buttons/chartCategoryBtn";
+import { getFixedData } from "../src/service/getFixedData";
+import { getAllFinancial } from "../src/service/getAllFinancial";
 
 export default function ResultPage() {
   useCheckLogin();

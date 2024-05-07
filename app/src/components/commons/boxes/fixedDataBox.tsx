@@ -1,6 +1,6 @@
-import api from "@/app/axios/instance";
+import api from "@/app/src/service/instance";
 import { useEffect, useState } from "react";
-import { IFixedData } from "../../types/fixedTypes/fixedDataType";
+import { IFixedData } from "../../../types/fixedTypes/fixedDataType";
 
 export default function FixedDataBox() {
   const [fixedData, setFixedData] = useState<IFixedData>({

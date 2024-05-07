@@ -1,4 +1,4 @@
-import CalculateForChart from "@/app/functions/calculateForChart";
+import CalculateForChart from "@/app/src/lib/calculates/calculateForChart";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -17,7 +17,7 @@ import {
   IPropsFetchedData,
   IEditDataValue,
 } from "../../types/editTypes/editTypes";
-import CalculateForDoughnut from "@/app/functions/calculateForDoughnut";
+import CalculateForDoughnut from "@/app/src/lib/calculates/calculateForDoughnut";
 
 interface IPropsChart {
   editData: any;

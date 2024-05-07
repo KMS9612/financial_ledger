@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
-import Header from "../header";
-import Navigation from "../navigation";
+import Header from "./header";
+import Navigation from "./navigation";
 import { usePathname } from "next/navigation";
 import { RecoilRoot } from "recoil";
 import { Inter } from "next/font/google";

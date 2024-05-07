@@ -2,7 +2,7 @@ import {
   IEditDataDate,
   IEditDataFull,
   IPropsFetchedData,
-} from "../src/types/editTypes/editTypes";
+} from "../../types/editTypes/editTypes";
 
 export default function CalculateForDoughnut(editData: Array<IEditDataFull>) {
   let monthPlusData = 0;

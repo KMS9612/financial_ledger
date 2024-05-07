@@ -1,5 +1,5 @@
-import { ITableData } from "../src/types/editTypes/tableType";
-import { IFixedData } from "../src/types/fixedTypes/fixedDataType";
+import { ITableData } from "../../types/editTypes/tableType";
+import { IFixedData } from "../../types/fixedTypes/fixedDataType";
 
 /** editData, fixedData를 받아 객체 {이번 달 지출: number, 이번 달 수입: number }를 반환하는 함수 */
 export default function CalculateData(editData: any, fixedData: IFixedData) {

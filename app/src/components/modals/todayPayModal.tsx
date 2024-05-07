@@ -1,6 +1,6 @@
 import { ChangeEvent, MouseEvent, useEffect, useState } from "react";
 import { IPropsTodayModal } from "../../types/modalTypes/todayPayModalType";
-import api from "@/app/axios/instance";
+import api from "@/app/src/service/instance";
 import CircleLoading from "../loading/circleLoading";
 
 export default function TodayPayModal({
