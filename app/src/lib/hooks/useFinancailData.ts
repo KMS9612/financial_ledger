@@ -13,13 +13,18 @@ function useFinancailData() {
   const [fixedData, setFixedData] = useRecoilState<IFixedData>(fixedDataState);
 
   useEffect(() => {
-    const email = sessionStorage.getItem("email");
-    const params = { email };
-    // 고정비용 요청하기
-    getFixedData(params, setFixedData);
+    const fetchFinancialData = async () => {
+      const email = sessionStorage.getItem("email");
+      const params = { email };
+      // 고정비용 요청하기
+      const fixed = await getFixedData(params);
+      setFixedData(fixed);
 
-    // 일일 등록 정보 요청하기
-    getAllFinancial(params, setEditData);
+      // 일일 등록 정보 요청하기
+      const edited = await getAllFinancial(params);
+      setEditData(edited);
+    };
+    fetchFinancialData();
   }, []);
   return { editData, fixedData };
 }
