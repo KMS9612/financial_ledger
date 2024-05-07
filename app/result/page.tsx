@@ -6,7 +6,7 @@ import { IFixedData } from "../src/types/fixedTypes/fixedDataType";
 import CalculateData from "../src/lib/calculates/calculateData";
 import ChartBox from "../src/components/chart/resultChart";
 import useCheckLogin from "../src/lib/checking/checkLogin";
-import ChartCategoryBtn from "../src/components/chart/chartCategoryBtn";
+import ChartCategoryBtn from "../src/components/commons/buttons/chartCategoryBtn";
 import { getFixedData } from "../src/service/getFixedData";
 import { getAllFinancial } from "../src/service/getAllFinancial";
 
