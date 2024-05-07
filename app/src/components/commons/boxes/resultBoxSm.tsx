@@ -1,10 +1,5 @@
+import { IPropsResultSmall } from "@/app/src/types/resultlTypes/resultBoxSmall";
 import TextSkeleton from "../../loading/textSkeleton";
-
-interface IPropsResultSmall {
-  title: string;
-  subText: string;
-  data: any;
-}
 
 export default function ResultBoxSmall(props: IPropsResultSmall) {
   return (

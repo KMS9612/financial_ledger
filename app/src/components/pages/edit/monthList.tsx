@@ -1,11 +1,10 @@
 import { useRouter } from "next/navigation";
-import { IPropsFetchedData } from "../src/types/editTypes/editTypes";
+import { IPropsFetchedData } from "../../../types/editTypes/editTypes";
 
 export default function MonthList({ el }: { el: IPropsFetchedData }) {
   const router = useRouter();
 
   const onClickRouteDetail = () => {
-    // const monthData = JSON.stringify(el);
     const target = el.month.replace("/", ".");
     router.push(`/edit/${target}`);
   };

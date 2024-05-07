@@ -4,7 +4,7 @@ import TodayPayModal from "../src/components/modals/todayPayModal";
 import FixPayModal from "../src/components/modals/fixPayModal";
 import { IPropsIsOpenModal } from "../src/types/modalTypes/ModalProps";
 import api from "../src/service/instance";
-import MonthList from "./monthList";
+import MonthList from "../src/components/pages/edit/monthList";
 import { IPropsFetchedData } from "../src/types/editTypes/editTypes";
 import useCheckLogin from "../src/lib/checking/checkLogin";
 import CircleLoading from "../src/components/loading/circleLoading";

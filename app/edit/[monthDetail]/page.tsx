@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import TableInfomation from "../tableInfo";
+import TableInfomation from "../../src/components/pages/edit/tableInfo";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import FixedDataBox from "@/app/src/components/commons/boxes/fixedDataBox";

@@ -1,4 +1,4 @@
-import { ITableData } from "../src/types/editTypes/tableType";
+import { ITableData } from "../../../types/editTypes/tableType";
 
 export default function TableInfomation({
   tableData,
