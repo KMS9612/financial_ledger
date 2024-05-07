@@ -1,4 +1,4 @@
-import { IFixedData } from "../src/types/fixedTypes/fixedDataType";
+import { IFixedData } from "../../types/fixedTypes/fixedDataType";
 
 export default function CalculateForChart(
   editData: any,

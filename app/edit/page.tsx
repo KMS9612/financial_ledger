@@ -3,10 +3,10 @@ import { useEffect, useState } from "react";
 import TodayPayModal from "../src/components/modals/todayPayModal";
 import FixPayModal from "../src/components/modals/fixPayModal";
 import { IPropsIsOpenModal } from "../src/types/modalTypes/ModalProps";
-import api from "../axios/instance";
+import api from "../src/service/instance";
 import MonthList from "./monthList";
 import { IPropsFetchedData } from "../src/types/editTypes/editTypes";
-import useCheckLogin from "../functions/checkLogin";
+import useCheckLogin from "../src/lib/checking/checkLogin";
 import CircleLoading from "../src/components/loading/circleLoading";
 
 export default function EditPage() {

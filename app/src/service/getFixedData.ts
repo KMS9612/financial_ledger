@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from "react";
-import { IFixedData } from "../src/types/fixedTypes/fixedDataType";
+import { IFixedData } from "../types/fixedTypes/fixedDataType";
 import api from "./instance";
 
 export const getFixedData = async (

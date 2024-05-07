@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from "react";
-import { IFormSignup } from "../src/types/signupTypes/signupTypes";
+import { IFormSignup } from "../../types/signupTypes/signupTypes";
 
 // 회원가입 버튼을 누른후 작동하는 FormData의 형식을 확인하는 함수
 export const checkFormData = (

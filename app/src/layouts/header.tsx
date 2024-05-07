@@ -2,7 +2,7 @@
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { useRecoilState } from "recoil";
-import { isOpenNavi } from "./recoil/navi";
+import { isOpenNavi } from "../recoil/store/navi";
 
 export default function Header() {
   const router = useRouter();

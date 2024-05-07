@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import TableInfomation from "../tableInfo";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import FixedDataBox from "@/app/src/components/box/fixedDataBox";
+import FixedDataBox from "@/app/src/components/commons/boxes/fixedDataBox";
 
 export default function MonthDetail({
   params,

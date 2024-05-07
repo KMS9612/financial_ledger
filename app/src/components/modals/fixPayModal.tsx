@@ -1,6 +1,6 @@
 import { ChangeEvent, useEffect, useState } from "react";
 import { IPropsIsOpenModal } from "../../types/modalTypes/ModalProps";
-import api from "@/app/axios/instance";
+import api from "@/app/src/service/instance";
 
 interface IFixedData {
   income: number;

@@ -1,5 +1,5 @@
 import { useRouter } from "next/navigation";
-import { IPropsSignupForm } from "../../types/signupTypes/signupTypes";
+import { IPropsSignupForm } from "../../../types/signupTypes/signupTypes";
 
 export default function SignUpForm(props: IPropsSignupForm) {
   const router = useRouter();

@@ -2,10 +2,10 @@
 import axios from "axios";
 import { ChangeEvent, useState } from "react";
 import SignUpAlertModal from "../src/components/modals/signUpModal";
-import SignUpForm from "../src/components/signup/signupForm";
+import SignUpForm from "../src/components/commons/forms/signupForm";
 import { IFormSignup } from "../src/types/signupTypes/signupTypes";
-import { checkFormData } from "../functions/checkFormData";
-import { PostFixedData } from "../axios/postFixedData";
+import { checkFormData } from "../src/lib/checking/checkFormData";
+import { PostFixedData } from "../src/service/postFixedData";
 
 export default function SignUp() {
   const [formData, setFormData] = useState<IFormSignup>({

@@ -1,4 +1,4 @@
-import TextSkeleton from "../loading/textSkeleton";
+import TextSkeleton from "../../loading/textSkeleton";
 
 interface IPropsResultSmall {
   title: string;
