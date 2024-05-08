@@ -1,6 +1,4 @@
 "use client";
-
-import { PostFixedData } from "@/app/axios/postFixedData";
 import { useRouter } from "next/navigation";
 import { Dispatch, SetStateAction } from "react";
 
