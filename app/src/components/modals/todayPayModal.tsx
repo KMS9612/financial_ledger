@@ -1,77 +1,99 @@
-import { ChangeEvent, MouseEvent, useEffect, useState } from "react";
+import { useRef, useState } from "react";
 import { IPropsTodayModal } from "../../types/modalTypes/todayPayModalType";
-import api from "@/app/src/service/instance";
 import CircleLoading from "../loading/circleLoading";
+import { useSetRecoilState } from "recoil";
+import { editDataState } from "../../recoil/store/financialData";
+import { getAllFinancial } from "../../service/getAllFinancial";
+import { postEditData } from "../../service/postEditData";
+import ModaltInput from "../commons/inputs/modalInput";
+import TodayModalSelect from "../commons/inputs/todayModalSelects";
 
 export default function TodayPayModal({
   isOpenFunction,
   isOpenObject,
-  setFormData,
-  formData,
-  fetchTableData,
 }: IPropsTodayModal) {
   // 연속 클릭 방지 및 로딩 상태 파악용 State
   const [isRequest, setIsRequest] = useState<boolean>(false);
+
+  // 일일 정보 등록 후 리스트 최신화를 위한 recoilState
+  const setEditData = useSetRecoilState(editDataState);
+
   // Edit에 필요한 Input의 정보를 모아놓은 객체
+  const dateRef = useRef<HTMLInputElement>(null);
+  const typeRef = useRef<HTMLInputElement>(null);
+  const placeRef = useRef<HTMLInputElement>(null);
+  const amountRef = useRef<HTMLInputElement>(null);
+
   const inputObj = [
     {
       label: "등록일시",
       inputAdd: "일/시",
       labelName: "date",
-      type: "text",
+      type: "date",
+      ref: dateRef,
     },
-    { label: "종류", inputAdd: "종류", labelName: "type", type: "select" },
+    {
+      label: "종류",
+      inputAdd: "종류",
+      labelName: "type",
+      type: "select",
+      ref: typeRef,
+    },
     {
       label: "출처",
       inputAdd: "출처",
       labelName: "place",
       type: "text",
+      ref: placeRef,
     },
-    { label: "금액", inputAdd: "원", labelName: "amount", type: "number" },
+    {
+      label: "금액",
+      inputAdd: "원",
+      labelName: "amount",
+      type: "number",
+      ref: amountRef,
+    },
   ];
 
-  const onChangeSetState = (
-    e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  ) => {
-    const { name, value } = e.currentTarget;
-
-    setFormData({ ...formData, [name]: value });
+  // InputValue 리셋
+  const resetInputValues = () => {
+    const date = dateRef.current?.value;
+    const type = typeRef.current?.value;
+    const amount = amountRef.current?.value;
+    const place = placeRef.current?.value;
+    if (!date || !type || !place || !amount) {
+      return;
+    }
+    dateRef.current.value = "";
+    typeRef.current.value = "";
+    amountRef.current.value = "";
+    placeRef.current.value = "";
   };
 
   const onClickSendRequest = async () => {
-    if (
-      !formData.date ||
-      !formData.place ||
-      !formData.type ||
-      !formData.amount
-    ) {
+    const date = dateRef.current?.value;
+    const type = typeRef.current?.value;
+    const amount = amountRef.current?.value;
+    const place = placeRef.current?.value;
+
+    if (!date || !type || !place || !amount) {
       alert("입력내용을 모두 입력해 주세요");
       return;
     }
+    const formData = { date, type, amount: Number(amount), place };
+    await postEditData(formData);
+    // 등록 후 값 초기화
+    resetInputValues();
 
-    // 23.12.25 추후 연달아 클릭하는 거 방지하는 기능 필요함
-    // 24.04.17 연속 클릭 방지 추가
+    // 연속 클릭 방지용 상태
     setIsRequest(true);
-
-    const email = sessionStorage.getItem("email");
-    await api
-      .post("/edit/createEdit", {
-        email: email,
-        date: formData.date.replaceAll("-", "/"),
-        financial_type: formData.type,
-        amount: formData.amount,
-        place: formData.place,
-      })
-      .then(() => {
-        // 요청 후 input 초기화
-        setFormData({ date: "", type: "지출", amount: 0, place: "" });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    // 서버 등록 후 editList를 최신화 하기위한 recoilState값 변경
+    let newEdit = await getAllFinancial();
+    setEditData(newEdit);
+    // todayModal 종료 함수
     isOpenFunction("today", false);
+    // 등록버튼의 로딩 상태
     setIsRequest(false);
-    fetchTableData();
   };
 
   return (
@@ -85,55 +107,13 @@ export default function TodayPayModal({
     >
       <div className="mb-10 text-lg font-bold">오늘 지출 등록</div>
       <div className="flex flex-col justify-center items-center gap-10">
-        {inputObj.map((el) => {
-          if (el.type !== "select") {
-            return (
-              <div key={el.label} className="relative flex flex-col text-left">
-                <div className="relative flex flex-col max-w-fit">
-                  <label htmlFor={el.labelName}>{el.label}</label>
-                  {el.label === "등록일시" ? (
-                    <input
-                      type="date"
-                      name={el.labelName}
-                      value={formData[el.labelName]}
-                      onChange={onChangeSetState}
-                      className="w-80 lg:w-60 h-10 pl-2 border rounded focus:outline-none focus:ring focus:border-slate-700 focus:border-none"
-                    />
-                  ) : (
-                    <div>
-                      <input
-                        type={el.type}
-                        name={el.labelName}
-                        value={formData[el.labelName]}
-                        onChange={onChangeSetState}
-                        className="w-80 lg:w-60 h-10 pl-2 border rounded focus:outline-none focus:ring focus:border-slate-700 focus:border-none"
-                      />
-                      <span className="absolute top-8 right-2 text-gray-400">
-                        {el.inputAdd}
-                      </span>
-                    </div>
-                  )}
-                </div>
-              </div>
-            );
-          } else {
-            return (
-              <div key={el.label} className=" relative flex flex-col text-left">
-                <div className="relative flex flex-col max-w-fit">
-                  <label htmlFor={el.labelName}>{el.label}</label>
-                  <select
-                    onChange={onChangeSetState}
-                    name={el.labelName}
-                    className="w-80 lg:w-60 h-10 pl-2 border rounded focus:outline-none focus:ring focus:border-slate-700 focus:border-none"
-                  >
-                    <option value="지출">지출</option>
-                    <option value="수입">수입</option>
-                  </select>
-                </div>
-              </div>
-            );
-          }
-        })}
+        {inputObj.map((el, index) =>
+          el.label !== "종류" ? (
+            <ModaltInput el={el} key={el.labelName + index} />
+          ) : (
+            <TodayModalSelect el={el} key={el.labelName + index} />
+          )
+        )}
         <div className="flex flex-col gap-5">
           <button
             disabled={isRequest}
@@ -147,8 +127,9 @@ export default function TodayPayModal({
           <button
             className="w-80 lg:w-60 h-10 border rounded"
             onClick={() => {
-              isOpenFunction("today", false),
-                setFormData({ date: "", type: "지출", amount: 0, place: "" });
+              isOpenFunction("today", false);
+              // 인풋 밸류 초기화
+              resetInputValues();
             }}
           >
             닫기

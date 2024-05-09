@@ -21,8 +21,9 @@ function useFinancailData() {
       setFixedData(fixed);
 
       // 일일 등록 정보 요청하기
-      const edited = await getAllFinancial(params);
+      const edited = await getAllFinancial();
       setEditData(edited);
+      sessionStorage.setItem("monthData", JSON.stringify(edited));
     };
     fetchFinancialData();
   }, []);

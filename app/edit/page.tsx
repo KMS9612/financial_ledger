@@ -1,30 +1,20 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import TodayPayModal from "../src/components/modals/todayPayModal";
 import FixPayModal from "../src/components/modals/fixPayModal";
 import { IPropsIsOpenModal } from "../src/types/modalTypes/ModalProps";
-import api from "../src/service/instance";
-import MonthList from "../src/components/pages/edit/monthList";
-import { IPropsFetchedData } from "../src/types/editTypes/editTypes";
 import useCheckLogin from "../src/lib/checking/checkLogin";
-import CircleLoading from "../src/components/loading/circleLoading";
+import useFinancailData from "../src/lib/hooks/useFinancailData";
+import { sortEditData } from "../src/lib/sort/sortEditData";
+import EditTopInfo from "../src/components/pages/edit/editTopInfo";
+import EditTableInfo from "../src/components/pages/edit/editTableInfo";
 
 export default function EditPage() {
   useCheckLogin();
-  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isOpen, setIsOpen] = useState<IPropsIsOpenModal>({
     edit: false,
     today: false,
   });
-  const [formData, setFormData] = useState({
-    date: "",
-    type: "지출",
-    amount: 0,
-    place: "",
-  });
-  const [financialData, setFinancialData] = useState<Array<IPropsFetchedData>>(
-    []
-  );
 
   // 일일등록 모달과 고정비용 모달의 on/off를 조절하는 함수
   const onChangeStateOfModal = (
@@ -42,98 +32,27 @@ export default function EditPage() {
     setIsOpen(newObject);
   };
 
-  // 해당 유저가 등록한 모든 일일 가계부 정보를 불러오는 함수
-  const fetchTableData = async () => {
-    const email = sessionStorage.getItem("email");
-    const payload = { email: email };
-    await api
-      .get("/edit/fetchAllFinancial", {
-        params: payload,
-      })
-      .then((res) => {
-        // 가입 후 첫 진입 시 null값이  return되므로 모달 켜주기
-        if (res.data.data === null) {
-          onChangeStateOfModal("today", !isOpen.today);
-          return;
-        }
-        const resData = res.data.data.data;
-        // Fetch된 데이터 날짜별 정렬
-        resData.sort((a: IPropsFetchedData, b: IPropsFetchedData) => {
-          const monthA = a.month;
-          const monthB = b.month;
-          if (monthA < monthB) {
-            return 1;
-          }
-          if (monthA > monthB) {
-            return -1;
-          }
-          return 0;
-        });
-        // Fetch된 후 정렬된 데이터 State(monthList 용)와 SessionStorage(monthDetail용)에 저장
-        setFinancialData(res.data.data.data);
-        sessionStorage.setItem("monthData", JSON.stringify(res.data.data.data));
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+  // 해당 유저가 등록한 모든 일일 가계부 정보를 불러오고 정렬시키는 부분
+  let { editData } = useFinancailData();
+  editData = sortEditData(editData);
 
-  useEffect(() => {
-    setIsLoading(true);
-    fetchTableData();
-  }, []);
-
-  return isLoading ? (
+  return (
     <div className="w-full relative h-screen flex flex-col pt-10 px-10 gap-8">
       <FixPayModal
         isOpenFunction={onChangeStateOfModal}
         isOpenObject={isOpen}
       />
       <TodayPayModal
-        fetchTableData={fetchTableData}
         isOpenFunction={onChangeStateOfModal}
         isOpenObject={isOpen}
-        setFormData={setFormData}
-        formData={formData}
       />
       {/* Top Infomation / Buttons */}
-      <div className="flex flex-col lg:flex-row justify-between items-center gap-10">
-        <div>
-          <h2 className="font-bold text-xl text-slate-700">
-            지출 / 수입 표 형식 가계부
-          </h2>
-        </div>
-        <div className="flex flex-col sm:flex-row gap-5">
-          <button
-            onClick={() => onChangeStateOfModal("edit", !isOpen.edit)}
-            className="w-80 h-10 flex justify-center items-center border-2 border-slate-600 rounded text-slate-600 font-bold transition ease-in-out hover:-translate-y-1"
-          >
-            고정 비용 설정
-          </button>
-          <button
-            onClick={() => onChangeStateOfModal("today", !isOpen.today)}
-            className="w-80 h-10 flex justify-center items-center border-2 border-slate-600 rounded text-slate-600 font-bold transition ease-in-out hover:-translate-y-1"
-          >
-            오늘 입/출 등록
-          </button>
-        </div>
-      </div>
+      <EditTopInfo
+        onChangeStateOfModal={onChangeStateOfModal}
+        isOpen={isOpen}
+      />
       {/* Table Infomation */}
-      <div className="w-full flex flex-wrap justify-center lg:justify-start gap-4">
-        {financialData.length !== 0 ? (
-          financialData.map((el: IPropsFetchedData, index) => (
-            <MonthList key={el.month + index} el={el} />
-          ))
-        ) : (
-          <div className="w-full flex justify-center items-center">
-            <CircleLoading />
-          </div>
-        )}
-      </div>
-    </div>
-  ) : (
-    <div className="w-full h-full flex justify-center items-center">
-      <CircleLoading />
+      <EditTableInfo editData={editData} />
     </div>
   );
 }

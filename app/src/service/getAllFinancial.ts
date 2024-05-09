@@ -1,9 +1,15 @@
 import api from "./instance";
 
-export const getAllFinancial = async (params: { email: string | null }) => {
+// get All Edit Data Request
+export const getAllFinancial = async () => {
   try {
+    const email = sessionStorage.getItem("email");
+    const params = { email };
     const res = await api.get("/edit/fetchAllFinancial", { params });
-    return res.data.data.data;
+
+    const editData = res.data.data.data;
+    sessionStorage.setItem("monthData", JSON.stringify(editData));
+    return editData;
   } catch {
     (err: any) => {
       console.log(err);
