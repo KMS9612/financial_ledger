@@ -1,14 +1,12 @@
 "use client";
 import { useState } from "react";
-import useCheckLogin from "../src/lib/checking/checkLogin";
 import ResultChartContainer from "../src/components/pages/result/resultChartContainer";
 import ResultBoxContainer from "../src/components/pages/result/resultBoxContainer";
 import useFinancailData from "../src/lib/hooks/useFinancailData";
 import NoDataPage from "../src/components/pages/NoDataPage/NoDataPage";
 import CircleLoading from "../src/components/loading/circleLoading";
 
-export default function ResultPage() {
-  useCheckLogin();
+export default function ResultPage({ pathname }: { pathname: any }) {
   // MonthData를 보여주는 그래프의 활성화유무를 나타내는 State
   const [showMonthData, setShowMonthData] = useState(false);
   const { editData, fixedData } = useFinancailData();

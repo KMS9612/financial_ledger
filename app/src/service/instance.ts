@@ -1,5 +1,5 @@
 import axios from "axios";
-
+import Cookie from "js-cookie";
 export const TestURL = "http://localhost:8080";
 export const PromotionURL = "https://ggb-back-0b82d9178398.herokuapp.com"; // API배포시 url
 
@@ -10,7 +10,8 @@ const refreshAccessToken = async (refreshToken: string) => {
   });
   const accessToken = response.data.newAccessToken;
 
-  sessionStorage.setItem("access", JSON.stringify(accessToken));
+  // sessionStorage.setItem("access", JSON.stringify(accessToken));
+  Cookie.set("access", accessToken);
 
   return accessToken;
 };
@@ -22,7 +23,8 @@ const api = axios.create({ baseURL: PromotionURL, withCredentials: true });
 // 요청 인터셉트
 api.interceptors.request.use(
   function (config) {
-    const token = JSON.parse(sessionStorage.getItem("access") || "");
+    // const token = JSON.parse(sessionStorage.getItem("access") || "");
+    const token = Cookie.get("access");
 
     // 요청이 전달되기 전에 작업 수행;
     config.headers["Content-Type"] = "application/json";
@@ -53,8 +55,8 @@ api.interceptors.response.use(
       // 첫 요청에 위 if문을 통과했다면 재요청을 하기위해 originalRequest._retry를 추가하여 중복 재요청 방지
       originalRequest._retry = true;
 
-      const refreshToken = JSON.parse(sessionStorage.getItem("refresh") || "");
-
+      // const refreshToken = JSON.parse(sessionStorage.getItem("refresh") || "");
+      const refreshToken = Cookie.get("refresh") || "";
       try {
         const accessToken = await refreshAccessToken(refreshToken);
 

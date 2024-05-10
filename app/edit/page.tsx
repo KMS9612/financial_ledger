@@ -3,14 +3,12 @@ import { useState } from "react";
 import TodayPayModal from "../src/components/modals/todayPayModal";
 import FixPayModal from "../src/components/modals/fixPayModal";
 import { IPropsIsOpenModal } from "../src/types/modalTypes/ModalProps";
-import useCheckLogin from "../src/lib/checking/checkLogin";
 import useFinancailData from "../src/lib/hooks/useFinancailData";
 import { sortEditData } from "../src/lib/sort/sortEditData";
 import EditTopInfo from "../src/components/pages/edit/editTopInfo";
 import EditTableInfo from "../src/components/pages/edit/editTableInfo";
 
 export default function EditPage() {
-  useCheckLogin();
   const [isOpen, setIsOpen] = useState<IPropsIsOpenModal>({
     edit: false,
     today: false,
