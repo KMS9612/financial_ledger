@@ -1,4 +1,5 @@
 "use client";
+import Cookie from "js-cookie";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { MouseEvent, useEffect, useState } from "react";
@@ -76,12 +77,15 @@ export default function LoginPage() {
         password,
       })
       .then((res) => {
+        // jwt토큰과 유저정보는 cookie에 저장
+        Cookie.set("access", res.data.accessToken, { expires: 1 });
+        Cookie.set("refresh", res.data.refreshToken, { expires: 7 });
         // jwt토큰과 유저정보는 sessionStorage에 저장
-        sessionStorage.setItem("access", JSON.stringify(res.data.accessToken));
-        sessionStorage.setItem(
-          "refresh",
-          JSON.stringify(res.data.refreshToken)
-        );
+        // sessionStorage.setItem("access", JSON.stringify(res.data.accessToken));
+        // sessionStorage.setItem(
+        //   "refresh",
+        //   JSON.stringify(res.data.refreshToken)
+        // );
         sessionStorage.setItem("email", res.data.email);
         router.push("/result");
       })

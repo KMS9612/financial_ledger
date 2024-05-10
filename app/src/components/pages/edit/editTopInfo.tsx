@@ -1,3 +1,4 @@
+import { onChangeStateOfModal } from "@/app/src/lib/events/onChangeStateOfModal";
 import { IPropsEditTopInfo } from "@/app/src/types/editTypes/editPageTypes";
 
 export default function EditTopInfo(props: IPropsEditTopInfo) {
@@ -10,14 +11,26 @@ export default function EditTopInfo(props: IPropsEditTopInfo) {
       </div>
       <div className="flex flex-col sm:flex-row gap-5">
         <button
-          onClick={() => props.onChangeStateOfModal("edit", !props.isOpen.edit)}
+          onClick={() =>
+            onChangeStateOfModal(
+              "edit",
+              !props.isOpen.edit,
+              props.isOpen,
+              props.setIsOpen
+            )
+          }
           className="w-80 h-10 flex justify-center items-center border-2 border-slate-600 rounded text-slate-600 font-bold transition ease-in-out hover:-translate-y-1"
         >
           고정 비용 설정
         </button>
         <button
           onClick={() =>
-            props.onChangeStateOfModal("today", !props.isOpen.today)
+            onChangeStateOfModal(
+              "today",
+              !props.isOpen.today,
+              props.isOpen,
+              props.setIsOpen
+            )
           }
           className="w-80 h-10 flex justify-center items-center border-2 border-slate-600 rounded text-slate-600 font-bold transition ease-in-out hover:-translate-y-1"
         >

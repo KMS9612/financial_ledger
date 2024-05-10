@@ -1,4 +1,5 @@
 "use client";
+import Cookie from "js-cookie";
 import { useRecoilState } from "recoil";
 import { isOpenNavi } from "../recoil/store/navi";
 import { useRouter } from "next/navigation";
@@ -10,7 +11,8 @@ export default function Navigation() {
   const router = useRouter();
 
   useEffect(() => {
-    const loginData: string | null = sessionStorage.getItem("access");
+    // const loginData: string | null = sessionStorage.getItem("access");
+    const loginData = Cookie.get("access");
     setIsLogin(loginData);
   }, [isOpen]);
 
@@ -36,8 +38,10 @@ export default function Navigation() {
                 router.push("/login");
               } else {
                 setIsOpen(false);
-                sessionStorage.removeItem("access");
-                sessionStorage.removeItem("refresh");
+                Cookie.remove("access");
+                Cookie.remove("refresh");
+                // sessionStorage.removeItem("access");
+                // sessionStorage.removeItem("refresh");
                 router.push("/login");
               }
             }}

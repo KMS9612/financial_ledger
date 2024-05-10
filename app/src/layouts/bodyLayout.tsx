@@ -17,7 +17,7 @@ export default function BodyLayout(props: IPropsBodyLayout) {
   const [isHidden, setIsHidden] = useState<boolean>(true);
   const currentPath = usePathname();
 
-  const Fonts = inter + " " + notoKR;
+  const Fonts = inter.className + " " + notoKR.className;
 
   useEffect(() => {
     const hiddenLayout = ["/"];

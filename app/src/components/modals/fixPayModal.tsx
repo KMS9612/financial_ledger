@@ -1,6 +1,7 @@
 import { ChangeEvent, useEffect, useState } from "react";
-import { IPropsIsOpenModal } from "../../types/modalTypes/ModalProps";
+import { IPropsFixPayModal } from "../../types/modalTypes/ModalProps";
 import api from "@/app/src/service/instance";
+import { onChangeStateOfModal } from "../../lib/events/onChangeStateOfModal";
 
 interface IFixedData {
   income: number;
@@ -9,16 +10,7 @@ interface IFixedData {
   [key: string]: number;
 }
 
-export default function FixPayModal({
-  isOpenFunction,
-  isOpenObject,
-}: {
-  isOpenFunction: (
-    modalType: keyof IPropsIsOpenModal,
-    changeType: boolean
-  ) => void;
-  isOpenObject: IPropsIsOpenModal;
-}) {
+export default function FixPayModal(props: IPropsFixPayModal) {
   const [fixedData, setFixedData] = useState<IFixedData>({
     income: 0,
     saving: 0,
@@ -69,18 +61,28 @@ export default function FixPayModal({
       .post("/fix/createFixedData", params)
       .then((res) => {
         alert("저장완료");
-        isOpenFunction("edit", false);
+        onChangeStateOfModal(
+          "edit",
+          false,
+          props.isOpenObject,
+          props.setIsOpenObject
+        );
       })
       .catch((err) => {
         alert("저장실패 다시 시도하세요.");
-        isOpenFunction("edit", false);
+        onChangeStateOfModal(
+          "edit",
+          false,
+          props.isOpenObject,
+          props.setIsOpenObject
+        );
       });
   };
 
   return (
     <div
       className={`${
-        isOpenObject.edit
+        props.isOpenObject.edit
           ? "opacity-100 pointer-events-auto"
           : "opacity-0 pointer-events-none"
       } absolute w-screen min-w-[380px] lg:w-96 h-fit py-10 bg-white border-slate-700 border-2 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center transition ease-in-out rounded z-10`}
@@ -115,7 +117,12 @@ export default function FixPayModal({
           <button
             className="w-80 lg:w-60 h-10 border rounded"
             onClick={() => {
-              isOpenFunction("edit", false);
+              onChangeStateOfModal(
+                "edit",
+                false,
+                props.isOpenObject,
+                props.setIsOpenObject
+              );
             }}
           >
             닫기
