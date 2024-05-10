@@ -1,4 +1,5 @@
 import { IPropsIsOpenModal } from "./ModalProps";
+import { Dispatch, SetStateAction } from "react";
 
 export interface FormData {
   date: string;
@@ -9,9 +10,6 @@ export interface FormData {
 }
 
 export interface IPropsTodayModal {
-  isOpenFunction: (
-    modalType: keyof IPropsIsOpenModal,
-    changeType: boolean
-  ) => void;
   isOpenObject: IPropsIsOpenModal;
+  setIsOpenObject: Dispatch<SetStateAction<IPropsIsOpenModal>>;
 }

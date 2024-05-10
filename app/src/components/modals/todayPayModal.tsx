@@ -7,11 +7,9 @@ import { getAllFinancial } from "../../service/getAllFinancial";
 import { postEditData } from "../../service/postEditData";
 import ModaltInput from "../commons/inputs/modalInput";
 import TodayModalSelect from "../commons/inputs/todayModalSelects";
+import { onChangeStateOfModal } from "../../lib/events/onChangeStateOfModal";
 
-export default function TodayPayModal({
-  isOpenFunction,
-  isOpenObject,
-}: IPropsTodayModal) {
+export default function TodayPayModal(props: IPropsTodayModal) {
   // 연속 클릭 방지 및 로딩 상태 파악용 State
   const [isRequest, setIsRequest] = useState<boolean>(false);
 
@@ -91,7 +89,12 @@ export default function TodayPayModal({
     let newEdit = await getAllFinancial();
     setEditData(newEdit);
     // todayModal 종료 함수
-    isOpenFunction("today", false);
+    onChangeStateOfModal(
+      "edit",
+      false,
+      props.isOpenObject,
+      props.setIsOpenObject
+    );
     // 등록버튼의 로딩 상태
     setIsRequest(false);
   };
@@ -99,7 +102,7 @@ export default function TodayPayModal({
   return (
     <div
       className={`${
-        isOpenObject.today
+        props.isOpenObject.today
           ? "opacity-100  pointer-events-auto"
           : "opacity-0  pointer-events-none"
       }
@@ -127,7 +130,12 @@ export default function TodayPayModal({
           <button
             className="w-80 lg:w-60 h-10 border rounded"
             onClick={() => {
-              isOpenFunction("today", false);
+              onChangeStateOfModal(
+                "today",
+                false,
+                props.isOpenObject,
+                props.setIsOpenObject
+              );
               // 인풋 밸류 초기화
               resetInputValues();
             }}
