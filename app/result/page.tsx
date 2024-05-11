@@ -5,15 +5,19 @@ import ResultBoxContainer from "../src/components/pages/result/resultBoxContaine
 import useFinancailData from "../src/lib/hooks/useFinancailData";
 import NoDataPage from "../src/components/pages/NoDataPage/NoDataPage";
 import CircleLoading from "../src/components/loading/circleLoading";
+import { FixedDataTypeGuard } from "../src/lib/checking/fixedDataTypeGuard";
 
-export default function ResultPage({ pathname }: { pathname: any }) {
+export default function ResultPage() {
   // MonthData를 보여주는 그래프의 활성화유무를 나타내는 State
   const [showMonthData, setShowMonthData] = useState(false);
   const { editData, fixedData } = useFinancailData();
 
   if (fixedData === null) {
     return <NoDataPage />;
-  } else if (Object.keys(fixedData).length === 0) {
+  } else if (
+    Object.keys(fixedData).length === 0 ||
+    !FixedDataTypeGuard(fixedData) // FixedData가 IFixedData타입을 충족하는지 확인하는 타입가드 {}일 경우를 배제 시켜 에러를 방지
+  ) {
     return <CircleLoading />;
   } else {
     return (

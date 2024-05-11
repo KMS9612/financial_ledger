@@ -1,7 +1,7 @@
 import { ChangeEvent, useEffect, useState } from "react";
-import { IPropsFixPayModal } from "../../types/modalTypes/ModalProps";
 import api from "@/app/src/service/instance";
 import { onChangeStateOfModal } from "../../lib/events/onChangeStateOfModal";
+import { IPropsFixPayModal } from "../../types/modalTypes/fixedPayModalType";
 
 interface IFixedData {
   income: number;

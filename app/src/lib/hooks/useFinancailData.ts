@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useRecoilState } from "recoil";
 import {
   editDataState,
@@ -10,7 +11,9 @@ import { IFixedData } from "../../types/fixedTypes/fixedDataType";
 
 function useFinancailData() {
   const [editData, setEditData] = useRecoilState<any>(editDataState);
-  const [fixedData, setFixedData] = useRecoilState<IFixedData>(fixedDataState);
+  const [fixedData, setFixedData] = useRecoilState<IFixedData | {}>(
+    fixedDataState
+  );
 
   useEffect(() => {
     const fetchFinancialData = async () => {
