@@ -4,7 +4,7 @@ import { IFixedData } from "../../../types/fixedTypes/fixedDataType";
 
 export default function FixedDataBox() {
   const [fixedData, setFixedData] = useState<IFixedData>({
-    id: "",
+    _id: "",
     email: "",
     saving: 0,
     fixed: 0,
