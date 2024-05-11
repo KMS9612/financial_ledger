@@ -15,7 +15,6 @@ export default function ResultPage() {
   if (fixedData === null) {
     return <NoDataPage />;
   } else if (
-    Object.keys(fixedData).length === 0 ||
     !FixedDataTypeGuard(fixedData) // FixedData가 IFixedData타입을 충족하는지 확인하는 타입가드 {}일 경우를 배제 시켜 에러를 방지
   ) {
     return <CircleLoading />;

@@ -1,5 +1,5 @@
 export interface IFixedData {
-  id: string;
+  _id: string;
   email: string;
   income: number;
   saving: number;

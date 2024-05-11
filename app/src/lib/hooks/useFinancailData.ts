@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useRecoilState } from "recoil";
 import {
   editDataState,
@@ -29,7 +28,7 @@ function useFinancailData() {
       sessionStorage.setItem("monthData", JSON.stringify(edited));
     };
     fetchFinancialData();
-  }, []);
+  }, [setFixedData, setEditData]);
   return { editData, fixedData };
 }
 

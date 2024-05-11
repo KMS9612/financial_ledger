@@ -2,7 +2,7 @@ import { type NextRequest, NextResponse } from "next/server";
 
 export function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
-  const needUnLoginPage = ["/", "/login", "signup"];
+  const needUnLoginPage = ["/login", "signup"];
   const needLoginPage = ["/result", "/edit"];
   const accessToken = request.cookies.get("access");
 
@@ -14,4 +14,6 @@ export function middleware(request: NextRequest) {
   }
 }
 
-export const config = {};
+export const config = {
+  matcher: ["/result", "/edit", "/login", "/signup"],
+};
