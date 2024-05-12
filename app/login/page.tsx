@@ -77,9 +77,10 @@ export default function LoginPage() {
         password,
       })
       .then((res) => {
-        // jwt토큰과 유저정보는 cookie에 저장
-        Cookie.set("access", res.data.accessToken, { expires: 1 });
-        Cookie.set("refresh", res.data.refreshToken, { expires: 7 });
+        // jwt토큰과 유저정보는 sessionCookie에 저장
+        Cookie.set("access", res.data.accessToken);
+        Cookie.set("refresh", res.data.refreshToken);
+        Cookie.set("email", email);
         // jwt토큰과 유저정보는 sessionStorage에 저장
         // sessionStorage.setItem("access", JSON.stringify(res.data.accessToken));
         // sessionStorage.setItem(

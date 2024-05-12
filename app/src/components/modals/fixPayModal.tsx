@@ -2,6 +2,7 @@ import { ChangeEvent, useEffect, useState } from "react";
 import api from "@/app/src/service/instance";
 import { onChangeStateOfModal } from "../../lib/events/onChangeStateOfModal";
 import { IPropsFixPayModal } from "../../types/modalTypes/fixedPayModalType";
+import Cookie from "js-cookie";
 
 interface IFixedData {
   income: number;
@@ -24,7 +25,9 @@ export default function FixPayModal(props: IPropsFixPayModal) {
   ];
 
   useEffect(() => {
-    let params = { email: sessionStorage.getItem("email") };
+    let params = {
+      email: sessionStorage.getItem("email") || Cookie.get("email"),
+    };
     api
       .get("/fix/fetchFixedData", { params })
       .then((res) => {

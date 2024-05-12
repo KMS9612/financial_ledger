@@ -5,7 +5,5 @@ import { IFixedData } from "../../types/fixedTypes/fixedDataType";
 export function FixedDataTypeGuard(object: any): object is IFixedData {
   const requiredProperties = ["_id", "email", "income", "saving", "fixed"];
 
-  console.log(object);
-  console.log(requiredProperties.every((property) => property in object));
   return requiredProperties.every((property) => property in object);
 }

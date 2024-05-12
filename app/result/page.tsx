@@ -11,6 +11,7 @@ export default function ResultPage() {
   // MonthData를 보여주는 그래프의 활성화유무를 나타내는 State
   const [showMonthData, setShowMonthData] = useState(false);
   const { editData, fixedData } = useFinancailData();
+  console.log(editData, fixedData);
 
   if (fixedData === null) {
     return <NoDataPage />;

@@ -16,10 +16,8 @@ function useFinancailData() {
 
   useEffect(() => {
     const fetchFinancialData = async () => {
-      const email = sessionStorage.getItem("email");
-      const params = { email };
       // 고정비용 요청하기
-      const fixed = await getFixedData(params);
+      const fixed = await getFixedData();
       setFixedData(fixed);
 
       // 일일 등록 정보 요청하기

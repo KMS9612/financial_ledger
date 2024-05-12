@@ -1,7 +1,10 @@
 import api from "./instance";
+import Cookie from "js-cookie";
 
-export const getFixedData = async (params: { email: string | null }) => {
+export const getFixedData = async () => {
   try {
+    const email = Cookie.get("email") || sessionStorage.getItem("email");
+    const params = { email };
     const res = await api.get("/fix/fetchFixedData", { params });
     return res.data.fixedData;
   } catch {

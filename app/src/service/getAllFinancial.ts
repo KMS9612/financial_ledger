@@ -1,9 +1,10 @@
 import api from "./instance";
-
+import Cookie from "js-cookie";
 // get All Edit Data Request
 export const getAllFinancial = async () => {
   try {
-    const email = sessionStorage.getItem("email");
+    const email = Cookie.get("email") || sessionStorage.getItem("email");
+    // const email = sessionStorage.getItem("email");
     const params = { email };
     const res = await api.get("/edit/fetchAllFinancial", { params });
 
