@@ -86,7 +86,7 @@ export default function LoginPage() {
         to-slate-500 background-animate"
         >
           <p className="text-5xl text-white">Welcome To GGB!</p>
-          <p className="text-2xl text-white">Let's Start Economize!</p>
+          <p className="text-2xl text-white">Let&rsquo;s Start Economize!</p>
         </div>
         {isLoading ? (
           <div className="lg:w-1/3 w-full h-full bg-white flex flex-col justify-center items-center border-4 border-white py-20 gap-20">
