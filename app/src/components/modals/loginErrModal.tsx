@@ -1,18 +1,14 @@
-import { FocusOBJ, UserDataOBJ } from "@/app/login/page";
 import { Dispatch, SetStateAction } from "react";
+import { FocusOBJ } from "../../types/loginTypes/loginPageTypes";
 
 export default function LoginErrModal({
   text,
   isOpen,
   setIsOpen,
-  setUserData,
-  setIsFocus,
 }: {
   text: string;
   isOpen: boolean;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
-  setUserData: Dispatch<SetStateAction<UserDataOBJ>>;
-  setIsFocus: Dispatch<SetStateAction<FocusOBJ>>;
 }) {
   return (
     <div
@@ -32,8 +28,6 @@ export default function LoginErrModal({
           <button
             onClick={() => {
               setIsOpen(false);
-              setUserData({ id: "", pw: "" });
-              setIsFocus({ id: false, pw: false });
             }}
             className="w-24 h-8 rounded-md bg-white text-slate-600 border-2 border-slate-600 font-bold text-lg transition ease-in-out duration-600 hover:-translate-y-1"
           >

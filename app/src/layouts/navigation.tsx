@@ -40,9 +40,10 @@ export default function Navigation() {
                 setIsOpen(false);
                 Cookie.remove("access");
                 Cookie.remove("refresh");
-                // sessionStorage.removeItem("access");
-                // sessionStorage.removeItem("refresh");
-                router.push("/login");
+                Cookie.remove("email");
+                setTimeout(() => {
+                  router.push("/login");
+                }, 1000);
               }
             }}
             className="w-5/6 h-8 border-2 rounded transition ease-in-out hover:-translate-y-1 hover:bg-white hover:text-slate-700"

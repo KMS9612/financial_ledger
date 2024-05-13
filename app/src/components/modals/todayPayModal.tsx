@@ -71,7 +71,6 @@ export default function TodayPayModal(props: IPropsTodayModal) {
   };
 
   const onClickSendRequest = async () => {
-    console.log("working");
     const date = dateRef.current?.value;
     const type = typeRef.current?.value;
     const amount = amountRef.current?.value;

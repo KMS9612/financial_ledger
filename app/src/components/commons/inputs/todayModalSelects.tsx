@@ -9,7 +9,6 @@ export default function TodayModalSelect(props: IPropsModalSelect) {
       <select
         ref={props.el.ref}
         name={props.el.labelName}
-        onChange={() => console.log(props.el.ref.current.value)}
         className="w-5/6 h-10 pl-2 border rounded focus:outline-none focus:ring focus:border-slate-700 focus:border-none"
       >
         <option value="지출">지출</option>
