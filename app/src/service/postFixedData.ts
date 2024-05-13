@@ -1,18 +1,21 @@
+import { IParamsFixedData } from "../types/fixedTypes/fixedDataType";
 import api from "./instance";
-
-export function PostFixedData(email: string) {
+import Cookie from "js-cookie";
+export async function PostFixedData(fixedData: IParamsFixedData) {
+  const email = sessionStorage.getItem("email") || Cookie.get("email");
   const params = {
     email,
-    income: 0,
-    saving: 0,
-    fixed: 0,
+    income: fixedData.income,
+    saving: fixedData.saving,
+    fixed: fixedData.fixed,
   };
-  api
+  await api
     .post("/fix/createFixedData", params)
     .then((res) => {
-      console.log(res.data);
+      return res.data;
     })
     .catch((err) => {
       console.log(err);
+      throw err;
     });
 }

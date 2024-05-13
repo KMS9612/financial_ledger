@@ -1,6 +1,6 @@
 import { IPropsModalInput } from "@/app/src/types/inputTypes/ModalInput";
 
-export default function ModaltInput(props: IPropsModalInput) {
+export default function ModalInput(props: IPropsModalInput) {
   return (
     <div className="w-full flex flex-col justify-center items-center">
       <div className="w-5/6 flex justify-start">
@@ -8,6 +8,7 @@ export default function ModaltInput(props: IPropsModalInput) {
       </div>
       <div className="relative w-5/6 h-10">
         <input
+          autoComplete="false"
           ref={props.el.ref}
           type={props.el.type}
           name={props.el.labelName}

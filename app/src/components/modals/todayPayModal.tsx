@@ -5,9 +5,11 @@ import { useSetRecoilState } from "recoil";
 import { editDataState } from "../../recoil/store/financialData";
 import { getAllFinancial } from "../../service/getAllFinancial";
 import { postEditData } from "../../service/postEditData";
-import ModaltInput from "../commons/inputs/modalInput";
+import ModalInput from "../commons/inputs/modalInput";
 import TodayModalSelect from "../commons/inputs/todayModalSelects";
 import { onChangeStateOfModal } from "../../lib/events/onChangeStateOfModal";
+import ModalPositiveBtn from "../commons/buttons/modalPositiveBtn";
+import ModalCloseBtn from "../commons/buttons/modalCloseBtn";
 
 export default function TodayPayModal(props: IPropsTodayModal) {
   // 연속 클릭 방지 및 로딩 상태 파악용 State
@@ -69,6 +71,7 @@ export default function TodayPayModal(props: IPropsTodayModal) {
   };
 
   const onClickSendRequest = async () => {
+    console.log("working");
     const date = dateRef.current?.value;
     const type = typeRef.current?.value;
     const amount = amountRef.current?.value;
@@ -78,13 +81,14 @@ export default function TodayPayModal(props: IPropsTodayModal) {
       alert("입력내용을 모두 입력해 주세요");
       return;
     }
+    setIsRequest(true);
+
     const formData = { date, type, amount: Number(amount), place };
     await postEditData(formData);
     // 등록 후 값 초기화
     resetInputValues();
 
     // 연속 클릭 방지용 상태
-    setIsRequest(true);
     // 서버 등록 후 editList를 최신화 하기위한 recoilState값 변경
     let newEdit = await getAllFinancial();
     setEditData(newEdit);
@@ -106,30 +110,26 @@ export default function TodayPayModal(props: IPropsTodayModal) {
           ? "opacity-100  pointer-events-auto"
           : "opacity-0  pointer-events-none"
       }
-      absolute min-w-[380px] lg:w-96 h-fit py-10 bg-white border-slate-700 border-2 top-1/2 left-1/2 w-1/5 -translate-x-1/2 -translate-y-1/2 text-center transition ease-in-out rounded z-10`}
+      absolute min-w-[380px] lg:w-96 h-fit py-10 bg-white top-1/2 left-1/2 w-1/5 shadow-lg -translate-x-1/2 -translate-y-1/2 text-center transition ease-in-out rounded-lg z-10`}
     >
       <div className="mb-10 text-lg font-bold">오늘 지출 등록</div>
       <div className="flex flex-col justify-center items-center gap-10">
         {inputObj.map((el, index) =>
           el.label !== "종류" ? (
-            <ModaltInput el={el} key={el.labelName + index} />
+            <ModalInput el={el} key={el.labelName + index} />
           ) : (
             <TodayModalSelect el={el} key={el.labelName + index} />
           )
         )}
-        <div className="flex flex-col gap-5">
-          <button
-            disabled={isRequest}
-            onClick={onClickSendRequest}
-            className={`${
-              isRequest && "bg-gray-300 cursor-wait"
-            } w-80 lg:w-60 h-10 flex justify-center items-center border rounded`}
-          >
-            {isRequest ? <CircleLoading /> : "저장"}
-          </button>
-          <button
-            className="w-80 lg:w-60 h-10 border rounded"
-            onClick={() => {
+        <div className="w-5/6 flex flex-col gap-5">
+          <ModalPositiveBtn
+            disable={isRequest}
+            btnText={isRequest ? <CircleLoading /> : "저장"}
+            onClickEvent={onClickSendRequest}
+          />
+          <ModalCloseBtn
+            btnText="닫기"
+            onClickEvent={() => {
               onChangeStateOfModal(
                 "today",
                 false,
@@ -139,9 +139,7 @@ export default function TodayPayModal(props: IPropsTodayModal) {
               // 인풋 밸류 초기화
               resetInputValues();
             }}
-          >
-            닫기
-          </button>
+          />
         </div>
       </div>
     </div>

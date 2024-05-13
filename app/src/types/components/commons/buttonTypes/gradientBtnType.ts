@@ -1,4 +1,4 @@
 export interface IPropsGradientBtn {
   btnInnerText: string;
-  onClickEvent:() => void
+  onClickEvent: () => void;
 }
