@@ -1,7 +1,6 @@
 "use client";
 import { useRouter } from "next/navigation";
 import { Dispatch, SetStateAction } from "react";
-import { PostFixedData } from "../../service/postFixedData";
 
 export default function SignUpAlertModal({
   text,
@@ -16,10 +15,6 @@ export default function SignUpAlertModal({
 
   const onClickComfirm = () => {
     if (text === "사용자 생성이 완료되었습니다.") {
-      // 가입 완료 후 FixedData기본 값 저장
-      const email = sessionStorage.getItem("email");
-      email && PostFixedData(email);
-
       router.push("/login");
     } else {
       setIsOpen(false);

@@ -1,5 +1,4 @@
 import { Dispatch, SetStateAction } from "react";
-import { FocusOBJ } from "../../types/loginTypes/loginPageTypes";
 
 export default function LoginErrModal({
   text,
