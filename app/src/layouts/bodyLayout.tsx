@@ -20,7 +20,7 @@ export default function BodyLayout(props: IPropsBodyLayout) {
   const Fonts = inter.className + " " + notoKR.className;
 
   useEffect(() => {
-    const hiddenLayout = ["/"];
+    const hiddenLayout = ["/", "/login"];
 
     setIsHidden(
       hiddenLayout.filter((el) => currentPath === el).length > 0 ? true : false

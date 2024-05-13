@@ -20,13 +20,13 @@ export default function LoginPage() {
 
   const inputData = [
     {
-      labelName: "이메일",
+      labelName: "Email",
       type: "email",
       id: "id",
       ref: idRef,
     },
     {
-      labelName: "비밀번호",
+      labelName: "PassWord",
       type: "password",
       id: "pw",
       ref: pwRef,
@@ -76,25 +76,36 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="absolute w-full h-full bg-gradient-to-br from-slate-500 to-slate-700 flex flex-col justify-center items-center px-8">
+    <div className="w-full h-full bg-gray-200 flex justify-center items-center">
       <LoginErrModal text={errText} isOpen={isOpen} setIsOpen={setIsOpen} />
-      {isLoading ? (
-        <div className="sm:w-96 w-full sm:m-h-3/5 h-3/5 min-h-[500px] bg-white flex flex-col justify-center items-center border-4 border-white rounded-lg py-20 gap-20 shadow-md">
-          <h2 className="text-2xl text-slate-700 font-bold">로그인</h2>
-          {/* Login Form */}
-          <LoginForm inputData={inputData} />
-          {/* Login Form Btns */}
-          <LoginBtnWrap
-            loginLoading={loginLoading}
-            onClickLogin={onClickLogin}
-            onClickTestAccountLogin={onClickTestAccountLogin}
-          />
+      <div className="w-5/6 h-5/6 rounded-xl flex shadow-xl overflow-hidden">
+        <div
+          className="lg:flex hidden w-2/3 h-full flex flex-col gap-3 justify-center items-center bg-gradient-to-r
+        from-slate-200
+        via-blue-300
+        to-slate-500 background-animate"
+        >
+          <p className="text-5xl text-white">Welcome To GGB!</p>
+          <p className="text-2xl text-white">Let's Start Economize!</p>
         </div>
-      ) : (
-        <div className="w-full h-full flex justify-center items-center">
-          <CircleLoading />
-        </div>
-      )}
+        {isLoading ? (
+          <div className="lg:w-1/3 w-full h-full bg-white flex flex-col justify-center items-center border-4 border-white py-20 gap-20">
+            <h2 className="text-2xl text-slate-600 font-bold">Welcome!</h2>
+            {/* Login Form */}
+            <LoginForm inputData={inputData} />
+            {/* Login Form Btns */}
+            <LoginBtnWrap
+              loginLoading={loginLoading}
+              onClickLogin={onClickLogin}
+              onClickTestAccountLogin={onClickTestAccountLogin}
+            />
+          </div>
+        ) : (
+          <div className="w-full h-full flex justify-center items-center">
+            <CircleLoading />
+          </div>
+        )}
+      </div>
     </div>
   );
 }
