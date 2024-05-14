@@ -1,13 +1,17 @@
 "use client";
 import Cookie from "js-cookie";
 import { useRouter } from "next/navigation";
-import { MouseEvent, useEffect, useRef, useState } from "react";
+import { MouseEvent, useEffect, useState } from "react";
 import LoginErrModal from "../src/components/modals/loginErrModal";
 import CircleLoading from "../src/components/loading/circleLoading";
 import LoginForm from "../src/components/pages/login/loginForm";
 import { postLogin } from "../src/service/postLogin";
 import LoginBtnWrap from "../src/components/pages/login/loginBtnWrap";
 import LoginLeftDeco from "../src/components/pages/login/loginLeftDeco";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { loginFormSchema } from "../src/schema/loginSchema/loginFormSchema";
+import { LoginFormData } from "../src/types/loginTypes/loginFormTypes";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -16,21 +20,16 @@ export default function LoginPage() {
   const [loginLoading, setLoginLoading] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const idRef = useRef<HTMLInputElement>(null);
-  const pwRef = useRef<HTMLInputElement>(null);
-
   const inputData = [
     {
       labelName: "Email",
       type: "email",
       id: "id",
-      ref: idRef,
     },
     {
       labelName: "PassWord",
       type: "password",
       id: "pw",
-      ref: pwRef,
     },
   ];
 
@@ -39,14 +38,12 @@ export default function LoginPage() {
   }, []);
 
   // 로그인 버튼 클릭시 로그인 요청을 보내는 함수
-  const onClickLogin = async (test: boolean) => {
-    const email = test ? "test@naver.com" : idRef.current?.value;
-    const password = test ? "test" : pwRef.current?.value;
+  const onClickLogin = async (test: boolean, data: LoginFormData | null) => {
+    const email = test ? "test@naver.com" : data?.id;
+    const password = test ? "test" : data?.pw;
 
-    if (!email || !password) {
-      alert("이메일과 비밀번호를 입력해주세요");
-      return;
-    }
+    if (!email || !password) return;
+
     setLoginLoading(true);
 
     try {
@@ -72,27 +69,46 @@ export default function LoginPage() {
   const onClickTestAccountLogin = async (
     event: MouseEvent<HTMLButtonElement>
   ) => {
-    event.stopPropagation;
-    onClickLogin(true);
+    event.stopPropagation();
+    event.preventDefault();
+    onClickLogin(true, null);
   };
 
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    setValue,
+  } = useForm<LoginFormData>({ resolver: yupResolver(loginFormSchema) });
+
+  const onSubmit = handleSubmit((data) => {
+    onClickLogin(false, data);
+  });
   return (
     <div className="w-full h-full bg-gray-200 flex justify-center items-center">
       <LoginErrModal text={errText} isOpen={isOpen} setIsOpen={setIsOpen} />
       <div className="w-5/6 h-5/6 rounded-xl flex shadow-xl overflow-hidden">
         <LoginLeftDeco />
         {isLoading ? (
-          <div className="lg:w-1/3 w-full h-full bg-white flex flex-col justify-center items-center border-4 border-white py-20 gap-20">
+          <form
+            onSubmit={onSubmit}
+            className="lg:w-1/3 w-full h-full bg-white flex flex-col justify-center items-center border-4 border-white py-20 gap-20"
+          >
             <h2 className="text-2xl text-slate-600 font-bold">Welcome!</h2>
             {/* Login Form */}
-            <LoginForm inputData={inputData} />
+            <LoginForm
+              inputData={inputData}
+              register={register}
+              errors={errors}
+            />
             {/* Login Form Btns */}
             <LoginBtnWrap
+              setValue={setValue}
               loginLoading={loginLoading}
               onClickLogin={onClickLogin}
               onClickTestAccountLogin={onClickTestAccountLogin}
             />
-          </div>
+          </form>
         ) : (
           <div className="lg:w-1/3 w-full h-full flex justify-center items-center">
             <CircleLoading />
