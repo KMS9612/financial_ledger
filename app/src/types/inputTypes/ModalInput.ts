@@ -1,9 +1,14 @@
+import { FieldErrors, UseFormRegister } from "react-hook-form";
+import { IParamsFixedData } from "../fixedTypes/fixedDataType";
+
 export interface IPropsModalInput {
   el: {
     label: string;
     inputAdd: string;
     labelName: string;
     type: string;
-    ref: any;
+    defaultVal: number;
   };
+  register: UseFormRegister<IParamsFixedData>;
+  errors?: FieldErrors<IParamsFixedData>;
 }

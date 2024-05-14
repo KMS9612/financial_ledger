@@ -5,6 +5,7 @@ export default function ModalPositiveBtn(props: IPropsModalPositiveBtn) {
   const whenUndisableCSS = "bg-blue-500 hover:bg-blue-700";
   return (
     <button
+      type={props.type}
       disabled={props.disable}
       onClick={props.onClickEvent}
       className={`${

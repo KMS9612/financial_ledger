@@ -14,22 +14,6 @@ export default function EditPage() {
     today: false,
   });
 
-  // 일일등록 모달과 고정비용 모달의 on/off를 조절하는 함수
-  // const onChangeStateOfModal = (
-  //   modalType: keyof IPropsIsOpenModal,
-  //   changeType: boolean
-  // ) => {
-  //   let newObject = { ...isOpen };
-  //   for (let i of Object.keys(newObject)) {
-  //     if (i === modalType) {
-  //       newObject[i as keyof IPropsIsOpenModal] = changeType;
-  //     } else {
-  //       newObject[i as keyof IPropsIsOpenModal] = false;
-  //     }
-  //   }
-  //   setIsOpen(newObject);
-  // };
-
   // 해당 유저가 등록한 모든 일일 가계부 정보를 불러오고 정렬시키는 부분
   let { editData } = useFinancailData();
   editData = sortEditData(editData);
