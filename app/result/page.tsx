@@ -17,7 +17,11 @@ export default function ResultPage() {
   } else if (
     !FixedDataTypeGuard(fixedData) // FixedData가 IFixedData타입을 충족하는지 확인하는 타입가드 {}일 경우를 배제 시켜 에러를 방지
   ) {
-    return <CircleLoading />;
+    return (
+      <div className="w-full h-full flex justify-center items-center">
+        <CircleLoading />
+      </div>
+    );
   } else {
     return (
       <div className="absolute w-full h-full flex flex-col gap-2 pt-20 px-4">

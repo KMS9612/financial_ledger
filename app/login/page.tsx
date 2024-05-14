@@ -7,6 +7,7 @@ import CircleLoading from "../src/components/loading/circleLoading";
 import LoginForm from "../src/components/pages/login/loginForm";
 import { postLogin } from "../src/service/postLogin";
 import LoginBtnWrap from "../src/components/pages/login/loginBtnWrap";
+import LoginLeftDeco from "../src/components/pages/login/loginLeftDeco";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -79,15 +80,7 @@ export default function LoginPage() {
     <div className="w-full h-full bg-gray-200 flex justify-center items-center">
       <LoginErrModal text={errText} isOpen={isOpen} setIsOpen={setIsOpen} />
       <div className="w-5/6 h-5/6 rounded-xl flex shadow-xl overflow-hidden">
-        <div
-          className="lg:flex hidden w-2/3 h-full flex flex-col gap-3 justify-center items-center bg-gradient-to-r
-        from-slate-200
-        via-blue-300
-        to-slate-500 background-animate"
-        >
-          <p className="text-5xl text-white">Welcome To GGB!</p>
-          <p className="text-2xl text-white">Let&rsquo;s Start Economize!</p>
-        </div>
+        <LoginLeftDeco />
         {isLoading ? (
           <div className="lg:w-1/3 w-full h-full bg-white flex flex-col justify-center items-center border-4 border-white py-20 gap-20">
             <h2 className="text-2xl text-slate-600 font-bold">Welcome!</h2>
@@ -101,7 +94,7 @@ export default function LoginPage() {
             />
           </div>
         ) : (
-          <div className="w-full h-full flex justify-center items-center">
+          <div className="lg:w-1/3 w-full h-full flex justify-center items-center">
             <CircleLoading />
           </div>
         )}
