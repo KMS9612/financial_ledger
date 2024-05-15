@@ -58,15 +58,18 @@ export default function FixPayModal(props: IPropsFixPayModal) {
     setGetDefaultLoading(true);
     const resData = await getFixedData();
 
-    setValue("income", resData["income"]);
-    setValue("fixed", resData["fixed"]);
-    setValue("saving", resData["saving"]);
+    if (resData) {
+      setValue("income", resData["income"]);
+      setValue("fixed", resData["fixed"]);
+      setValue("saving", resData["saving"]);
+    }
     setGetDefaultLoading(false);
   };
 
   useEffect(() => {
     getFixedDataForDefault();
-  });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // 저장버튼 클릭시 DB에 고정지출, 수입에 대한 정보를 저장하는 함수
   const onClickSaveFixedData = async (data: IParamsFixedData) => {
