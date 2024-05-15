@@ -1,4 +1,4 @@
-import { ChangeEvent } from "react";
+import { FieldError, FieldErrors, UseFormRegister } from "react-hook-form";
 
 export interface IFormSignupInner {
   text: string;
@@ -14,7 +14,25 @@ export interface IFormSignup {
 }
 
 export interface IPropsSignupForm {
-  onChangeSetFormData: (e: ChangeEvent<HTMLInputElement>) => void;
-  formData: IFormSignup;
-  onClickSignUp: () => void;
+  register: UseFormRegister<SignUpFormRegister>;
+  signUpFormInputData: Array<SignUpFormInputElements>;
+  isLoading: boolean;
+}
+
+export interface IPropsSignUpFormInput {
+  register: UseFormRegister<SignUpFormRegister>;
+  el: SignUpFormInputElements;
+}
+
+export interface SignUpFormInputElements {
+  placeholder: string;
+  type: string;
+  id: "email" | "password" | "passwordCheck";
+  errMsg: string | undefined;
+}
+
+export interface SignUpFormRegister {
+  email: string;
+  password: string;
+  passwordCheck: string;
 }

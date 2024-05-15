@@ -1,5 +1,6 @@
 export interface IPropsGradientBtn {
   btnInnerText: string;
-  onClickEvent: () => void;
+  onClickEvent?: () => void;
   isLoading?: boolean;
+  type?: "button" | "reset" | "submit" | undefined;
 }

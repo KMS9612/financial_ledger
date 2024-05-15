@@ -1,7 +1,9 @@
 import { IPropsLoginBtnWrap } from "@/app/src/types/loginTypes/loginBtnWrapTypes";
 import CircleLoading from "../../loading/circleLoading";
+import { useRouter } from "next/navigation";
 
 export default function LoginBtnWrap(props: IPropsLoginBtnWrap) {
+  const router = useRouter();
   return (
     <div className="w-full flex flex-col justify-center items-center gap-6">
       <button
@@ -24,7 +26,7 @@ export default function LoginBtnWrap(props: IPropsLoginBtnWrap) {
       </button>
       <button
         type="button"
-        onClick={() => alert("수정 중 입니다. 테스트 계정을 사용 해 주세요")}
+        onClick={() => router.push("/signup")}
         className="w-5/6 h-12 rounded-md border-2 border-slate-700 text-slate-700 font-bold transition duration-300 ease-in-out hover:-translate-y-1"
       >
         회원가입
