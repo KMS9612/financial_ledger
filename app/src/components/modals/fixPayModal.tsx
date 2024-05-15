@@ -16,6 +16,13 @@ import GradientBtn from "../commons/buttons/gradientBtn";
 export default function FixPayModal(props: IPropsFixPayModal) {
   const [isRequest, setIsRequest] = useState(false);
   const [getDefaultLoading, setGetDefaultLoading] = useState(false);
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors },
+  } = useForm({ resolver: yupResolver(fixPayModalSchema) });
+
   const inputObj = [
     {
       label: "월 고정수입",
@@ -23,6 +30,7 @@ export default function FixPayModal(props: IPropsFixPayModal) {
       inputAdd: "원",
       type: "number",
       defaultVal: 0,
+      errMsg: errors.income?.message,
     },
     {
       label: "월 저금금액",
@@ -30,6 +38,7 @@ export default function FixPayModal(props: IPropsFixPayModal) {
       inputAdd: "원",
       type: "number",
       defaultVal: 0,
+      errMsg: errors.saving?.message,
     },
     {
       label: "월 고정지출",
@@ -37,15 +46,9 @@ export default function FixPayModal(props: IPropsFixPayModal) {
       inputAdd: "원",
       type: "number",
       defaultVal: 0,
+      errMsg: errors.fixed?.message,
     },
   ];
-
-  const {
-    register,
-    handleSubmit,
-    setValue,
-    formState: { errors },
-  } = useForm({ resolver: yupResolver(fixPayModalSchema) });
 
   // 초기값 및 비용 불러오기 버튼을 누를때 고정비용을 불러와 input값으로 넣어주는 함수
   const getFixedDataForDefault = async (

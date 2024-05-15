@@ -1,19 +1,12 @@
-import { IPropsModalInput } from "@/app/src/types/inputTypes/ModalInput";
+import {
+  IPropsModalInput,
+  RegisterType,
+} from "@/app/src/types/inputTypes/ModalInput";
+import { Path } from "react-hook-form";
 
-export default function ModalInput(props: IPropsModalInput) {
-  if (
-    props.el.labelName !== "income" &&
-    props.el.labelName !== "fixed" &&
-    props.el.labelName !== "saving"
-  )
-    return;
-
-  const currentName = props.el.labelName;
-  const errMessages = {
-    income: props.errors?.income?.message,
-    fixed: props.errors?.fixed?.message,
-    saving: props.errors?.saving?.message,
-  };
+export default function ModalInput<RT extends RegisterType>(
+  props: IPropsModalInput<RT>
+) {
   return (
     <div className="w-full flex flex-col justify-center items-center">
       <div className="w-5/6 flex justify-start">
@@ -21,8 +14,8 @@ export default function ModalInput(props: IPropsModalInput) {
       </div>
       <div className="relative w-5/6 h-10">
         <input
-          {...props.register(props.el.labelName)}
-          autoComplete="false"
+          {...props.register(props.el.labelName as Path<RT>)}
+          autoComplete="off"
           type={props.el.type}
           defaultValue={props.el.defaultVal}
           id={props.el.labelName}
@@ -37,7 +30,7 @@ export default function ModalInput(props: IPropsModalInput) {
       </div>
       <div className="w-5/6 flex justify-start">
         <span className="font-bold text-sm text-red-500">
-          {errMessages[currentName]}
+          {props.el.errMsg}
         </span>
       </div>
     </div>
