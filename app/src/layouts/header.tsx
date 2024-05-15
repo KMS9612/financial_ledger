@@ -18,7 +18,7 @@ export default function Header() {
           alt=""
           width={36}
           height={36}
-          onClick={() => router.push("/")}
+          onClick={() => router.replace("/")}
         ></Image>
       </div>
       <NaviOpenBtn setIsOpen={setIsOpen} />

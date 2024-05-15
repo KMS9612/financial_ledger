@@ -17,6 +17,21 @@ export default function Navigation() {
     setIsLogin(loginData);
   }, [isOpen]);
 
+  const onClickLogout = () => {
+    if (!isLogin) {
+      setIsOpen(false);
+      router.push("/login");
+    } else {
+      Cookie.remove("access");
+      Cookie.remove("refresh");
+      Cookie.remove("email");
+      setTimeout(() => {
+        router.push("/login");
+        setIsOpen(false);
+      }, 1000);
+    }
+  };
+
   return (
     <div
       className={`fixed h-full bg-slate-600 transition duration-300 ease-in-out top-0 right-0 z-20 ${
@@ -28,20 +43,7 @@ export default function Navigation() {
         <div className="w-5/6 h-32 flex flex-col justify-center text-white font-bold items-center gap-4 border rounded">
           {!isLogin ? `로그인이 필요합니다.` : `환영합니다!`}
           <button
-            onClick={() => {
-              if (!isLogin) {
-                setIsOpen(false);
-                router.push("/login");
-              } else {
-                setIsOpen(false);
-                Cookie.remove("access");
-                Cookie.remove("refresh");
-                Cookie.remove("email");
-                setTimeout(() => {
-                  router.push("/login");
-                }, 1000);
-              }
-            }}
+            onClick={onClickLogout}
             className="w-5/6 h-8 border-2 rounded transition ease-in-out hover:-translate-y-1 hover:bg-white hover:text-slate-700"
           >
             {!isLogin ? `로그인` : `로그아웃`}

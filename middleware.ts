@@ -7,9 +7,11 @@ export function middleware(request: NextRequest) {
   const accessToken = request.cookies.get("access");
 
   if (needUnLoginPage.includes(pathname) && accessToken) {
+    console.log("redirect working :to result");
     return NextResponse.redirect(new URL("/result", request.url));
   }
   if (needLoginPage.includes(pathname) && !accessToken) {
+    console.log("redirect working :to login");
     return NextResponse.redirect(new URL("/login", request.url));
   }
 }
