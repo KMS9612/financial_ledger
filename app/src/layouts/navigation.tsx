@@ -16,7 +16,6 @@ export default function Navigation() {
     const loginData = Cookie.get("access");
     setIsLogin(loginData);
   }, [isOpen]);
-
   const onClickLogout = () => {
     if (!isLogin) {
       setIsOpen(false);
@@ -34,12 +33,12 @@ export default function Navigation() {
 
   return (
     <div
-      className={`fixed h-full bg-slate-600 transition duration-300 ease-in-out top-0 right-0 z-20 ${
-        isOpen ? "w-96 -translate-x-0" : "w-0 translate-x-96 "
+      className={`fixed h-full bg-slate-600 transition duration-300 ease-in-out top-0 right-0 p-2 z-20 ${
+        isOpen ? "w-96 -translate-x-0" : "w-0 translate-x-96"
       }`}
     >
       <NaviCloseBtn setIsOpen={setIsOpen} />
-      <div className="m-h-4/6 mx-auto flex flex-col justify-start items-center gap-10 ">
+      <div className="m-h-4/6 mx-auto mt-2 flex flex-col justify-start items-center gap-10 ">
         <div className="w-5/6 h-32 flex flex-col justify-center text-white font-bold items-center gap-4 border rounded">
           {!isLogin ? `로그인이 필요합니다.` : `환영합니다!`}
           <button

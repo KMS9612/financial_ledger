@@ -1,9 +1,14 @@
 "use client";
-
+import Cookie from "js-cookie";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export default function Home() {
   const router = useRouter();
+  const [isLogin, setIsLogin] = useState(false);
+  useEffect(() => {
+    setIsLogin(Cookie.get("access") ? true : false);
+  }, []);
   return (
     <div className="w-full flex flex-col justify-center items-center">
       <div
@@ -19,10 +24,10 @@ export default function Home() {
               Write, Read, Economize
             </p>
             <button
-              onClick={() => router.push("/login")}
+              onClick={() => router.replace("/login")}
               className="w-full h-12 border rounded text-white font-bold hover:bg-gray-300"
             >
-              Login
+              {isLogin ? "Go Result" : "Login"}
             </button>
             {/* <button className="w-full h-12 border rounded text-white font-bold hover:bg-gray-300">
               About
