@@ -18,7 +18,6 @@ export default function BodyLayout(props: IPropsBodyLayout) {
   const [isHidden, setIsHidden] = useState<boolean>(true);
   const currentPath = usePathname();
   const Fonts = inter.className + " " + notoKR.className;
-  const resetModalState = useResetRecoilState(isOpenModal);
 
   useEffect(() => {
     const hiddenLayout = ["/", "/login", "/signup"];
@@ -26,9 +25,7 @@ export default function BodyLayout(props: IPropsBodyLayout) {
     setIsHidden(
       hiddenLayout.filter((el) => currentPath === el).length > 0 ? true : false
     );
-    // fix, today모달 창을 킨 상태로 해당 모달을 사용하는 페이지로 이동하면 켜져있는 상태가 유지되는 걸 막기위한 resetState
-    resetModalState();
-  }, [currentPath, resetModalState]);
+  }, [currentPath]);
 
   return (
     <RecoilRoot>
