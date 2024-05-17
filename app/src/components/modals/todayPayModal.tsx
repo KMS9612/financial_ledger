@@ -1,8 +1,5 @@
 import { useState } from "react";
-import {
-  FormData,
-  IPropsTodayModal,
-} from "../../types/modalTypes/todayPayModalType";
+import { FormData } from "../../types/modalTypes/todayPayModalType";
 import CircleLoading from "../loading/circleLoading";
 import { useSetRecoilState } from "recoil";
 import { editDataState } from "../../recoil/store/financialData";
@@ -10,17 +7,16 @@ import { getAllFinancial } from "../../service/getAllFinancial";
 import { postEditData } from "../../service/postEditData";
 import ModalInput from "../commons/inputs/modalInput";
 import TodayModalSelect from "../commons/inputs/todayModalSelects";
-import { onChangeStateOfModal } from "../../lib/events/onChangeStateOfModal";
 import ModalPositiveBtn from "../commons/buttons/modalPositiveBtn";
 import ModalCloseBtn from "../commons/buttons/modalCloseBtn";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { todayPayModalSchema } from "../../schema/modalSchema/todayPayModalSchema";
+import { useChangeStateOfModals } from "../../lib/hooks/useChangeStateOfModals";
 
-export default function TodayPayModal(props: IPropsTodayModal) {
+export default function TodayPayModal() {
   // 연속 클릭 방지 및 로딩 상태 파악용 State
   const [isRequest, setIsRequest] = useState<boolean>(false);
-
   const {
     register,
     handleSubmit,
@@ -30,6 +26,7 @@ export default function TodayPayModal(props: IPropsTodayModal) {
   } = useForm({
     resolver: yupResolver(todayPayModalSchema),
   });
+  const { isOpen, changeModalState } = useChangeStateOfModals();
 
   // 일일 정보 등록 후 리스트 최신화를 위한 recoilState
   const setEditData = useSetRecoilState(editDataState);
@@ -95,12 +92,7 @@ export default function TodayPayModal(props: IPropsTodayModal) {
     let newEdit = await getAllFinancial();
     setEditData(newEdit);
     // todayModal 종료 함수
-    onChangeStateOfModal(
-      "edit",
-      false,
-      props.isOpenObject,
-      props.setIsOpenObject
-    );
+    changeModalState("edit", false);
     // 등록버튼의 로딩 상태
     setIsRequest(false);
   };
@@ -112,7 +104,7 @@ export default function TodayPayModal(props: IPropsTodayModal) {
   return (
     <div
       className={`${
-        props.isOpenObject.today
+        isOpen.today
           ? "opacity-100  pointer-events-auto"
           : "opacity-0  pointer-events-none"
       }
@@ -148,12 +140,7 @@ export default function TodayPayModal(props: IPropsTodayModal) {
             type="button"
             btnText="닫기"
             onClickEvent={() => {
-              onChangeStateOfModal(
-                "today",
-                false,
-                props.isOpenObject,
-                props.setIsOpenObject
-              );
+              changeModalState("today", false);
               // 인풋 밸류 초기화
               resetInputValues();
             }}

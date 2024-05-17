@@ -1,6 +1,4 @@
 import { MouseEvent, useEffect, useRef, useState } from "react";
-import { onChangeStateOfModal } from "../../lib/events/onChangeStateOfModal";
-import { IPropsFixPayModal } from "../../types/modalTypes/fixedPayModalType";
 import { PostFixedData } from "../../service/postFixedData";
 import { getFixedData } from "../../service/getFixedData";
 import ModaltInput from "../commons/inputs/modalInput";
@@ -12,8 +10,9 @@ import { fixPayModalSchema } from "../../schema/modalSchema/fixPayModalSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { IParamsFixedData } from "../../types/fixedTypes/fixedDataType";
 import GradientBtn from "../commons/buttons/gradientBtn";
+import { useChangeStateOfModals } from "../../lib/hooks/useChangeStateOfModals";
 
-export default function FixPayModal(props: IPropsFixPayModal) {
+export default function FixPayModal() {
   const [isRequest, setIsRequest] = useState(false);
   const [getDefaultLoading, setGetDefaultLoading] = useState(false);
   const {
@@ -22,6 +21,7 @@ export default function FixPayModal(props: IPropsFixPayModal) {
     setValue,
     formState: { errors },
   } = useForm({ resolver: yupResolver(fixPayModalSchema) });
+  const { isOpen, changeModalState } = useChangeStateOfModals();
 
   const inputObj = [
     {
@@ -85,20 +85,10 @@ export default function FixPayModal(props: IPropsFixPayModal) {
     try {
       await PostFixedData(fixedData);
       alert("저장완료");
-      onChangeStateOfModal(
-        "edit",
-        false,
-        props.isOpenObject,
-        props.setIsOpenObject
-      );
+      changeModalState("edit", false);
     } catch (err) {
       alert("저장 실패 다시 시도하세요");
-      onChangeStateOfModal(
-        "edit",
-        false,
-        props.isOpenObject,
-        props.setIsOpenObject
-      );
+      changeModalState("edit", false);
     }
     setIsRequest(false);
   };
@@ -111,7 +101,7 @@ export default function FixPayModal(props: IPropsFixPayModal) {
   return (
     <div
       className={`${
-        props.isOpenObject.edit
+        isOpen.edit
           ? "opacity-100 pointer-events-auto"
           : "opacity-0 pointer-events-none"
       } absolute min-w-[380px] lg:w-96 h-fit py-10 bg-white top-1/2 left-1/2 shadow-xl -translate-x-1/2 -translate-y-1/2 text-center transition ease-in-out rounded-lg z-10`}
@@ -150,12 +140,7 @@ export default function FixPayModal(props: IPropsFixPayModal) {
             type="button"
             btnText="닫기"
             onClickEvent={() => {
-              onChangeStateOfModal(
-                "edit",
-                false,
-                props.isOpenObject,
-                props.setIsOpenObject
-              );
+              changeModalState("edit", false);
             }}
           />
         </div>
