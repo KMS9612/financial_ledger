@@ -1,4 +1,5 @@
 import { ITableData } from "../../../types/editTypes/tableType";
+import TableInfoItems from "./tableInfoItems";
 
 export default function TableInfomation({
   tableData,
@@ -6,7 +7,7 @@ export default function TableInfomation({
   tableData: Array<ITableData>;
 }) {
   return (
-    <div className="w-full overflow-auto">
+    <div className="w-full overflow-auto px-10 py-4">
       <div className="w-full table min-w-[600px]">
         {/* Table Top */}
         <div className="flex bg-slate-600 text-white font-bold text-xs xl:text-sm sm:text-xs">
@@ -24,23 +25,7 @@ export default function TableInfomation({
       </div>
       {/* 클릭된 년/월에 대한 데이터 기입하기 */}
       {tableData.map((el, index) => (
-        <div
-          key={el.value.amount + index}
-          className="min-w-[600px] flex text-xs xl:text-sm sm:text-xs border-b-2 border-l-2 border-r-2"
-        >
-          <div className="w-1/3 flex border-r justify-center items-center h-16 lg:h-8">
-            {el.day}일
-          </div>
-          <div className="w-1/3 flex border-r justify-center items-center h-16 lg:h-8">
-            {el.value.financial_type}
-          </div>
-          <div className="w-1/3 flex border-r justify-center items-center h-16 lg:h-8">
-            {el.value.place}
-          </div>
-          <div className="w-1/3 flex justify-center items-center h-16 lg:h-8">
-            {el.value.amount} 원
-          </div>
-        </div>
+        <TableInfoItems key={el.id + index} el={el} />
       ))}
     </div>
   );

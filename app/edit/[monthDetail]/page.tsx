@@ -5,6 +5,7 @@ import TableInfomation from "../../src/components/pages/edit/tableInfo";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import FixedDataBox from "@/app/src/components/commons/boxes/fixedDataBox";
+import EditItemsDetailModal from "@/app/src/components/modals/editItemsDetailModal";
 
 export default function MonthDetail({
   params,
@@ -37,9 +38,10 @@ export default function MonthDetail({
   }, [propsData]);
 
   return (
-    <div className="w-full h-screen pt-10 px-10">
+    <div className="w-full h-screen">
+      <EditItemsDetailModal />
       {/* Top Infomation */}
-      <div className="flex flex-col xl:flex-row justify-between items-center mb-4 gap-10 xl:gap-0">
+      <div className="flex flex-col xl:flex-row justify-between items-center mb-4 gap-10 xl:gap-0 px-10 py-4">
         <div className="flex gap-2">
           <button onClick={() => router.back()}>
             <Image

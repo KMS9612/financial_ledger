@@ -5,7 +5,7 @@ import ResultBoxContainer from "../src/components/pages/result/resultBoxContaine
 import useFinancailData from "../src/lib/hooks/useFinancailData";
 import NoDataPage from "../src/components/pages/NoDataPage/NoDataPage";
 import CircleLoading from "../src/components/loading/circleLoading";
-import { FixedDataTypeGuard } from "../src/lib/checking/fixedDataTypeGuard";
+import { FixedDataTypeGuard } from "../src/types/fixedTypes/fixedDataType";
 
 export default function ResultPage() {
   // MonthData를 보여주는 그래프의 활성화유무를 나타내는 State
