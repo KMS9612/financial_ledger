@@ -6,17 +6,18 @@ import { clickedEditDetail } from "../../recoil/store/clickedEditDetail";
 import { ITableData, isITableData } from "../../types/editTypes/tableType";
 import { useEffect, useState } from "react";
 import CircleLoading from "../loading/circleLoading";
-import api from "@/app/src/service/instance";
 import { usePathname } from "next/navigation";
 import { getMonthEdit } from "../../service/getMonthEdit";
 import { tableDataState } from "../../recoil/store/tableData";
 import { deleteOneEdit } from "../../service/deleteOneEdit";
+import DeleteBtn from "../commons/buttons/deleteBtn";
 
 export default function EditItemsDetailModal() {
   const pathName = usePathname();
   const { isOpen, changeModalState } = useChangeStateOfModals();
   const editDetailData = useRecoilValue<ITableData | {}>(clickedEditDetail);
   const [isDataValid, setIsDataValid] = useState(false);
+  const [isDeleteLoading, setIsDeleteLoading] = useState(false);
   const setTableData = useSetRecoilState(tableDataState);
 
   useEffect(() => {
@@ -26,6 +27,7 @@ export default function EditItemsDetailModal() {
 
   const onClickRemoveEditData = async () => {
     try {
+      setIsDeleteLoading(true);
       const email =
         sessionStorage.getItem("email") || Cookie.get("email") || "";
       // Month객체와 Day객체의 아이디를 구하는 부분
@@ -42,9 +44,12 @@ export default function EditItemsDetailModal() {
       setTableData([]);
       const res = await getMonthEdit(targetMonth);
       setTableData(res);
+      setIsDeleteLoading(false);
     } catch (err) {
       alert("에러가 발생했습니다.");
+      changeModalState("editDetail", false);
       console.log(err);
+      setIsDeleteLoading(false);
     }
   };
   return (
@@ -60,15 +65,37 @@ export default function EditItemsDetailModal() {
         className="absolute w-full h-full bg-gray-500/50"
       ></div>
       {isDataValid ? (
-        <div className="absolute flex justify-center items-center min-w-[300px] w-2/4 h-[500px] bg-white shadow-xl rounded-lg p-2">
-          {/* <h2>{(editDetailData as ITableData).day} 상세 정보</h2>
-          <div>{(editDetailData as ITableData).value.amount}</div>
-          <div>{(editDetailData as ITableData).value.financial_type}</div>
-          <div>{(editDetailData as ITableData).value.place}</div> */}
-          <p className="font-bold text-2xl text-gray-500">개발 중 입니다.</p>
-          <button onClick={onClickRemoveEditData} className="border-2">
-            삭제
-          </button>
+        <div className="absolute flex flex-col justify-between items-center min-w-[300px] w-2/6 h-4/5 bg-white shadow-xl rounded-lg p-10">
+          {/* Head */}
+          <div className="w-full">
+            <h2 className="font-bold text-2xl text-slate-500">
+              {(editDetailData as ITableData).day}일 상세 정보
+            </h2>
+          </div>
+          {/* Infomation(Body) */}
+          <div className="w-full flex flex-col gap-10 font-semibold">
+            <div className="w-full flex justify-between items-center border-b-2">
+              <span className="font-bold text-xl text-slate-400">사용처</span>
+              <span>{(editDetailData as ITableData).value.place}</span>
+            </div>
+            <div className="w-full flex justify-between items-center border-b-2">
+              <span className="font-bold text-xl text-slate-400">종류</span>
+              <span>{(editDetailData as ITableData).value.financial_type}</span>
+            </div>
+            <div className="w-full flex justify-between items-center border-b-2">
+              <span className="font-bold text-xl text-slate-400">금액</span>
+              <span>{(editDetailData as ITableData).value.amount}원</span>
+            </div>
+          </div>
+          {/* btn Wrap */}
+          <div className="w-full h-12">
+            <DeleteBtn
+              isLoading={isDeleteLoading}
+              btnText="삭제"
+              type="button"
+              onClickEvent={onClickRemoveEditData}
+            />
+          </div>
         </div>
       ) : (
         <CircleLoading />

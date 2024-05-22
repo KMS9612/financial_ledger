@@ -15,7 +15,7 @@ export default function MonthDetail({
   const [year, month] = propsData.split("/");
 
   return (
-    <div className="w-full h-screen">
+    <div className="w-full h-full">
       <EditItemsDetailModal />
       {/* Top Infomation */}
       <div className="flex flex-col xl:flex-row justify-between items-center mb-4 gap-10 xl:gap-0 px-10 py-4">
