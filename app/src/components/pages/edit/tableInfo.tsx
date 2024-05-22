@@ -22,7 +22,7 @@ export default function TableInfomation() {
         </div>
       </div>
       {/* 클릭된 년/월에 대한 데이터 기입하기 */}
-      {Object.keys(tableData).length !== 0 ? (
+      {tableData.length > 0 ? (
         tableData.map((el, index) => (
           <TableInfoItems key={el._id + index} el={el} />
         ))
