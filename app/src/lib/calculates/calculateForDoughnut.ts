@@ -14,7 +14,7 @@ export default function CalculateForDoughnut(editData: Array<IEditDataFull>) {
     ("0" + (today.getMonth() + 1)).slice(-2).toString();
 
   const currentEditData = editData.filter(
-    (el: IPropsFetchedData) => el.month === currentMonth
+    (el: any) => el.month === currentMonth
   );
 
   currentEditData[0]?.date.forEach((el: IEditDataDate) => {
