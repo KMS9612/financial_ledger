@@ -6,6 +6,7 @@ import { useSetRecoilState } from "recoil";
 export default function TableInfoItems(props: IPropsTableInfoItems) {
   const { changeModalState } = useChangeStateOfModals();
   const setClickedEdit = useSetRecoilState(clickedEditDetail);
+
   return (
     <div
       onClick={() => {

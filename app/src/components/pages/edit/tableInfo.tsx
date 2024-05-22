@@ -1,11 +1,9 @@
-import { ITableData } from "../../../types/editTypes/tableType";
 import TableInfoItems from "./tableInfoItems";
+import CircleLoading from "../../loading/circleLoading";
+import { useGetTableData } from "@/app/src/lib/hooks/useGetTableData";
 
-export default function TableInfomation({
-  tableData,
-}: {
-  tableData: Array<ITableData>;
-}) {
+export default function TableInfomation() {
+  const { tableData }: { tableData: Array<any> } = useGetTableData();
   return (
     <div className="w-full overflow-auto px-10 py-4">
       <div className="w-full table min-w-[600px]">
@@ -24,9 +22,15 @@ export default function TableInfomation({
         </div>
       </div>
       {/* 클릭된 년/월에 대한 데이터 기입하기 */}
-      {tableData.map((el, index) => (
-        <TableInfoItems key={el.id + index} el={el} />
-      ))}
+      {Object.keys(tableData).length !== 0 ? (
+        tableData.map((el, index) => (
+          <TableInfoItems key={el._id + index} el={el} />
+        ))
+      ) : (
+        <div className="w-full h-full flex justify-center items-center">
+          <CircleLoading />
+        </div>
+      )}
     </div>
   );
 }

@@ -15,6 +15,7 @@ export interface IEditDataFull {
 export interface IPropsFetchedData {
   month: string;
   date: [IEditDataDate];
+  _id: string;
 }
 
 export interface IEditDataDate {

@@ -5,7 +5,7 @@ export interface ITableData {
     financial_type: string;
     place: string;
   };
-  id: string;
+  _id: string;
 }
 
 export function isITableData(data: any): data is ITableData {

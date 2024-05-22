@@ -5,7 +5,3 @@ export interface IPropsEditTopInfo {
   isOpen: IPropsIsOpenModal;
   setIsOpen: Dispatch<SetStateAction<IPropsIsOpenModal>>;
 }
-
-export interface IPropsEditTableInfo {
-  editData: any;
-}

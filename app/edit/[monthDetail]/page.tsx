@@ -1,9 +1,7 @@
 "use client";
-
 import { useRouter } from "next/navigation";
 import TableInfomation from "../../src/components/pages/edit/tableInfo";
 import Image from "next/image";
-import { useEffect, useState } from "react";
 import FixedDataBox from "@/app/src/components/commons/boxes/fixedDataBox";
 import EditItemsDetailModal from "@/app/src/components/modals/editItemsDetailModal";
 
@@ -15,27 +13,6 @@ export default function MonthDetail({
   const router = useRouter();
   const propsData = params.monthDetail.replace(".", "/");
   const [year, month] = propsData.split("/");
-  const [tableData, setTableData] = useState<Array<any>>([]);
-
-  useEffect(() => {
-    // sessionStorage에 저장한 monthData에서 클릭된 년/월의 일별 데이터를 가져오기
-    const monthData = JSON.parse(
-      sessionStorage.getItem("monthData") || ""
-    ).filter((el: any) => el.month === propsData)[0].date;
-
-    // 선택된 달의 일별 데이터 테이블을 정렬
-    monthData.sort((a: any, b: any) => {
-      const dayA = a.day;
-      const dayB = b.day;
-
-      if (dayA > dayB) {
-        return 1;
-      } else {
-        return -1;
-      }
-    });
-    setTableData(monthData);
-  }, [propsData]);
 
   return (
     <div className="w-full h-screen">
@@ -58,7 +35,7 @@ export default function MonthDetail({
         <FixedDataBox />
       </div>
       {/* <Table Infomation /> */}
-      <TableInfomation tableData={tableData} />
+      <TableInfomation />
     </div>
   );
 }

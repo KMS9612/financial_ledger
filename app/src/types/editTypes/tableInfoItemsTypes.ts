@@ -6,6 +6,6 @@ export interface IPropsTableInfoItems {
       financial_type: string;
       place: string;
     };
-    id: string;
+    _id: string;
   };
 }

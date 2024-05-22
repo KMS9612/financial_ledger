@@ -13,11 +13,13 @@ export default function FixedDataBox() {
 
   // 고정지출, 고정수입, 저금 내용 불러온 후 state에 저장
   useEffect(() => {
-    const email = sessionStorage.getItem("email");
-    const params = { email };
-    api.get("/fix/fetchFixedData", { params }).then((res) => {
-      setFixedData(res.data.fixedData);
-    });
+    const getFixed = async () => {
+      const email = sessionStorage.getItem("email");
+      const params = { email };
+      const resData = await api.get("/fix/fetchFixedData", { params });
+      setFixedData(resData.data.fixedData);
+    };
+    getFixed();
   }, []);
   return (
     <div className="flex flex-row flex-wrap gap-2 items-center">
