@@ -24,10 +24,8 @@ export default function Navigation() {
       Cookie.remove("access");
       Cookie.remove("refresh");
       Cookie.remove("email");
-      setTimeout(() => {
-        router.push("/login");
-        setIsOpen(false);
-      }, 1000);
+      router.push("/login");
+      setIsOpen(false);
     }
   };
 
