@@ -6,14 +6,12 @@ export function middleware(request: NextRequest) {
   const needLoginPage = ["/result", "/edit"];
   const accessToken = request.cookies.get("access");
 
-  console.log("middleware is running", pathname, accessToken?.value);
-
   if (needUnLoginPage.includes(pathname) && accessToken) {
-    console.log(`redirect :from ${pathname} :to result :access ${accessToken}`);
+    console.log(`redirect :from ${pathname} :to result`);
     return NextResponse.redirect(new URL("/result", request.url));
   }
   if (needLoginPage.includes(pathname) && !accessToken) {
-    console.log(`redirect :from ${pathname} :to login :access ${accessToken}`);
+    console.log(`redirect :from ${pathname} :to login`);
     return NextResponse.redirect(new URL("/login", request.url));
   }
   return;
