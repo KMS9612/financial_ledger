@@ -13,18 +13,24 @@ export default function TableInfoItems(props: IPropsTableInfoItems) {
         changeModalState("editDetail", true);
         setClickedEdit(props.el);
       }}
-      className="min-w-[600px] flex text-xs xl:text-sm sm:text-xs border-b-2 border-l-2 border-r-2 hover:bg-gray-300 cursor-pointer"
+      className="w-full h-12 flex justify-center items-center rounded-md cursor-pointer px-2 py-2 transition ease-in-out hover:bg-gray-300 shadow-xl"
     >
-      <div className="w-1/3 flex border-r justify-center items-center h-16 lg:h-8">
+      <div className="w-1/4 font-semibold flex border-r justify-center items-center h-16 lg:h-8">
         {props.el.day}일
       </div>
-      <div className="w-1/3 flex border-r justify-center items-center h-16 lg:h-8">
+      <div
+        className={`${
+          props.el.value.financial_type === "수입"
+            ? "text-positiveText"
+            : "text-nagativeText"
+        } w-1/4 font-semibold flex border-r justify-center items-center h-16 lg:h-8`}
+      >
         {props.el.value.financial_type}
       </div>
-      <div className="w-1/3 flex border-r justify-center items-center h-16 lg:h-8">
+      <div className="w-1/4 font-semibold flex border-r justify-center items-center h-16 lg:h-8">
         {props.el.value.place}
       </div>
-      <div className="w-1/3 flex justify-center items-center h-16 lg:h-8">
+      <div className="w-1/4 font-semibold flex justify-center items-center h-16 lg:h-8">
         {props.el.value.amount} 원
       </div>
     </div>

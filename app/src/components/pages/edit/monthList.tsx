@@ -32,18 +32,18 @@ export default function MonthList({ el }: { el: IPropsFetchedData }) {
       onClick={onClickRouteDetail}
       className="w-full h-12 flex justify-center items-center rounded-md cursor-pointer px-2 py-2 transition ease-in-out hover:bg-gray-300 shadow-xl"
     >
-      <div className="flex justify-center items-center w-1/4 font-bold ">
+      <div className="flex border-r justify-center items-center w-1/4 font-bold ">
         {el.month}
       </div>
-      <div className="flex justify-center font-semibold items-center w-1/4">
+      <div className="flex border-r justify-center font-semibold items-center w-1/4">
         {el.date.length}개의 등록정보
       </div>
-      <div className="flex justify-center items-center w-1/4">
+      <div className="flex border-r justify-center items-center w-1/4">
         <span className="font-bold text-positiveText">{plus.plus}</span>
         <span className="mx-2">/</span>
         <span className="font-bold text-nagativeText">{plus.minus}</span>
       </div>
-      <div className="flex justify-center items-center w-1/4">
+      <div className="flex border-r justify-center items-center w-1/4">
         <p className="font-bold text-gray-300">개발중입니다.</p>
       </div>
     </div>
