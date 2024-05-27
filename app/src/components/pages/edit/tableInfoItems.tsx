@@ -13,7 +13,7 @@ export default function TableInfoItems(props: IPropsTableInfoItems) {
         changeModalState("editDetail", true);
         setClickedEdit(props.el);
       }}
-      className="w-full h-12 flex justify-center items-center rounded-md cursor-pointer px-2 py-2 transition ease-in-out hover:bg-gray-300 shadow-xl"
+      className="w-full text-xs lg:text-lg h-12 flex justify-center items-center rounded-md cursor-pointer px-2 py-2 transition ease-in-out hover:bg-gray-300 shadow-xl"
     >
       <div className="w-1/4 font-semibold flex border-r justify-center items-center h-16 lg:h-8">
         {props.el.day}일

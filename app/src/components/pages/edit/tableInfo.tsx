@@ -1,24 +1,22 @@
 import TableInfoItems from "./tableInfoItems";
 import CircleLoading from "../../loading/circleLoading";
 import { useGetTableData } from "@/app/src/lib/hooks/useGetTableData";
+import EditListHeader from "../../commons/list/editListHeader";
 
 export default function TableInfomation() {
   const { tableData }: { tableData: Array<any> } = useGetTableData();
   const tableHeaders = ["일시", "종류", "사용처", "금액"];
   return (
     <div className="w-full flex flex-col gap-2 overflow-auto px-10 py-4">
-      <div className="w-full min-w-[600px]">
+      <div className="w-full">
         {/* Table Top */}
         <div className="w-full h-12 flex justify-center items-center rounded-md px-2 py-2 border-2 border-slate-400">
           {tableHeaders.map((headerName) => (
-            <div
+            <EditListHeader
               key={headerName}
-              className={`${
-                headerName !== "금액" && "border-r"
-              } w-1/4 h-6 font-bold flex justify-center items-center`}
-            >
-              {headerName}
-            </div>
+              headerText={headerName}
+              lastHeaderText={tableHeaders[tableHeaders.length - 1]}
+            />
           ))}
         </div>
       </div>
