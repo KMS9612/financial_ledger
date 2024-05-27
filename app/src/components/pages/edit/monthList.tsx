@@ -26,7 +26,7 @@ export default function MonthList({ el }: { el: IPropsFetchedData }) {
     };
 
     calculatePlusOrMinus();
-  }, []);
+  }, [el.date]);
   return (
     <div
       onClick={onClickRouteDetail}
