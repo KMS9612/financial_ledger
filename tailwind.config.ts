@@ -14,6 +14,10 @@ const config: Config = {
       fontFamily: {
         notokr: ["Noto Sans KR"],
       },
+      colors: {
+        positiveText: "#2ECC71",
+        nagativeText: "#E74C3C",
+      },
     },
   },
   plugins: [],

@@ -10,14 +10,14 @@ export default function ResultBoxSmall(props: IPropsResultSmall) {
         <div className="min-w-[300px] w-full overflow-auto flex flex-col justify-end items-start px-4">
           <div className="w-full flex justify-between text-lg font-bold">
             <span>고정지출</span>
-            <span className="text-red-600">
+            <span className="text-nagativeText">
               {isNaN(props.data.fixed) ? <TextSkeleton /> : props.data.fixed}
               {/* <TextSkeleton /> */}
             </span>
           </div>
           <div className="w-full flex justify-between text-lg font-bold">
             <span>고정수입</span>
-            <span className="text-lime-600">
+            <span className="text-positiveText">
               {isNaN(props.data.income) ? <TextSkeleton /> : props.data.income}
             </span>
           </div>
@@ -34,9 +34,9 @@ export default function ResultBoxSmall(props: IPropsResultSmall) {
             className={`text-lg font-bold ${
               props.title !== "이번 달 총 지출"
                 ? props.data >= 0
-                  ? "text-lime-600"
-                  : "text-red-600"
-                : "text-red-600"
+                  ? "text-positiveText"
+                  : "text-nagativeText"
+                : "text-nagativeText"
             }`}
           >
             {isNaN(props.data) ? <TextSkeleton /> : props.data}
