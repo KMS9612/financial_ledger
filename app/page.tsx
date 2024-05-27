@@ -19,13 +19,15 @@ export default function Home() {
       >
         <div className="w-full h-full flex justify-center items-center bg-gray-500 opacity-[0.8]">
           <div className="h-full flex flex-col justify-center items-center gap-4">
-            <h2 className="font-bold text-6xl text-white">Financial Book</h2>
+            <h2 className="font-bold text-6xl text-white text-center">
+              Financial Book
+            </h2>
             <p className="text-gray-300 font-bold text-3xl opacity-1">
               Write, Read, Economize
             </p>
             <button
               onClick={() => router.replace("/login")}
-              className="w-full h-12 border rounded text-white font-bold hover:bg-gray-300"
+              className="w-3/4 sm:w-full h-12 border rounded text-white font-bold hover:bg-gray-300"
             >
               {isLogin ? "Go Result" : "Login"}
             </button>
