@@ -12,17 +12,24 @@ export default function ResultPage() {
   const [showMonthData, setShowMonthData] = useState(false);
   const { editData, fixedData } = useFinancailData();
 
-  if (fixedData === null) {
+  // useFinancialData로 불러온 데이터가 null 즉, 값 자체가 없을땐 NoDataPage를 렌더링
+  if (fixedData === null || editData === undefined) {
     return <NoDataPage />;
   } else if (
-    !FixedDataTypeGuard(fixedData) // FixedData가 IFixedData타입을 충족하는지 확인하는 타입가드 {}일 경우를 배제 시켜 에러를 방지
+    editData?.length === 0 ||
+    !FixedDataTypeGuard(fixedData) || // FixedData가 IFixedData타입을 충족하는지 확인하는 타입가드 {}일 경우를 배제 시켜 에러를 방지
+    Object.keys(fixedData).length === 0
   ) {
     return (
       <div className="w-full h-full flex justify-center items-center">
         <CircleLoading />
       </div>
     );
-  } else {
+  } else if (
+    fixedData !== null &&
+    editData.length !== 0 &&
+    Object.keys(fixedData).length !== 0
+  ) {
     return (
       <div className="absolute w-full h-full flex flex-col gap-2 pt-20 px-4">
         <h2 className="text-slate-700 font-bold text-4xl">

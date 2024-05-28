@@ -59,3 +59,39 @@ body {
     background-position: 100% 50%;
   }
 }
+
+/* check icon animation */
+@keyframes draw-circle {
+  0% {
+    stroke-dasharray: 0, 282;
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dasharray: 283, 283;
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes draw-check {
+  0% {
+    stroke-dasharray: 0, 100;
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dasharray: 100, 0;
+    stroke-dashoffset: 0;
+  }
+}
+
+.animate-circle {
+  stroke-dasharray: 283;
+  stroke-dashoffset: 283;
+  animation: draw-circle 0.5s ease-out forwards;
+}
+
+.animate-check {
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+  animation: draw-check 0.8s ease-out forwards;
+  animation-delay: 1s;
+}

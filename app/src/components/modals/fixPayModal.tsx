@@ -87,6 +87,7 @@ export default function FixPayModal() {
       alert("저장완료");
       changeModalState("edit", false);
     } catch (err) {
+      console.log(err);
       alert("저장 실패 다시 시도하세요");
       changeModalState("edit", false);
     }

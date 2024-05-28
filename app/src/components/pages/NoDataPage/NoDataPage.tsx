@@ -2,9 +2,11 @@ import GradientBtn from "../../commons/buttons/gradientBtn";
 import FixPayModal from "../../modals/fixPayModal";
 import TodayPayModal from "../../modals/todayPayModal";
 import { useChangeStateOfModals } from "@/app/src/lib/hooks/useChangeStateOfModals";
+import CircleCheckAnimation from "../../commons/animation/circleCheckAni";
 
 export default function NoDataPage() {
   const { changeModalState } = useChangeStateOfModals();
+
   return (
     <div className="w-full h-full flex justify-center items-center bg-gray-100">
       <TodayPayModal />
@@ -21,11 +23,19 @@ export default function NoDataPage() {
         </div>
         <div className="w-full flex flex-col gap-2">
           <GradientBtn
-            btnInnerText="고정 비용 등록"
+            btnInnerText={
+              // haveData.fixed ? <CircleCheckAnimation /> : "고정 비용 등록"
+              "고정 비용 등록"
+            }
+            // isDisabled={haveData.fixed}
             onClickEvent={() => changeModalState("edit", true)}
           ></GradientBtn>
           <GradientBtn
-            btnInnerText="일일 지출 / 수입 등록"
+            btnInnerText={
+              // haveData.edit ? <CircleCheckAnimation /> : "일일 지출 / 수입 등록"
+              "일일 지출 / 수입 등록"
+            }
+            // isDisabled={haveData.edit}
             onClickEvent={() => changeModalState("today", true)}
           ></GradientBtn>
         </div>
