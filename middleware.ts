@@ -7,9 +7,9 @@ export function middleware(request: NextRequest) {
   const accessToken = request.cookies.get("access");
 
   // 회원가입 후 데이터 저장 프로세스 및 resultPage리팩토링으로  signup페이지 접근제한
-  if (pathname === "/signup") {
-    return NextResponse.redirect(new URL("/", request.url));
-  }
+  // if (pathname === "/signup") {
+  //   return NextResponse.redirect(new URL("/", request.url));
+  // }
 
   if (needUnLoginPage.includes(pathname) && accessToken) {
     console.log(`redirect :from ${pathname} :to result`);

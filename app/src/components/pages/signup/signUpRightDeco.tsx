@@ -1,7 +1,7 @@
 export default function SignUpRightDeco() {
   return (
     <div
-      className="lg:flex hidden w-2/3 h-full flex flex-col gap-3 justify-center items-center bg-gradient-to-r
+      className="lg:flex hidden w-2/3 h-full flex-col gap-3 justify-center items-center bg-gradient-to-r
     from-slate-200
     via-blue-300
     to-slate-500 background-animate"
