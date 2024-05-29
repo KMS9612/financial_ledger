@@ -3,10 +3,9 @@ import { useEffect, useState } from "react";
 import Header from "./header";
 import Navigation from "./navigation";
 import { usePathname } from "next/navigation";
-import { RecoilRoot, useResetRecoilState } from "recoil";
+import { RecoilRoot } from "recoil";
 import { Inter } from "next/font/google";
 import { Noto_Sans_KR } from "next/font/google";
-import { isOpenModal } from "../recoil/store/isOpenModal";
 
 interface IPropsBodyLayout {
   children: React.ReactNode;

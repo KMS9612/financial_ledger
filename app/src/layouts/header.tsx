@@ -10,12 +10,12 @@ export default function Header() {
   const [isOpen, setIsOpen] = useRecoilState(isOpenNavi);
 
   return (
-    <div className="top-0 w-full h-12 min-h-14 bg-slate-500 flex justify-between items-center px-6 z-10">
+    <div className="top-0 w-full h-12 min-h-[50px] bg-slate-500 flex justify-between items-center px-6 z-10">
       <div className="container flex items-center ">
         <Image
           className="cursor-pointer"
           src="/logo.png"
-          alt=""
+          alt="가계부 페이지 로고아이콘, 클릭시 첫 페이지로 이동"
           width={36}
           height={36}
           onClick={() => router.replace("/")}
