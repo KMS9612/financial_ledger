@@ -8,8 +8,6 @@ import CircleLoading from "../src/components/loading/circleLoading";
 import { FixedDataTypeGuard } from "../src/types/fixedTypes/fixedDataType";
 
 export default function ResultPage() {
-  // MonthData를 보여주는 그래프의 활성화유무를 나타내는 State
-  const [showMonthData, setShowMonthData] = useState(false);
   const { editData, fixedData } = useFinancailData();
 
   // useFinancialData로 불러온 데이터가 null 즉, 값 자체가 없을땐 NoDataPage를 렌더링
@@ -36,12 +34,7 @@ export default function ResultPage() {
           내 가계부 확인하기
         </h2>
         <div className="w-full h-full flex flex-col xl:flex-row gap-4 pb-2">
-          <ResultChartContainer
-            setShowMonthData={setShowMonthData}
-            showMonthData={showMonthData}
-            editData={editData}
-            fixedData={fixedData}
-          />
+          <ResultChartContainer editData={editData} fixedData={fixedData} />
           <ResultBoxContainer fixedData={fixedData} editData={editData} />
         </div>
       </div>

@@ -12,17 +12,13 @@ import {
 } from "chart.js";
 import { Bar, Doughnut } from "react-chartjs-2";
 import { IFixedData } from "../../types/fixedTypes/fixedDataType";
-import {
-  IEditDataDate,
-  IPropsFetchedData,
-  IEditDataValue,
-} from "../../types/editTypes/editTypes";
 import CalculateForDoughnut from "@/app/src/lib/calculates/calculateForDoughnut";
+import { useRecoilValue } from "recoil";
+import { showMonthDataState } from "../../recoil/store/showMonthData";
 
 interface IPropsChart {
   editData: any;
   fixedData: IFixedData;
-  showMonthData: boolean;
 }
 
 ChartJS.register(
@@ -38,6 +34,7 @@ ChartJS.register(
 export default function ChartBox(props: IPropsChart) {
   const { plus, minus } = CalculateForChart(props.editData, props.fixedData);
   const { fixed, income, saving } = props.fixedData;
+  const showMonthData = useRecoilValue(showMonthDataState);
 
   // yyyy/mm 포맷으로 현재 달을 찾아 도넛형 그래프에 필요한 일일등록 정보를 반환하는 함수
   const { monthMinusData, monthPlusData } = CalculateForDoughnut(
@@ -125,7 +122,7 @@ export default function ChartBox(props: IPropsChart) {
   };
   return (
     <div className="w-full xl:h-full h-96 flex justify-center items-center border rounded-lg shadow-md p-2 overflow-auto">
-      {props.showMonthData ? (
+      {showMonthData ? (
         <Doughnut data={monthData} options={monthOption}></Doughnut>
       ) : (
         <Bar

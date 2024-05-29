@@ -1,14 +1,8 @@
-import { Dispatch, SetStateAction } from "react";
+import { showMonthDataState } from "@/app/src/recoil/store/showMonthData";
+import { useRecoilState } from "recoil";
 
-interface IPropsCategoryBtn {
-  setShowMonthData: Dispatch<SetStateAction<boolean>>;
-  showMonthData: boolean;
-}
-
-export default function ChartCategoryBtn({
-  setShowMonthData,
-  showMonthData,
-}: IPropsCategoryBtn) {
+export default function ChartCategoryBtn() {
+  const [showMonthData, setShowMonthData] = useRecoilState(showMonthDataState);
   return (
     <button
       onClick={() => setShowMonthData((prev) => !prev)}
