@@ -46,12 +46,6 @@ export default function ResultBoxContainer(props: IPropsResultBoxContainer) {
           data={el.data}
         />
       ))}
-      <button
-        onClick={() => router.push("/edit")}
-        className="w-full xl:w-full h-24 border shadow-md bg-slate-600 text-white font-bold text-xl rounded"
-      >
-        일일 지출/수입 작성하러 가기
-      </button>
     </div>
   );
 }

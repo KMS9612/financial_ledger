@@ -121,7 +121,7 @@ export default function ChartBox(props: IPropsChart) {
     },
   };
   return (
-    <div className="w-full xl:h-full h-96 flex justify-center items-center border rounded-lg shadow-md p-2 overflow-auto">
+    <div className="w-full xl:h-[500px] h-96 flex justify-center items-center border rounded-lg shadow-md p-2 overflow-auto">
       {showMonthData ? (
         <Doughnut data={monthData} options={monthOption}></Doughnut>
       ) : (

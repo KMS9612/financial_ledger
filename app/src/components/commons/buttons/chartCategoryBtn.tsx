@@ -6,9 +6,9 @@ export default function ChartCategoryBtn() {
   return (
     <button
       onClick={() => setShowMonthData((prev) => !prev)}
-      className="absolute bg-slate-600 rounded right-2 top-2 text-white sm:text-base text-sm font-bold p-2"
+      className="bg-slate-600 rounded text-white sm:text-base text-sm font-bold p-1"
     >
-      {showMonthData ? "이번 년도" : "이번 달"}
+      {showMonthData ? "이번 년도" : "이번 달"} 차트 보기
     </button>
   );
 }
