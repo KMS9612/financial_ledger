@@ -1,6 +1,5 @@
-import { MouseEvent, useEffect, useRef, useState } from "react";
+import { MouseEvent, useEffect, useState } from "react";
 import { PostFixedData } from "../../service/postFixedData";
-import { getFixedData } from "../../service/getFixedData";
 import ModaltInput from "../commons/inputs/modalInput";
 import ModalCloseBtn from "../commons/buttons/modalCloseBtn";
 import ModalPositiveBtn from "../commons/buttons/modalPositiveBtn";
@@ -8,11 +7,16 @@ import CircleLoading from "../loading/circleLoading";
 import { useForm } from "react-hook-form";
 import { fixPayModalSchema } from "../../schema/modalSchema/fixPayModalSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { IParamsFixedData } from "../../types/fixedTypes/fixedDataType";
+import {
+  FixedDataTypeGuard,
+  IParamsFixedData,
+} from "../../types/fixedTypes/fixedDataType";
 import GradientBtn from "../commons/buttons/gradientBtn";
 import { useChangeStateOfModals } from "../../lib/hooks/useChangeStateOfModals";
+import useFinancailData from "../../lib/hooks/useFinancailData";
 
 export default function FixPayModal() {
+  const { fixedData, refetchData } = useFinancailData();
   const [isRequest, setIsRequest] = useState(false);
   const [getDefaultLoading, setGetDefaultLoading] = useState(false);
   const {
@@ -56,12 +60,11 @@ export default function FixPayModal() {
   ) => {
     event?.preventDefault();
     setGetDefaultLoading(true);
-    const resData = await getFixedData();
 
-    if (resData) {
-      setValue("income", resData["income"]);
-      setValue("fixed", resData["fixed"]);
-      setValue("saving", resData["saving"]);
+    if (fixedData !== null && FixedDataTypeGuard(fixedData)) {
+      setValue("income", fixedData.income);
+      setValue("fixed", fixedData.fixed);
+      setValue("saving", fixedData.saving);
     }
     setGetDefaultLoading(false);
   };
@@ -85,6 +88,7 @@ export default function FixPayModal() {
     try {
       await PostFixedData(fixedData);
       alert("저장완료");
+      refetchData();
       changeModalState("edit", false);
     } catch (err) {
       console.log(err);

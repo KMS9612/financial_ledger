@@ -1,9 +1,6 @@
 import { useState } from "react";
 import { FormData } from "../../types/modalTypes/todayPayModalType";
 import CircleLoading from "../loading/circleLoading";
-import { useSetRecoilState } from "recoil";
-import { editDataState } from "../../recoil/store/financialData";
-import { getAllFinancial } from "../../service/getAllFinancial";
 import { postEditData } from "../../service/postEditData";
 import ModalInput from "../commons/inputs/modalInput";
 import TodayModalSelect from "../commons/inputs/todayModalSelects";
@@ -13,8 +10,10 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { todayPayModalSchema } from "../../schema/modalSchema/todayPayModalSchema";
 import { useChangeStateOfModals } from "../../lib/hooks/useChangeStateOfModals";
+import useFinancailData from "../../lib/hooks/useFinancailData";
 
 export default function TodayPayModal() {
+  const { refetchData } = useFinancailData();
   // 연속 클릭 방지 및 로딩 상태 파악용 State
   const [isRequest, setIsRequest] = useState<boolean>(false);
   const {
@@ -27,9 +26,6 @@ export default function TodayPayModal() {
     resolver: yupResolver(todayPayModalSchema),
   });
   const { isOpen, changeModalState } = useChangeStateOfModals();
-
-  // 일일 정보 등록 후 리스트 최신화를 위한 recoilState
-  const setEditData = useSetRecoilState(editDataState);
 
   const inputObj = [
     {
@@ -87,10 +83,8 @@ export default function TodayPayModal() {
     await postEditData(formData);
     // 등록 후 값 초기화
     resetInputValues();
-
-    // 서버 등록 후 editList를 최신화 하기위한 recoilState값 변경
-    let newEdit = await getAllFinancial();
-    setEditData(newEdit);
+    // 서버 등록 후 editList를 최신화 하기위한 useFinancialData 재 작동
+    refetchData();
     // todayModal 종료 함수
     changeModalState("edit", false);
     // 등록버튼의 로딩 상태

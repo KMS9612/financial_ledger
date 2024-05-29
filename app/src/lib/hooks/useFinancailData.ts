@@ -3,7 +3,7 @@ import {
   editDataState,
   fixedDataState,
 } from "../../recoil/store/financialData";
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import { getFixedData } from "../../service/getFixedData";
 import { getAllFinancial } from "../../service/getAllFinancial";
 import { IFixedData } from "../../types/fixedTypes/fixedDataType";
@@ -14,20 +14,21 @@ function useFinancailData() {
     fixedDataState
   );
 
-  useEffect(() => {
-    const fetchFinancialData = async () => {
-      // 고정비용 요청하기
-      const fixed = await getFixedData();
-      setFixedData(fixed);
+  const fetchFinancialData = useCallback(async () => {
+    // 고정비용 요청하기
+    const fixed = await getFixedData();
+    setFixedData(fixed);
 
-      // 일일 등록 정보 요청하기
-      const edited = await getAllFinancial();
-      setEditData(edited);
-      sessionStorage.setItem("monthData", JSON.stringify(edited));
-    };
-    fetchFinancialData();
+    // 일일 등록 정보 요청하기
+    const edited = await getAllFinancial();
+    setEditData(edited);
+    sessionStorage.setItem("monthData", JSON.stringify(edited));
   }, [setFixedData, setEditData]);
-  return { editData, fixedData };
+
+  useEffect(() => {
+    fetchFinancialData();
+  }, [fetchFinancialData]);
+  return { editData, fixedData, refetchData: fetchFinancialData };
 }
 
 export default useFinancailData;
