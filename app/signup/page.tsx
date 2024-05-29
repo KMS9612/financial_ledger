@@ -71,7 +71,7 @@ export default function SignUp() {
   });
 
   return (
-    <div className="relative w-full h-full bg-gray-200 flex justify-center items-center">
+    <div className="relative rounded-xl w-full h-full bg-gray-200 flex justify-center items-center">
       <SignUpAlertModal
         text={modalText}
         isOpen={isOpen}
@@ -79,7 +79,7 @@ export default function SignUp() {
       />
       <form
         onSubmit={onSubmit}
-        className="w-5/6 h-5/6 flex rounded-xl shadow-xl"
+        className="w-5/6 h-5/6 flex rounded-xl shadow-xl overflow-hidden"
       >
         <SignUpForm
           isLoading={isLoading}
