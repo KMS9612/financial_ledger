@@ -1,5 +1,3 @@
-export interface IPropsResultSmall {
-  title: string;
-  subText: string;
-  data: any;
+export interface IPropsResultTodayDataBox {
+  el: { title: string; subText: string; data: number };
 }
