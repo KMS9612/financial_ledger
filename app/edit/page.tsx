@@ -14,7 +14,7 @@ export default function EditPage() {
   });
 
   return (
-    <div className="w-full relative h-screen flex flex-col pt-10 px-10 gap-8">
+    <div className="w-full relative h-screen flex flex-col py-10 px-10 gap-8">
       <FixPayModal />
       <TodayPayModal />
       {/* Top Infomation / Buttons */}

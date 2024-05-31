@@ -5,6 +5,10 @@ export const postCreateNewUser = async (body: {
   password: string;
 }) => {
   try {
+    if (!body.email || !body.password) {
+      alert("입력 값이 불충분합니다, 입력값을 다시 입력 후 재시도 해주세요.");
+      return;
+    }
     const res = await axios.post(
       "https://ggb-back-0b82d9178398.herokuapp.com/createUser",
       body

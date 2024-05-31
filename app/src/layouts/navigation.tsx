@@ -15,7 +15,11 @@ export default function Navigation() {
     // const loginData: string | null = sessionStorage.getItem("access");
     const loginData = Cookie.get("access");
     setIsLogin(loginData);
-  }, [isOpen]);
+
+    if (loginData === null || !loginData) {
+      router.push("/login");
+    }
+  }, [isOpen, router]);
   const onClickLogout = () => {
     if (!isLogin) {
       setIsOpen(false);
