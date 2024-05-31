@@ -35,9 +35,9 @@ export default function Navigation() {
 
   return (
     <div
-      className={`fixed h-full bg-slate-600 transition duration-300 ease-in-out top-0 right-0 p-2 z-20 ${
-        isOpen ? "w-96 -translate-x-0" : "w-0 translate-x-96"
-      }`}
+      className={`${
+        isOpen ? "-translate-x-0" : "w-[0px] translate-x-96"
+      } w-[400px] fixed h-full bg-slate-600 transition-all duration-700 top-0 right-0 p-2 z-20`}
     >
       <NaviCloseBtn setIsOpen={setIsOpen} />
       <div className="m-h-4/6 mx-auto mt-2 flex flex-col justify-start items-center gap-10 ">
