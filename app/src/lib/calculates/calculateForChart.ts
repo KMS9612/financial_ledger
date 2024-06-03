@@ -1,4 +1,6 @@
+import { useRecoilValue } from "recoil";
 import { IFixedData } from "../../types/fixedTypes/fixedDataType";
+import { chartTargetYearState } from "../../recoil/store/chartYear";
 
 export default function CalculateForChart(
   editData: any,
@@ -9,13 +11,12 @@ export default function CalculateForChart(
   let minus: Array<number> = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
   let income = fixedData.income;
 
-  // 현재 년 월을 가져오기 (yyyy/mm Format)
-  const today = new Date();
-  const year = today.getFullYear();
+  // select로 선택된 연도를 가져오기 (yyyy Format), 초기값 "" 이라면 현재년도 가져오기
+  const targetYear = useRecoilValue(chartTargetYearState);
 
   // 이번년도 데이터들만 자르기
   const filterData = editData.filter((el: any) => {
-    return el.month.split("/")[0] === year.toString();
+    return el.month.split("/")[0] === targetYear;
   });
 
   // 월 순서대로 수입과 지출 각각의 배열에 백분률 해서 저장하기

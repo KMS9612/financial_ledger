@@ -1,20 +1,16 @@
-import {
-  IEditDataDate,
-  IEditDataFull,
-  IPropsFetchedData,
-} from "../../types/editTypes/editTypes";
+import { useRecoilValue } from "recoil";
+import { IEditDataDate, IEditDataFull } from "../../types/editTypes/editTypes";
+import { chartTargetMonthState } from "../../recoil/store/chartMonth";
 
 export default function CalculateForDoughnut(editData: Array<IEditDataFull>) {
   let monthPlusData = 0;
   let monthMinusData = 0;
-  const today = new Date();
-  const currentMonth =
-    today.getFullYear().toString() +
-    "/" +
-    ("0" + (today.getMonth() + 1)).slice(-2).toString();
+
+  // 선택된 연월 데이터 가져오기
+  const targetMonth = useRecoilValue(chartTargetMonthState);
 
   const currentEditData = editData.filter(
-    (el: any) => el.month === currentMonth
+    (el: IEditDataFull) => el.month === targetMonth
   );
 
   currentEditData[0]?.date.forEach((el: IEditDataDate) => {

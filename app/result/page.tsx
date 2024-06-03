@@ -38,7 +38,7 @@ export default function ResultPage() {
           내 가계부 확인하기
         </h2>
         <div className="w-full h-full flex flex-col xl:flex-row gap-4 pb-2">
-          <ResultChartContainer editData={editData} fixedData={fixedData} />
+          <ResultChartContainer />
           <ResultBoxContainer fixedData={fixedData} editData={editData} />
         </div>
       </div>
