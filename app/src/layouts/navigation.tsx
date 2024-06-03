@@ -36,7 +36,7 @@ export default function Navigation() {
   return (
     <div
       className={`${
-        isOpen ? "-translate-x-0" : "w-0 translate-x-96"
+        isOpen ? "opacity-100 -translate-x-0" : "opacity-0 w-0 translate-x-96"
       } w-[400px] fixed h-full bg-slate-600 transition-all duration-700 top-0 right-0 p-2 z-20`}
     >
       <NaviCloseBtn setIsOpen={setIsOpen} />

@@ -3,7 +3,7 @@ import { IPropsNaviCloseBtn } from "@/app/src/types/components/commons/buttonTyp
 export default function NaviCloseBtn(props: IPropsNaviCloseBtn) {
   return (
     <button
-      onClick={() => props.setIsOpen((prev) => !prev)}
+      onClick={() => props.setIsOpen(false)}
       className="p-2 rounded-md focus:outline-none bg-gray-800 text-white hover:bg-gray-700 transition ease-in-out duration-150"
     >
       <svg
