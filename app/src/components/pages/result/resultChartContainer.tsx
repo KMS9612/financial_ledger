@@ -8,7 +8,7 @@ export default function ResultChartContainer(props: IPropsChartContainer) {
       <div className="w-full h-12 border rounded-lg flex justify-end items-center shadow-lg px-2 py-1">
         <ChartCategoryBtn />
       </div>
-      <ChartBox editData={props.editData} fixedData={props.fixedData} />
+      <ChartBox />
     </div>
   );
 }
