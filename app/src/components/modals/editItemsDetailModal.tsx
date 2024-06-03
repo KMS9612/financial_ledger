@@ -6,13 +6,14 @@ import { clickedEditDetail } from "../../recoil/store/clickedEditDetail";
 import { ITableData, isITableData } from "../../types/editTypes/tableType";
 import { useEffect, useState } from "react";
 import CircleLoading from "../loading/circleLoading";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { getMonthEdit } from "../../service/getMonthEdit";
 import { tableDataState } from "../../recoil/store/tableData";
 import { deleteOneEdit } from "../../service/deleteOneEdit";
 import DeleteBtn from "../commons/buttons/deleteBtn";
 
 export default function EditItemsDetailModal() {
+  const router = useRouter();
   const pathName = usePathname();
   const { isOpen, changeModalState } = useChangeStateOfModals();
   const editDetailData = useRecoilValue<ITableData | {}>(clickedEditDetail);
@@ -43,6 +44,10 @@ export default function EditItemsDetailModal() {
       changeModalState("editDetail", false);
       setTableData([]);
       const res = await getMonthEdit(targetMonth);
+      if (res.length === 0) {
+        alert(targetMonth + "의 데이터가 모두 삭제되었습니다.");
+        router.push("/edit");
+      }
       setTableData(res);
       setIsDeleteLoading(false);
     } catch (err) {
