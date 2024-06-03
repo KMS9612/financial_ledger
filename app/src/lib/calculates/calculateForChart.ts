@@ -1,11 +1,14 @@
 import { useRecoilValue } from "recoil";
 import { IFixedData } from "../../types/fixedTypes/fixedDataType";
 import { chartTargetYearState } from "../../recoil/store/chartYear";
+import { IEditDataDate, IEditDataFull } from "../../types/editTypes/editTypes";
+import { barChartUnitState } from "../../recoil/store/barChartUnit";
 
 export default function CalculateForChart(
   editData: any,
   fixedData: IFixedData
 ) {
+  const chartUnit = useRecoilValue(barChartUnitState);
   // 이번년도의 월별 지출과 수입을 배열로 백분율로 변환해 반환할것.
   let plus: Array<number> = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
   let minus: Array<number> = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
@@ -15,18 +18,22 @@ export default function CalculateForChart(
   const targetYear = useRecoilValue(chartTargetYearState);
 
   // 이번년도 데이터들만 자르기
-  const filterData = editData.filter((el: any) => {
+  const filterData = editData.filter((el: IEditDataFull) => {
     return el.month.split("/")[0] === targetYear;
   });
 
   // 월 순서대로 수입과 지출 각각의 배열에 백분률 해서 저장하기
-  filterData.forEach((el1: any) => {
+  filterData.forEach((el1: IEditDataFull) => {
     let month = parseInt(el1.month.split("/")[1]);
-    el1.date.forEach((el2: any) => {
+    el1.date.forEach((el2: IEditDataDate) => {
+      const cal =
+        chartUnit === "won"
+          ? el2.value.amount
+          : (el2.value.amount / income) * 100;
       if (el2.value.financial_type === "지출") {
-        minus[month - 1] += (el2.value.amount / income) * 100;
+        minus[month - 1] += cal;
       } else {
-        plus[month - 1] += (el2.value.amount / income) * 100;
+        plus[month - 1] += cal;
       }
     });
   });

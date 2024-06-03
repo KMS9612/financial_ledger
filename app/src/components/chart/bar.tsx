@@ -15,12 +15,14 @@ import {
   fixedDataState,
 } from "../../recoil/store/financialData";
 import { FixedDataTypeGuard } from "../../types/fixedTypes/fixedDataType";
+import { barChartUnitState } from "../../recoil/store/barChartUnit";
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip);
 
 const BarChart = () => {
   const fixedData = useRecoilValue(fixedDataState);
   const editData = useRecoilValue(editDataState);
+  const chartUnit = useRecoilValue(barChartUnitState);
   if (!FixedDataTypeGuard(fixedData)) return;
   const { plus, minus } = CalculateForChart(editData, fixedData);
 
@@ -42,7 +44,7 @@ const BarChart = () => {
     ],
     datasets: [
       {
-        label: "연간 월 지출(%)",
+        label: chartUnit === "won" ? "연간 월 지출(원)" : "연간 월 지출(%)",
         data: minus,
         backgroundColor: "rgba(224, 61, 61, 0.863)",
         borderColor: "rgba(75,192,192,1)",
@@ -50,7 +52,7 @@ const BarChart = () => {
         borderWidth: 1,
       },
       {
-        label: "연간 월 수입(%)",
+        label: chartUnit === "won" ? "연간 월 수입(원)" : "연간 월 수입(%)",
         data: plus,
         backgroundColor: "rgba(119, 203, 150, 0.838)",
         borderColor: "rgba(75,192,192,1)",
