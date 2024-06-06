@@ -1,4 +1,4 @@
-import { IPropsFetchedData } from "@/app/src/types/editTypes/editTypes";
+import { IEditDataFull } from "@/app/src/types/editTypes/editTypes";
 import MonthList from "./monthList";
 import CircleLoading from "../../loading/circleLoading";
 import useFinancailData from "@/app/src/lib/hooks/useFinancailData";
@@ -7,9 +7,9 @@ import EditListHeader from "../../commons/list/editListHeader";
 
 export default function EditTableInfo() {
   let { editData } = useFinancailData();
-  editData = sortEditData(editData);
+  let sortedEditData = sortEditData(editData);
 
-  const tableHeaders = ["날짜", "등록 갯 수", "수입 / 지출", "조작"];
+  const tableHeaders = ["날짜", "등록 갯 수", "수입 / 지출", "통계"];
 
   return (
     <div className="w-full flex flex-wrap justify-center lg:justify-start gap-4">
@@ -25,7 +25,7 @@ export default function EditTableInfo() {
             ))}
           </div>
           <div className="w-full h-full flex flex-col border-2 border-slate-400 rounded-lg shadow-xl gap-4 p-2 overflow-auto">
-            {editData.map((el: IPropsFetchedData, index: number) => (
+            {sortedEditData.map((el: IEditDataFull, index: number) => (
               <MonthList key={el.month + index} el={el} />
             ))}
           </div>

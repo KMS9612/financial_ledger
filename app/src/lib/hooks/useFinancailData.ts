@@ -7,9 +7,12 @@ import { useCallback, useEffect } from "react";
 import { getFixedData } from "../../service/getFixedData";
 import { getAllFinancial } from "../../service/getAllFinancial";
 import { IFixedData } from "../../types/fixedTypes/fixedDataType";
+import { IEditDataFull } from "../../types/editTypes/editTypes";
 
 function useFinancailData() {
-  const [editData, setEditData] = useRecoilState<any>(editDataState);
+  const [editData, setEditData] = useRecoilState<Array<IEditDataFull> | []>(
+    editDataState
+  );
   const [fixedData, setFixedData] = useRecoilState<IFixedData | {}>(
     fixedDataState
   );

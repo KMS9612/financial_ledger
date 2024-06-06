@@ -1,8 +1,8 @@
-import { IPropsFetchedData } from "../../types/editTypes/editTypes";
+import { IEditDataFull } from "../../types/editTypes/editTypes";
 
-export const sortEditData = (editData: any) => {
+export const sortEditData = (editData: Array<IEditDataFull>) => {
   let sortedData = [...editData];
-  sortedData.sort((a: IPropsFetchedData, b: IPropsFetchedData) => {
+  sortedData.sort((a: IEditDataFull, b: IEditDataFull) => {
     const monthA = a.month;
     const monthB = b.month;
     if (monthA < monthB) {
