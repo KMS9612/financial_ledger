@@ -16,28 +16,32 @@ import {
 } from "../../recoil/store/financialData";
 import { FixedDataTypeGuard } from "../../types/fixedTypes/fixedDataType";
 import { barChartUnitState } from "../../recoil/store/barChartUnit";
+import { chartTargetYearState } from "../../recoil/store/chartYear";
+import { useRouter } from "next/navigation";
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip);
 
 const BarChart = () => {
+  const router = useRouter();
   const fixedData = useRecoilValue(fixedDataState);
   const editData = useRecoilValue(editDataState);
   const chartUnit = useRecoilValue(barChartUnitState);
+  const targetYear = useRecoilValue(chartTargetYearState);
   if (!FixedDataTypeGuard(fixedData)) return;
   const { plus, minus } = CalculateForChart(editData, fixedData);
 
   // 연간 데이터 (월별 총 수입, 총 지출의 퍼센테이지)
   const yearData = {
     labels: [
-      "1월",
-      "2월",
-      "3월",
-      "4월",
-      "5월",
-      "6월",
-      "7월",
-      "8월",
-      "9월",
+      "01월",
+      "02월",
+      "03월",
+      "04월",
+      "05월",
+      "06월",
+      "07월",
+      "08월",
+      "09월",
       "10월",
       "11월",
       "12월",
@@ -76,6 +80,14 @@ const BarChart = () => {
         fullSize: true,
         text: "연간 지출/수입 그래프",
       },
+    },
+    onClick: (evt: any, activeElement: any) => {
+      if (activeElement.length !== 0) {
+        var firstPoint = activeElement[0];
+        const month = yearData.labels[firstPoint.index].split("월")[0];
+        const targetDate = targetYear + "." + month;
+        router.push("/edit/" + targetDate);
+      }
     },
   };
   return <Bar data={yearData} options={options}></Bar>;

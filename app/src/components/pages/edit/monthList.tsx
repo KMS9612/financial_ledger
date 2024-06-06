@@ -52,8 +52,8 @@ export default function MonthList({ el }: { el: IEditDataFull }) {
       </div>
       <div className="flex justify-center items-center w-1/4">
         <p className="font-bold">
-          <span className="text-positiveText">{total.plusCount}</span> /{" "}
-          <span className="text-nagativeText">{total.minusCount}</span>
+          <span className="text-positiveText">{total.plusCount}</span>원 /{" "}
+          <span className="text-nagativeText">{total.minusCount}</span>원
         </p>
       </div>
     </div>

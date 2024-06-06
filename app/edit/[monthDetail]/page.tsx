@@ -4,15 +4,24 @@ import TableInfomation from "../../src/components/pages/edit/tableInfo";
 import Image from "next/image";
 import FixedDataBox from "@/app/src/components/commons/boxes/fixedDataBox";
 import EditItemsDetailModal from "@/app/src/components/modals/editItemsDetailModal";
+import { useSetRecoilState } from "recoil";
+import { tableDataState } from "@/app/src/recoil/store/tableData";
+import { useEffect } from "react";
 
 export default function MonthDetail({
   params,
 }: {
-  params: { monthDetail: any };
+  params: { monthDetail: string };
 }) {
   const router = useRouter();
   const propsData = params.monthDetail.replace(".", "/");
   const [year, month] = propsData.split("/");
+
+  // result에서 진입 할 시 첫 진입이 아니라면 이전 값이 남아있어 몇초간 이전 테이블데이터가 보여지는 문제를 막기위해 작성
+  const setTableData = useSetRecoilState(tableDataState);
+  useEffect(() => {
+    setTableData([]);
+  });
 
   return (
     <div className="w-full h-full">

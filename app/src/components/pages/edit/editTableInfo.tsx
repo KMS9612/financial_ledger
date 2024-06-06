@@ -9,7 +9,7 @@ export default function EditTableInfo() {
   let { editData } = useFinancailData();
   let sortedEditData = sortEditData(editData);
 
-  const tableHeaders = ["날짜", "등록 갯 수", "수입 / 지출", "통계"];
+  const tableHeaders = ["날짜", "등록 갯 수", "수입 / 지출", "통계(+/-)"];
 
   return (
     <div className="w-full flex flex-wrap justify-center lg:justify-start gap-4">
