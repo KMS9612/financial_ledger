@@ -1,5 +1,6 @@
 import { IPropsResultTodayDataBox } from "@/app/src/types/resultlTypes/resultBoxSmall";
 import TextSkeleton from "../../loading/textSkeleton";
+import calculateForUnit from "@/app/src/lib/calculates/calculateForUnit";
 
 export default function ResultTodayDataBox(props: IPropsResultTodayDataBox) {
   return (
@@ -15,9 +16,12 @@ export default function ResultTodayDataBox(props: IPropsResultTodayDataBox) {
               : "text-nagativeText"
           }`}
         >
-          {isNaN(props.el.data) ? <TextSkeleton /> : props.el.data}
+          {isNaN(props.el.data) ? (
+            <TextSkeleton />
+          ) : (
+            calculateForUnit(props.el.data)
+          )}
         </span>
-        <span className="text-lg font-bold">원</span>
       </div>
     </div>
   );

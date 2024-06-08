@@ -3,6 +3,7 @@ import TextSkeleton from "../../loading/textSkeleton";
 import { useRecoilValue } from "recoil";
 import { fixedDataState } from "@/app/src/recoil/store/financialData";
 import CircleLoading from "../../loading/circleLoading";
+import calculateForUnit from "@/app/src/lib/calculates/calculateForUnit";
 
 export default function ResultFixDataBox() {
   const fixedData = useRecoilValue(fixedDataState);
@@ -37,7 +38,7 @@ export default function ResultFixDataBox() {
           <div key={el.title} className="flex justify-between">
             <span>{el.title}</span>
             <span className={`${el.textColor}`}>
-              {isNaN(el.data) ? <TextSkeleton /> : el.data}
+              {isNaN(el.data) ? <TextSkeleton /> : calculateForUnit(el.data)}
             </span>
           </div>
         ))}

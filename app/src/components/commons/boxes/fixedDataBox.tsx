@@ -1,5 +1,6 @@
-import { FixedDataTypeGuard } from "@/app/src/types/fixedTypes/fixedDataType";
 import useFinancailData from "@/app/src/lib/hooks/useFinancailData";
+import calculateForUnit from "@/app/src/lib/calculates/calculateForUnit";
+import { FixedDataTypeGuard } from "@/app/src/types/fixedTypes/fixedDataType";
 import TextSkeleton from "../../loading/textSkeleton";
 
 export default function FixedDataBox() {
@@ -11,7 +12,7 @@ export default function FixedDataBox() {
       dataField: !FixedDataTypeGuard(fixedData) ? (
         <TextSkeleton />
       ) : (
-        fixedData.income
+        calculateForUnit(fixedData.income)
       ),
     },
     {
@@ -19,7 +20,7 @@ export default function FixedDataBox() {
       dataField: !FixedDataTypeGuard(fixedData) ? (
         <TextSkeleton />
       ) : (
-        fixedData.fixed
+        calculateForUnit(fixedData.fixed)
       ),
     },
     {
@@ -27,7 +28,7 @@ export default function FixedDataBox() {
       dataField: !FixedDataTypeGuard(fixedData) ? (
         <TextSkeleton />
       ) : (
-        fixedData.saving
+        calculateForUnit(fixedData.saving)
       ),
     },
   ];
@@ -39,7 +40,7 @@ export default function FixedDataBox() {
           key={el.innerText}
           className="border-2 border-slate-600 font-bold rounded-md h-10 flex justify-center items-center px-10 text-xs lg:text-base min-w-full xl:min-w-[215px]"
         >
-          {el.innerText}: {el.dataField} 원
+          {el.innerText}: {el.dataField}
         </div>
       ))}
     </div>
