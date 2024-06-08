@@ -6,7 +6,7 @@ export default function ChartCategoryBtn() {
   return (
     <button
       onClick={() => setShowMonthData((prev) => !prev)}
-      className="bg-slate-600 h-[35px] rounded text-white sm:text-base text-sm font-bold p-1"
+      className="sm:w-fit w-full bg-slate-600 h-[35px] rounded text-white sm:text-base text-sm font-bold p-1"
     >
       {showMonthData ? "연 간" : "월 간"} 차트 보기
     </button>

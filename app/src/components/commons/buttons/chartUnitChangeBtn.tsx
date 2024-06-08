@@ -11,7 +11,7 @@ export default function ChartUnitChangeBtn() {
   return (
     <button
       onClick={onClickChangeUnit}
-      className="bg-slate-600 h-[35px] rounded text-white sm:text-base text-sm font-bold p-1"
+      className="sm:w-fit w-full bg-slate-600 h-[35px] rounded text-white sm:text-base text-sm font-bold p-1"
     >
       {chartUnit === "won" ? "퍼센트(%)로 변경" : "원으로 변경"}
     </button>

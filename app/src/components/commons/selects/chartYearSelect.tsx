@@ -24,7 +24,7 @@ export default function ChartYearSelect() {
       onChange={onChangeSetTargetYear}
       name=""
       id=""
-      className="w-[150px] h-[35px] border border-slate-500 rounded-lg outline-none focus:outline-none"
+      className="sm:w-[150px] w-full h-[35px] border border-slate-500 rounded-lg outline-none focus:outline-none"
       value={!showMonthData ? targetYear : targetMonth}
     >
       <option value="" disabled>
