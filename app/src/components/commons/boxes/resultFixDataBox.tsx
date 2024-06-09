@@ -31,7 +31,7 @@ export default function ResultFixDataBox() {
   ];
 
   return (
-    <div className="min-w-[300px] border rounded-lg w-full overflow-auto flex flex-col justify-end items-start px-4 shadow-lg p-2 gap-6">
+    <div className="min-w-[200px] border rounded-lg w-full overflow-auto flex flex-col justify-end items-start px-4 shadow-lg p-2 gap-6">
       <h2 className="text-2xl text-slate-700 font-bold">고정비용</h2>
       <div className="w-full flex flex-col justify-between text-lg font-bold">
         {fixDataObj.map((el) => (

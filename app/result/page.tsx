@@ -33,13 +33,13 @@ export default function ResultPage() {
     Object.keys(fixedData).length !== 0
   ) {
     return (
-      <div className="absolute w-full h-full flex flex-col gap-2 pt-20 px-4">
+      <div className="absolute w-full h-full flex flex-col gap-2 py-20 px-4">
         <h2 className="text-slate-700 font-bold text-4xl">
           내 가계부 확인하기
         </h2>
-        <div className="w-full h-full flex flex-col xl:flex-row gap-4 pb-2">
-          <ResultChartContainer />
+        <div className="w-full h-full flex-col flex items-center gap-4 pb-2">
           <ResultBoxContainer fixedData={fixedData} editData={editData} />
+          <ResultChartContainer />
         </div>
       </div>
     );

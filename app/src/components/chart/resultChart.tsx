@@ -7,7 +7,7 @@ export default function ChartBox() {
   const showMonthData = useRecoilValue(showMonthDataState);
 
   return (
-    <div className="w-full xl:h-[500px] h-96 flex justify-center items-center border rounded-lg shadow-md p-2 overflow-auto">
+    <div className="w-full h-[500px] flex justify-center items-center border rounded-lg shadow-md p-2 overflow-auto">
       {showMonthData ? <DoughnutChart /> : <BarChart />}
     </div>
   );

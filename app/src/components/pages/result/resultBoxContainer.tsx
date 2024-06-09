@@ -30,7 +30,7 @@ export default function ResultBoxContainer(props: IPropsResultBoxContainer) {
   ];
 
   return (
-    <div className="w-full xl:w-1/4 flex flex-row flex-wrap xl:flex-col gap-4">
+    <div className="w-full flex flex-row flex-wrap lg:flex-nowrap gap-4">
       {/* 데이터 표시 박스 */}
       <ResultFixDataBox />
       {dataSet.map((el, index) => (
