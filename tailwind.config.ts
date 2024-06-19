@@ -7,6 +7,7 @@ const config: Config = {
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+    container: { center: true },
     extend: {
       backgroundImage: {
         landing: "url(/landing_bg.png)",
@@ -20,6 +21,6 @@ const config: Config = {
       },
     },
   },
-  plugins: [],
+  plugins: [require("tailwindcss-animated")],
 };
 export default config;

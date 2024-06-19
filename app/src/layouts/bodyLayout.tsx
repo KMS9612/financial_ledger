@@ -32,8 +32,8 @@ export default function BodyLayout(props: IPropsBodyLayout) {
         className={`${Fonts} relative mx-auto w-screen h-screen m-h-screen flex flex-col justify-start items-center overflow-x-hidden`}
         style={{ minWidth: "380px", margin: "0 auto" }}
       >
-        <Navigation></Navigation>
-        {!isHidden && <Header></Header>}
+        {!isHidden && <Navigation />}
+        {!isHidden && <Header />}
         {props.children}
       </body>
     </RecoilRoot>

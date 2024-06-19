@@ -24,7 +24,7 @@ export default function MonthDetail({
   });
 
   return (
-    <div className="w-full h-full">
+    <div className="w-full h-full animate-fade animate-once">
       <EditItemsDetailModal />
       {/* Top Infomation */}
       <div className="flex flex-col xl:flex-row justify-between items-center mb-4 gap-10 xl:gap-0 px-10 py-4">

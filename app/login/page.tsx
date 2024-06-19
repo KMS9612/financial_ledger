@@ -87,7 +87,7 @@ export default function LoginPage() {
   return (
     <div className="w-full h-full bg-gray-200 flex justify-center items-center">
       <LoginErrModal text={errText} isOpen={isOpen} setIsOpen={setIsOpen} />
-      <div className="w-5/6 h-5/6 rounded-xl flex shadow-xl overflow-hidden">
+      <div className="w-5/6 h-5/6 rounded-xl flex shadow-xl overflow-hidden animate-fade animate-once">
         <LoginLeftDeco />
         {isLoading ? (
           <form

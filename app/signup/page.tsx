@@ -79,7 +79,7 @@ export default function SignUp() {
       />
       <form
         onSubmit={onSubmit}
-        className="w-5/6 h-5/6 flex rounded-xl shadow-xl overflow-hidden"
+        className="w-5/6 h-5/6 flex rounded-xl shadow-xl overflow-hidden  animate-fade animate-once"
       >
         <SignUpForm
           isLoading={isLoading}

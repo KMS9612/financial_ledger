@@ -11,7 +11,7 @@ export default function Header() {
 
   return (
     <div className="top-0 w-full h-12 min-h-[50px] bg-slate-500 flex justify-between items-center px-6 z-10">
-      <div className="container flex items-center ">
+      <div className="w-full flex items-center ">
         <Image
           className="cursor-pointer"
           src="/logo.png"

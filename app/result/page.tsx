@@ -33,7 +33,7 @@ export default function ResultPage() {
     Object.keys(fixedData).length !== 0
   ) {
     return (
-      <div className="absolute w-full h-full flex flex-col gap-2 py-20 px-4">
+      <div className="absolute w-full h-full flex flex-col gap-2 py-20 px-4 animate-fade animate-once">
         <h2 className="text-slate-700 font-bold text-4xl">
           내 가계부 확인하기
         </h2>
