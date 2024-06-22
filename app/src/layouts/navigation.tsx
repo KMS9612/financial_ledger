@@ -2,7 +2,7 @@
 import Cookie from "js-cookie";
 import { useRecoilState } from "recoil";
 import { isOpenNavi } from "../recoil/store/navi";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import NaviCloseBtn from "../components/commons/buttons/naviCloseBtn";
 

@@ -19,11 +19,16 @@ export default function BodyLayout(props: IPropsBodyLayout) {
   const Fonts = inter.className + " " + notoKR.className;
 
   useEffect(() => {
+    const allPath = ["/", "/login", "/signup", "/edit", "/result"];
     const hiddenLayout = ["/", "/login", "/signup"];
 
-    setIsHidden(
-      hiddenLayout.filter((el) => currentPath === el).length > 0 ? true : false
-    );
+    if (allPath.includes(currentPath)) {
+      setIsHidden(
+        hiddenLayout.filter((el) => currentPath === el).length > 0
+          ? true
+          : false
+      );
+    }
   }, [currentPath]);
 
   return (

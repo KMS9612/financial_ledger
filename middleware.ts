@@ -6,11 +6,14 @@ export function middleware(request: NextRequest) {
   const needLoginPage = ["/result", "/edit"];
   const accessToken = request.cookies.get("access");
 
+  console.log(pathname);
+
   // 회원가입 후 데이터 저장 프로세스 및 resultPage리팩토링으로  signup페이지 접근제한
   // if (pathname === "/signup") {
   //   return NextResponse.redirect(new URL("/", request.url));
   // }
 
+  // 로그인 권한 분기 별 페이지 리다이렉트
   if (needUnLoginPage.includes(pathname) && accessToken) {
     console.log(`redirect :from ${pathname} :to result`);
     return NextResponse.redirect(new URL("/result", request.url));
