@@ -12,6 +12,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { loginFormSchema } from "../src/schema/loginSchema/loginFormSchema";
 import { LoginFormData } from "../src/types/loginTypes/loginFormTypes";
+import SocialLogin from "../src/components/pages/login/socialLogin";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -84,6 +85,13 @@ export default function LoginPage() {
   const onSubmit = handleSubmit((data) => {
     onClickLogin(false, data);
   });
+
+  const onClickSocialLogin = (
+    event: MouseEvent<HTMLImageElement>,
+    socialType: string
+  ) => {
+    alert(socialType + "소셜 로그인은 준비중입니다.");
+  };
   return (
     <div className="w-full h-full bg-gray-200 flex justify-center items-center">
       <LoginErrModal text={errText} isOpen={isOpen} setIsOpen={setIsOpen} />
@@ -108,6 +116,7 @@ export default function LoginPage() {
               onClickLogin={onClickLogin}
               onClickTestAccountLogin={onClickTestAccountLogin}
             />
+            <SocialLogin onClickSocialLogin={onClickSocialLogin} />
           </form>
         ) : (
           <div className="lg:w-1/3 w-full h-full flex justify-center items-center">
