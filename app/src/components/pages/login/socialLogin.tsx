@@ -30,8 +30,10 @@ export default function SocialLogin(props: IPropsSocialLogin) {
   return (
     <div className="w-full h-[100px] flex flex-col justify-center items-center items-center gap-6">
       <div className="w-full flex justify-center items-center relative text-gray-500">
-        <p className="absolute w-1/2 border rounded-full"></p>
-        <p className="w-1/6 absolute z-100 bg-white text-center">소셜 로그인</p>
+        <p className="absolute w-2/3 min-w-[200px] border rounded-full"></p>
+        <p className="w-1/6 min-w-[90px] absolute z-100 bg-white text-center">
+          소셜 로그인
+        </p>
       </div>
       <div className="w-full flex justify-center items-center gap-10">
         {socialItems.map((items: SocialItemsType) => {
