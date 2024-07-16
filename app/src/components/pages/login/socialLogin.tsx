@@ -18,12 +18,12 @@ export default function SocialLogin(props: IPropsSocialLogin) {
   const socialItems = [
     {
       socialName: "Naver",
-      imgRoute: "/naverImg/btnG_아이콘사각.png",
+      imgRoute: "/naverImg/btnG_아이콘사각.avif",
       imgAlt: "Naver Social Login Button",
     },
     {
       socialName: "Kakao",
-      imgRoute: "/kktImg/kakaotalk_sharing_btn_medium.png",
+      imgRoute: "/kktImg/kakaotalk_sharing_btn_medium.avif",
       imgAlt: "KakaoTalk Social Login Button",
     },
   ];
@@ -43,11 +43,12 @@ export default function SocialLogin(props: IPropsSocialLogin) {
                 props.onClickSocialLogin(event, items.socialName)
               }
               key={items.imgRoute}
-              className="cursor-pointer"
+              className="cursor-pointer rounded-xl"
               src={items.imgRoute}
               width={50}
               height={50}
               alt={items.imgAlt}
+              loading="lazy"
             ></Image>
           );
         })}
