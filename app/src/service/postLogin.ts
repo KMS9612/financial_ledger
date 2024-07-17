@@ -6,7 +6,7 @@ export const postLogin = async (params: {
 }) => {
   try {
     const res = await axios.post(
-      "https://ggb-back-87f71d708f48.herokuapp.com/login",
+      "https://ggb-back-deploy-856a8d52b46b.herokuapp.com/login",
       // "http://ec2-54-180-146-189.ap-northeast-2.compute.amazonaws.com/login",
       {
         email: params.email,
