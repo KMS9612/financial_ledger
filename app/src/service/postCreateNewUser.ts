@@ -10,7 +10,8 @@ export const postCreateNewUser = async (body: {
       return;
     }
     const res = await axios.post(
-      "https://ggb-back-0b82d9178398.herokuapp.com/createUser",
+      // "https://ggb-back-0b82d9178398.herokuapp.com/createUser",
+      "http://ec2-54-180-146-189.ap-northeast-2.compute.amazonaws.com/createUser",
       body
     );
     return res.data;

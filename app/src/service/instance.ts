@@ -1,7 +1,9 @@
 import axios from "axios";
 import Cookie from "js-cookie";
 export const TestURL = "http://localhost:8080";
-export const PromotionURL = "https://ggb-back-0b82d9178398.herokuapp.com"; // API배포시 url
+// export const PromotionURL = "https://ggb-back-0b82d9178398.herokuapp.com"; // API배포시 url
+export const PromotionURL =
+  "http://ec2-54-180-146-189.ap-northeast-2.compute.amazonaws.com";
 
 // refreshAccessToken 로직
 const refreshAccessToken = async (refreshToken: string) => {
