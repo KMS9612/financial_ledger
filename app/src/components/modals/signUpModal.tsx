@@ -27,7 +27,7 @@ export default function SignUpAlertModal({
         isOpen
           ? "opacity-100 pointer-events-auto"
           : "opacity-0 pointer-events-none"
-      } absolute min-w-[300px] w-2/4 h-fit top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-md bg-slate-600 p-5 transition duration-600 ease-in-out`}
+      } absolute top-0 left-0 min-w-[300px] w-2/4 h-fit top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-md bg-slate-600 p-5 transition duration-600 ease-in-out`}
     >
       <span className="text-white font-bold text-4xl">알림</span>
       <div className="text-white my-6 text-lg">{text}</div>

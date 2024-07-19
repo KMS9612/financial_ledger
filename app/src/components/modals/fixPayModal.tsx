@@ -109,47 +109,54 @@ export default function FixPayModal() {
         isOpen.edit
           ? "opacity-100 pointer-events-auto"
           : "opacity-0 pointer-events-none"
-      } absolute min-w-[380px] lg:w-96 h-fit py-10 bg-white top-1/2 left-1/2 shadow-xl -translate-x-1/2 -translate-y-1/2 text-center transition ease-in-out rounded-lg z-10`}
+      } absolute top-0 left-0 w-full h-full z-20 transition ease-in-out`}
     >
-      <div className="mb-10 text-lg font-bold">
-        고정 비용 설정
-        <br />
-      </div>
-      <form
-        onSubmit={onSubmitHandleForm}
-        className="flex flex-col justify-center items-center gap-10"
+      {/* 모달활성화 배경 */}
+      <div className="absolute w-full h-full bg-gray-700 opacity-50"></div>
+      {/* 모달박스 */}
+      <div
+        className={`absolute top-50 left-50 min-w-[380px] lg:w-96 h-fit py-10 bg-white top-1/2 left-1/2 shadow-xl -translate-x-1/2 -translate-y-1/2 text-center rounded-lg z-10 opacity-100`}
       >
-        {inputObj.map((el, index) => {
-          return (
-            <ModaltInput
-              key={el.labelName + index}
-              el={el}
-              register={register}
-              errors={errors}
-            />
-          );
-        })}
-        <div className="w-5/6 flex flex-col gap-5">
-          <GradientBtn
-            btnInnerText="내 비용 불러오기"
-            onClickEvent={getFixedDataForDefault}
-            isLoading={getDefaultLoading}
-          ></GradientBtn>
-
-          <ModalPositiveBtn
-            type="submit"
-            disable={isRequest}
-            btnText={isRequest ? <CircleLoading /> : "저장"}
-          />
-          <ModalCloseBtn
-            type="button"
-            btnText="닫기"
-            onClickEvent={() => {
-              changeModalState("edit", false);
-            }}
-          />
+        <div className="mb-10 text-lg font-bold">
+          고정 비용 설정
+          <br />
         </div>
-      </form>
+        <form
+          onSubmit={onSubmitHandleForm}
+          className="flex flex-col justify-center items-center gap-10"
+        >
+          {inputObj.map((el, index) => {
+            return (
+              <ModaltInput
+                key={el.labelName + index}
+                el={el}
+                register={register}
+                errors={errors}
+              />
+            );
+          })}
+          <div className="w-5/6 flex flex-col gap-5">
+            <GradientBtn
+              btnInnerText="내 비용 불러오기"
+              onClickEvent={getFixedDataForDefault}
+              isLoading={getDefaultLoading}
+            ></GradientBtn>
+
+            <ModalPositiveBtn
+              type="submit"
+              disable={isRequest}
+              btnText={isRequest ? <CircleLoading /> : "저장"}
+            />
+            <ModalCloseBtn
+              type="button"
+              btnText="닫기"
+              onClickEvent={() => {
+                changeModalState("edit", false);
+              }}
+            />
+          </div>
+        </form>
+      </div>
     </div>
   );
 }

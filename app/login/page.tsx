@@ -93,37 +93,35 @@ export default function LoginPage() {
     alert(socialType + "소셜 로그인은 준비중입니다.");
   };
   return (
-    <div className="w-full h-full bg-gray-200 flex justify-center items-center">
+    <div className="h-full rounded-xl flex shadow-xl overflow-hidden animate-fade animate-once">
       <LoginErrModal text={errText} isOpen={isOpen} setIsOpen={setIsOpen} />
-      <div className="w-5/6 h-5/6 rounded-xl flex shadow-xl overflow-hidden animate-fade animate-once">
-        <LoginLeftDeco />
-        {isLoading ? (
-          <form
-            onSubmit={onSubmit}
-            className="lg:w-1/3 w-full h-full bg-white flex flex-col justify-center items-center border-4 border-white py-20 gap-20"
-          >
-            <h2 className="text-2xl text-slate-600 font-bold">Welcome!</h2>
-            {/* Login Form */}
-            <LoginForm
-              inputData={inputData}
-              register={register}
-              errors={errors}
-            />
-            {/* Login Form Btns */}
-            <LoginBtnWrap
-              setValue={setValue}
-              loginLoading={loginLoading}
-              onClickLogin={onClickLogin}
-              onClickTestAccountLogin={onClickTestAccountLogin}
-            />
-            <SocialLogin onClickSocialLogin={onClickSocialLogin} />
-          </form>
-        ) : (
-          <div className="lg:w-1/3 w-full h-full flex justify-center items-center">
-            <CircleLoading />
-          </div>
-        )}
-      </div>
+      <LoginLeftDeco />
+      {isLoading ? (
+        <form
+          onSubmit={onSubmit}
+          className="lg:w-1/3 w-full h-full bg-white flex flex-col justify-center items-center border-4 border-white py-20 gap-20"
+        >
+          <h2 className="text-2xl text-slate-600 font-bold">Welcome!</h2>
+          {/* Login Form */}
+          <LoginForm
+            inputData={inputData}
+            register={register}
+            errors={errors}
+          />
+          {/* Login Form Btns */}
+          <LoginBtnWrap
+            setValue={setValue}
+            loginLoading={loginLoading}
+            onClickLogin={onClickLogin}
+            onClickTestAccountLogin={onClickTestAccountLogin}
+          />
+          <SocialLogin onClickSocialLogin={onClickSocialLogin} />
+        </form>
+      ) : (
+        <div className="lg:w-1/3 w-full h-full flex justify-center items-center">
+          <CircleLoading />
+        </div>
+      )}
     </div>
   );
 }

@@ -71,23 +71,23 @@ export default function SignUp() {
   });
 
   return (
-    <div className="relative rounded-xl w-full h-full bg-gray-200 flex justify-center items-center">
+    // <div className="relative rounded-xl w-full h-full bg-gray-200 flex justify-center items-center">
+    <form
+      onSubmit={onSubmit}
+      className="h-full flex rounded-xl shadow-xl overflow-hidden  animate-fade animate-once"
+    >
       <SignUpAlertModal
         text={modalText}
         isOpen={isOpen}
         setIsOpen={setIsOpen}
       />
-      <form
-        onSubmit={onSubmit}
-        className="w-5/6 h-5/6 flex rounded-xl shadow-xl overflow-hidden  animate-fade animate-once"
-      >
-        <SignUpForm
-          isLoading={isLoading}
-          register={register}
-          signUpFormInputData={signUpFormInputData}
-        />
-        <SignUpRightDeco />
-      </form>
-    </div>
+      <SignUpForm
+        isLoading={isLoading}
+        register={register}
+        signUpFormInputData={signUpFormInputData}
+      />
+      <SignUpRightDeco />
+    </form>
+    // </div>
   );
 }

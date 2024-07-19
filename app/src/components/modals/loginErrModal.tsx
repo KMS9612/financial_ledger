@@ -15,7 +15,7 @@ export default function LoginErrModal({
         isOpen
           ? "block opacity-100 pointer-events-auto"
           : "hidden opacity-0 pointer-events-none"
-      } absolute w-full h-full`}
+      } absolute w-full h-full top-0 left-0 z-20`}
     >
       <div className="absolute w-full h-full bg-gray-700 opacity-50"></div>
       <div

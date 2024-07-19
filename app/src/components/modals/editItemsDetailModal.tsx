@@ -63,7 +63,7 @@ export default function EditItemsDetailModal() {
         isOpen.editDetail
           ? "opacity-100 pointer-events-auto"
           : "opacity-0 pointer-events-none"
-      } absolute w-full h-full flex justify-center items-center transition-opacity duration-300 ease-in-out`}
+      } absolute top-0 left-0 w-full h-full flex justify-center items-center transition-opacity duration-300 ease-in-out`}
     >
       <div
         onClick={() => changeModalState("editDetail", false)}

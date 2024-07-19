@@ -99,48 +99,53 @@ export default function TodayPayModal() {
     <div
       className={`${
         isOpen.today
-          ? "opacity-100  pointer-events-auto"
-          : "opacity-0  pointer-events-none"
-      }
-      absolute min-w-[380px] lg:w-96 h-fit py-10 bg-white top-1/2 left-1/2 w-1/5 shadow-lg -translate-x-1/2 -translate-y-1/2 text-center transition ease-in-out rounded-lg z-10`}
+          ? "opacity-100 pointer-events-auto"
+          : "opacity-0 pointer-events-none"
+      } absolute top-0 left-0 w-full h-full z-20 transition ease-in-out `}
     >
-      <div className="mb-10 text-lg font-bold">오늘 지출 등록</div>
-      <form
-        onSubmit={onSubmit}
-        className="flex flex-col justify-center items-center gap-10"
+      {/* 모달활성화 배경 */}
+      <div className="absolute w-full h-full bg-gray-700 opacity-50"></div>
+      <div
+        className={`absolute min-w-[380px] lg:w-96 h-fit py-10 bg-white top-1/2 left-1/2 w-1/5 shadow-lg -translate-x-1/2 -translate-y-1/2 text-center rounded-lg z-10`}
       >
-        {inputObj.map((el, index) =>
-          el.label !== "종류" ? (
-            <ModalInput
-              el={el}
-              key={el.labelName + index}
-              register={register}
+        <div className="mb-10 text-lg font-bold">오늘 지출 등록</div>
+        <form
+          onSubmit={onSubmit}
+          className="flex flex-col justify-center items-center gap-10"
+        >
+          {inputObj.map((el, index) =>
+            el.label !== "종류" ? (
+              <ModalInput
+                el={el}
+                key={el.labelName + index}
+                register={register}
+              />
+            ) : (
+              <TodayModalSelect
+                el={el}
+                key={el.labelName + index}
+                register={register}
+              />
+            )
+          )}
+          <div className="w-5/6 flex flex-col gap-5">
+            <ModalPositiveBtn
+              type="submit"
+              disable={isRequest}
+              btnText={isRequest ? <CircleLoading /> : "저장"}
             />
-          ) : (
-            <TodayModalSelect
-              el={el}
-              key={el.labelName + index}
-              register={register}
+            <ModalCloseBtn
+              type="button"
+              btnText="닫기"
+              onClickEvent={() => {
+                changeModalState("today", false);
+                // 인풋 밸류 초기화
+                resetInputValues();
+              }}
             />
-          )
-        )}
-        <div className="w-5/6 flex flex-col gap-5">
-          <ModalPositiveBtn
-            type="submit"
-            disable={isRequest}
-            btnText={isRequest ? <CircleLoading /> : "저장"}
-          />
-          <ModalCloseBtn
-            type="button"
-            btnText="닫기"
-            onClickEvent={() => {
-              changeModalState("today", false);
-              // 인풋 밸류 초기화
-              resetInputValues();
-            }}
-          />
-        </div>
-      </form>
+          </div>
+        </form>
+      </div>
     </div>
   );
 }

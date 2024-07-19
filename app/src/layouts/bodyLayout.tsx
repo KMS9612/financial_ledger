@@ -34,12 +34,22 @@ export default function BodyLayout(props: IPropsBodyLayout) {
   return (
     <RecoilRoot>
       <body
-        className={`${Fonts} relative mx-auto w-screen h-screen m-h-screen flex flex-col justify-start items-center overflow-x-hidden`}
+        className={`${Fonts} w-screen h-screen m-h-screen justify-center items-center overflow-x-hidden p-10 bg-gray-100`}
         style={{ minWidth: "380px", margin: "0 auto" }}
       >
-        {!isHidden && <Navigation />}
-        {!isHidden && <Header />}
-        {props.children}
+        <div className="grid grid-cols-12 w-full h-full rounded-lg overflow-hidden shadow-2xl bg-white">
+          <div className={`${isHidden && "hidden"} col-span-2`}>
+            <Navigation />
+          </div>
+          {/* {!isHidden && <Header />} */}
+          <div
+            className={`${
+              isHidden ? "col-span-12" : "col-span-10 p-2"
+            } overflow-auto`}
+          >
+            {props.children}
+          </div>
+        </div>
       </body>
     </RecoilRoot>
   );

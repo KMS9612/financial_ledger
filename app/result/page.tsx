@@ -33,14 +33,9 @@ export default function ResultPage() {
     Object.keys(fixedData).length !== 0
   ) {
     return (
-      <div className="absolute w-full h-full flex flex-col gap-2 py-20 px-4 animate-fade animate-once">
-        <h2 className="text-slate-700 font-bold text-4xl">
-          내 가계부 확인하기
-        </h2>
-        <div className="w-full h-full flex-col flex items-center gap-4 pb-2">
-          <ResultBoxContainer fixedData={fixedData} editData={editData} />
-          <ResultChartContainer />
-        </div>
+      <div className="w-full h-full flex flex-col justify-center items-center gap-2 animate-fade animate-once">
+        <ResultBoxContainer fixedData={fixedData} editData={editData} />
+        <ResultChartContainer />
       </div>
     );
   }
