@@ -109,7 +109,7 @@ export default function FixPayModal() {
         isOpen.edit
           ? "opacity-100 pointer-events-auto"
           : "opacity-0 pointer-events-none"
-      } absolute top-0 left-0 w-full h-full z-20 transition ease-in-out`}
+      } absolute top-0 left-0 w-screen h-screen z-20 transition ease-in-out`}
     >
       {/* 모달활성화 배경 */}
       <div className="absolute w-full h-full bg-gray-700 opacity-50"></div>

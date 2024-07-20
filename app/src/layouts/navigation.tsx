@@ -9,6 +9,7 @@ import { useChangeStateOfModals } from "../lib/hooks/useChangeStateOfModals";
 import { INaviItem } from "../types/layout/navigation/naviItemsType";
 import FixPayModal from "../components/modals/fixPayModal";
 import TodayPayModal from "../components/modals/todayPayModal";
+import { naviItems } from "./naviItem";
 
 export default function Navigation() {
   // const [isOpen, setIsOpen] = useRecoilState(isOpenNavi);
@@ -54,13 +55,6 @@ export default function Navigation() {
     }
     return;
   };
-
-  const naviItems: INaviItem[] = [
-    { itemName: "Overview", route: "/result", isModal: false },
-    { itemName: "Table", route: "/edit", isModal: false },
-    { itemName: "TodayRegist", modalType: "today", isModal: true },
-    { itemName: "FixedRegist", modalType: "edit", isModal: true },
-  ];
 
   return (
     <div className={`h-full bg-gray-400 transition-all duration-700 p-2 z-20`}>

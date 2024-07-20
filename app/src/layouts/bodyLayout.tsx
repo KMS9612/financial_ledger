@@ -1,11 +1,11 @@
 "use client";
 import { useEffect, useState } from "react";
-import Header from "./header";
 import Navigation from "./navigation";
 import { usePathname } from "next/navigation";
 import { RecoilRoot } from "recoil";
 import { Inter } from "next/font/google";
 import { Noto_Sans_KR } from "next/font/google";
+import MobileNavi from "./mbNavigation";
 
 interface IPropsBodyLayout {
   children: React.ReactNode;
@@ -34,21 +34,32 @@ export default function BodyLayout(props: IPropsBodyLayout) {
   return (
     <RecoilRoot>
       <body
-        className={`${Fonts} w-screen h-screen m-h-screen justify-center items-center overflow-x-hidden p-10 bg-gray-100`}
+        className={`${Fonts} relative w-screen h-screen justify-center items-center overflow-x-hidden overflow-y-auto p-10 bg-gray-100`}
         style={{ minWidth: "380px", margin: "0 auto" }}
       >
         <div className="grid grid-cols-12 w-full h-full rounded-lg overflow-hidden shadow-2xl bg-white">
-          <div className={`${isHidden && "hidden"} col-span-2`}>
-            <Navigation />
-          </div>
+          {/* DesktopNavigation */}
+          {!isHidden && (
+            <div className={`xl:block hidden col-span-2`}>
+              <Navigation />
+            </div>
+          )}
+
           {/* {!isHidden && <Header />} */}
+          {/* Mounted Components */}
           <div
             className={`${
-              isHidden ? "col-span-12" : "col-span-10 p-2"
-            } overflow-auto`}
+              isHidden ? "col-span-12" : "col-span-12 xl:col-span-10 p-2"
+            } w-full h-full overflow-auto`}
           >
             {props.children}
           </div>
+          {/* MobileNavigation */}
+          {!isHidden && (
+            <div className={`xl:hidden col-span-12 w-full h-full`}>
+              <MobileNavi />
+            </div>
+          )}
         </div>
       </body>
     </RecoilRoot>

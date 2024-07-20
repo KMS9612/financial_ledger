@@ -1,7 +1,4 @@
 "use client";
-import TodayPayModal from "../src/components/modals/todayPayModal";
-import FixPayModal from "../src/components/modals/fixPayModal";
-import EditTopInfo from "../src/components/pages/edit/editTopInfo";
 import EditTableInfo from "../src/components/pages/edit/editTableInfo";
 import { useEffect } from "react";
 import { useSetRecoilState } from "recoil";
