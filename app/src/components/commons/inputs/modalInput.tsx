@@ -20,10 +20,10 @@ export default function ModalInput<RT extends RegisterType>(
           defaultValue={props.el.defaultVal}
           id={props.el.labelName}
           name={props.el.labelName}
-          className="w-full h-10 pl-2 border rounded focus:outline-none focus:ring focus:border-slate-700 focus:border-none"
+          className="w-full h-10 pl-2 border rounded focus:outline-none focus:ring focus:border-slate-700 focus:border-none dark:bg-stone-400"
         />
         {props.el.type !== "date" && (
-          <span className="absolute top-2 right-2 text-gray-400">
+          <span className="absolute top-2 right-2 text-gray-400 dark:text-white">
             {props.el.inputAdd}
           </span>
         )}

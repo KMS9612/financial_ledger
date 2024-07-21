@@ -63,14 +63,14 @@ export default function EditItemsDetailModal() {
         isOpen.editDetail
           ? "opacity-100 pointer-events-auto"
           : "opacity-0 pointer-events-none"
-      } absolute top-0 left-0 w-full h-full flex justify-center items-center transition-opacity duration-300 ease-in-out`}
+      } absolute top-0 left-0 w-full h-full flex justify-center items-center transition-opacity duration-300 ease-in-out dark:text-white`}
     >
       <div
         onClick={() => changeModalState("editDetail", false)}
         className="absolute w-full h-full bg-gray-500/50"
       ></div>
       {isDataValid ? (
-        <div className="absolute flex flex-col justify-between items-center min-w-[300px] w-2/6 h-4/5 bg-white shadow-xl rounded-lg p-10">
+        <div className="absolute flex flex-col justify-between items-center min-w-[300px] w-2/6 h-4/5 bg-white dark:bg-stone-600 shadow-xl rounded-lg p-10">
           {/* Head */}
           <div className="w-full">
             <h2 className="font-bold text-2xl text-slate-500">

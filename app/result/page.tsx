@@ -33,7 +33,7 @@ export default function ResultPage() {
     Object.keys(fixedData).length !== 0
   ) {
     return (
-      <div className="w-full h-full flex flex-col justify-center items-center gap-2 animate-fade animate-once">
+      <div className="w-full h-full flex flex-col justify-center items-center gap-2 animate-fade animate-onced">
         <ResultBoxContainer fixedData={fixedData} editData={editData} />
         <ResultChartContainer />
       </div>

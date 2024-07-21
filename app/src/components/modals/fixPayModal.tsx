@@ -115,7 +115,7 @@ export default function FixPayModal() {
       <div className="absolute w-full h-full bg-gray-700 opacity-50"></div>
       {/* 모달박스 */}
       <div
-        className={`absolute top-50 left-50 min-w-[380px] lg:w-96 h-fit py-10 bg-white top-1/2 left-1/2 shadow-xl -translate-x-1/2 -translate-y-1/2 text-center rounded-lg z-10 opacity-100`}
+        className={`absolute top-50 left-50 min-w-[380px] lg:w-96 h-fit py-10 bg-white dark:bg-stone-600 dark:text-white top-1/2 left-1/2 shadow-xl -translate-x-1/2 -translate-y-1/2 text-center rounded-lg z-10 opacity-100`}
       >
         <div className="mb-10 text-lg font-bold">
           고정 비용 설정

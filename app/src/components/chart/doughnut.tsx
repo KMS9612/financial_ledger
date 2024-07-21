@@ -14,11 +14,14 @@ import {
   fixedDataState,
 } from "../../recoil/store/financialData";
 import { FixedDataTypeGuard } from "../../types/fixedTypes/fixedDataType";
+import { isDarkState } from "../../recoil/store/isDark";
 
 ChartJS.register(Title, Tooltip, Legend, DoughnutController, ArcElement);
 const DoughnutChart = () => {
   const fixedData = useRecoilValue(fixedDataState);
   const editData = useRecoilValue(editDataState);
+  const isDark = useRecoilValue(isDarkState);
+  ChartJS.defaults.color = `${isDark ? "white" : "black"}`;
   if (!FixedDataTypeGuard(fixedData)) return;
 
   const { fixed, income, saving } = fixedData;
@@ -52,6 +55,9 @@ const DoughnutChart = () => {
     plugins: {
       legned: {
         position: "top",
+        labels: {
+          color: `${isDark ? "#ffffff" : ""}`,
+        },
       },
       title: {
         display: true,

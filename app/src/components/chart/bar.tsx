@@ -6,7 +6,6 @@ import {
   BarElement,
   Title,
   Tooltip,
-  Legend,
 } from "chart.js";
 import CalculateForChart from "../../lib/calculates/calculateForChart";
 import { useRecoilValue } from "recoil";
@@ -18,6 +17,7 @@ import { FixedDataTypeGuard } from "../../types/fixedTypes/fixedDataType";
 import { barChartUnitState } from "../../recoil/store/barChartUnit";
 import { chartTargetYearState } from "../../recoil/store/chartYear";
 import { useRouter } from "next/navigation";
+import { isDarkState } from "../../recoil/store/isDark";
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip);
 
@@ -27,6 +27,8 @@ const BarChart = () => {
   const editData = useRecoilValue(editDataState);
   const chartUnit = useRecoilValue(barChartUnitState);
   const targetYear = useRecoilValue(chartTargetYearState);
+  const isDark = useRecoilValue(isDarkState);
+  ChartJS.defaults.color = `${isDark ? "white" : "black"}`;
   if (!FixedDataTypeGuard(fixedData)) return;
   const { plus, minus } = CalculateForChart(editData, fixedData);
 

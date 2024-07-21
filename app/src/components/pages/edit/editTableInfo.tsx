@@ -12,10 +12,10 @@ export default function EditTableInfo() {
   const tableHeaders = ["날짜", "등록 갯 수", "수입 / 지출", "통계(+/-)"];
 
   return (
-    <div className="w-full flex flex-wrap justify-center lg:justify-start gap-4">
+    <div className="w-full flex flex-wrap justify-center lg:justify-start gap-4 dark:text-white">
       {editData.length !== 0 ? (
         <div className="w-full flex flex-col gap-2">
-          <div className="divide-x-2 divide-slate-400 w-full h-12 flex justify-center items-center rounded-md px-2 py-2 shadow-xl">
+          <div className="divide-x-2 divide-slate-400 w-full h-12 flex justify-center items-center rounded-md px-2 py-2 shadow-xl dark:bg-stone-600">
             {tableHeaders.map((headerName) => (
               <EditListHeader
                 key={headerName}

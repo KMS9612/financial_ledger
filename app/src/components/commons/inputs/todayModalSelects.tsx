@@ -13,7 +13,7 @@ export default function TodayModalSelect<RT extends TodayRegisterType>(
       <select
         {...props.register(props.el.labelName as Path<RT>)}
         name={props.el.labelName}
-        className="w-5/6 h-10 pl-2 border rounded focus:outline-none focus:ring focus:border-slate-700 focus:border-none"
+        className="w-5/6 h-10 pl-2 border rounded focus:outline-none focus:ring focus:border-slate-700 focus:border-none dark:bg-stone-500"
       >
         <option value="지출">지출</option>
         <option value="수입">수입</option>

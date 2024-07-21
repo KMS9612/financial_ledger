@@ -49,7 +49,7 @@ export default function MonthList({ el }: { el: IEditDataFull }) {
   return (
     <div
       onClick={onClickRouteDetail}
-      className="relative divide-x-2 divide-slate-400 w-full text-xs sm:text-lg h-14 flex justify-center items-center rounded-md cursor-pointer px-2 py-2 transition ease-in-out hover:bg-gray-300 shadow-xl"
+      className="relative divide-x-2 divide-slate-400 dark:bg-stone-600 w-full text-xs sm:text-lg h-14 flex justify-center items-center rounded-md cursor-pointer px-2 py-2 transition ease-in-out hover:bg-gray-300 dark:hover:bg-stone-500 shadow-xl"
     >
       <div className="flex justify-center items-center w-1/4 font-bold ">
         {el.month}

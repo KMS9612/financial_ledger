@@ -101,12 +101,12 @@ export default function TodayPayModal() {
         isOpen.today
           ? "opacity-100 pointer-events-auto"
           : "opacity-0 pointer-events-none"
-      } absolute top-0 left-0 w-full h-full z-20 transition ease-in-out `}
+      } absolute top-0 left-0 w-full h-full z-20 transition ease-in-out dark:text-white`}
     >
       {/* 모달활성화 배경 */}
       <div className="absolute w-full h-full bg-gray-700 opacity-50"></div>
       <div
-        className={`absolute min-w-[380px] lg:w-96 h-fit py-10 bg-white top-1/2 left-1/2 w-1/5 shadow-lg -translate-x-1/2 -translate-y-1/2 text-center rounded-lg z-10`}
+        className={`absolute min-w-[380px] lg:w-96 h-fit py-10 bg-white dark:bg-stone-600 top-1/2 left-1/2 w-1/5 shadow-lg -translate-x-1/2 -translate-y-1/2 text-center rounded-lg z-10`}
       >
         <div className="mb-10 text-lg font-bold">오늘 지출 등록</div>
         <form

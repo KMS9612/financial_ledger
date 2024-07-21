@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import BodyLayout from "./src/layouts/bodyLayout";
+import RecoilRootComp from "./src/layouts/recoilRooteComp";
 
 export const metadata: Metadata = {
   title: "가계부",
@@ -14,7 +15,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ko">
-      <BodyLayout>{children}</BodyLayout>
+      <RecoilRootComp>
+        <BodyLayout>{children}</BodyLayout>
+      </RecoilRootComp>
     </html>
   );
 }
