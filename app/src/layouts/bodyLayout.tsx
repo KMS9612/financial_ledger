@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { Inter } from "next/font/google";
 import { Noto_Sans_KR } from "next/font/google";
 import MobileNavi from "./mbNavigation";
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { isDarkState } from "../recoil/store/isDark";
 
 interface IPropsBodyLayout {
@@ -16,9 +16,21 @@ const notoKR = Noto_Sans_KR({ subsets: ["latin"] });
 
 export default function BodyLayout(props: IPropsBodyLayout) {
   const [isHidden, setIsHidden] = useState<boolean>(true);
-  const isDark = useRecoilValue(isDarkState);
+  const [isDark, setIsDark] = useRecoilState(isDarkState);
   const currentPath = usePathname();
   const Fonts = inter.className + " " + notoKR.className;
+
+  const checkTheme = () => {
+    if (
+      localStorage.theme === "dark" ||
+      (!("theme" in localStorage) &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches)
+    ) {
+      setIsDark(true);
+    } else {
+      setIsDark(false);
+    }
+  };
 
   useEffect(() => {
     const allPath = ["/", "/login", "/signup", "/edit", "/result"];
@@ -34,6 +46,8 @@ export default function BodyLayout(props: IPropsBodyLayout) {
     if (currentPath.startsWith("/edit")) {
       setIsHidden(false);
     }
+
+    checkTheme();
   }, [currentPath]);
 
   return (
