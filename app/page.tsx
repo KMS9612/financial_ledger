@@ -10,7 +10,7 @@ export default function Home() {
     setIsLogin(Cookie.get("access") ? true : false);
   }, []);
   return (
-    <div className="w-full flex flex-col justify-center items-center">
+    <div className="w-full h-full flex flex-col justify-center items-center">
       <div
         className={`bg-gradient-to-r
         from-lime-500

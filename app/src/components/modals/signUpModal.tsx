@@ -33,6 +33,7 @@ export default function SignUpAlertModal({
       <div className="text-white my-6 text-lg">{text}</div>
       <div className="w-full text-right">
         <button
+          type="button"
           onClick={onClickComfirm}
           className="w-24 h-8 rounded-md bg-white text-slate-600 font-bold text-lg transition ease-in-out duration-600 hover:-translate-y-1"
         >

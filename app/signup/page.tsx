@@ -74,7 +74,7 @@ export default function SignUp() {
     // <div className="relative rounded-xl w-full h-full bg-gray-200 flex justify-center items-center">
     <form
       onSubmit={onSubmit}
-      className="h-full flex rounded-xl shadow-xl overflow-hidden  animate-fade animate-once"
+      className="w-full h-full flex rounded-xl shadow-xl overflow-hidden  animate-fade animate-once"
     >
       <SignUpAlertModal
         text={modalText}

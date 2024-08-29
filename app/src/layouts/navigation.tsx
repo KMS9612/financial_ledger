@@ -32,6 +32,7 @@ export default function Navigation() {
       router.push("/login");
     }
   }, [isOpen, router]);
+
   const onClickLogout = () => {
     if (!isLogin) {
       router.push("/login");
@@ -59,6 +60,7 @@ export default function Navigation() {
   };
 
   const onClickToggleDarkMode = () => {
+    localStorage.setItem("theme", isDark ? "white" : "dark");
     setIsDark((prev) => !prev);
   };
 

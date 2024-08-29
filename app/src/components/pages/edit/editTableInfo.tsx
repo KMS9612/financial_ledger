@@ -24,7 +24,7 @@ export default function EditTableInfo() {
               />
             ))}
           </div>
-          <div className="w-full h-full flex flex-col shadow-xl rounded-lg shadow-xl gap-4 p-2 overflow-auto">
+          <div className="w-full h-full flex flex-col shadow-xl rounded-lg gap-4 p-2 overflow-auto">
             {sortedEditData.map((el: IEditDataFull, index: number) => (
               <MonthList key={el.month + index} el={el} />
             ))}

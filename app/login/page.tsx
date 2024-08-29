@@ -93,7 +93,7 @@ export default function LoginPage() {
     alert(socialType + "소셜 로그인은 준비중입니다.");
   };
   return (
-    <div className="h-full rounded-xl flex shadow-xl overflow-hidden animate-fade animate-once">
+    <div className="w-full h-full rounded-xl flex shadow-xl overflow-hidden animate-fade animate-once">
       <LoginErrModal text={errText} isOpen={isOpen} setIsOpen={setIsOpen} />
       <LoginLeftDeco />
       {isLoading ? (

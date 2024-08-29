@@ -14,7 +14,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="ko">
+    <html
+      lang="ko"
+      className="w-screen h-screen flex justify-center items-center"
+    >
       <RecoilRootComp>
         <BodyLayout>{children}</BodyLayout>
       </RecoilRootComp>

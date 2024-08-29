@@ -11,7 +11,7 @@ export default function EditPage() {
   });
 
   return (
-    <div className="w-full relative h-full flex flex-col gap-8 animate-fade animate-once">
+    <div className="relative w-full h-full flex flex-col justify-center items-center gap-8 animate-fade animate-once">
       {/* <FixPayModal /> */}
       {/* <TodayPayModal /> */}
       {/* Top Infomation / Buttons */}
