@@ -1,4 +1,5 @@
 "use client";
+import axios from "axios";
 import Cookie from "js-cookie";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -9,6 +10,11 @@ export default function Home() {
   useEffect(() => {
     setIsLogin(Cookie.get("access") ? true : false);
   }, []);
+
+  const sqlTestBtn = () => {
+    axios({ url: "/api", method: "post" });
+  };
+
   return (
     <div className="w-full h-full flex flex-col justify-center items-center">
       <div
@@ -35,6 +41,7 @@ export default function Home() {
             {/* <button className="w-full h-12 border rounded text-white font-bold hover:bg-gray-300">
               About
             </button> */}
+            <button onClick={() => sqlTestBtn()}>SQL Test Button</button>
           </div>
         </div>
       </div>
