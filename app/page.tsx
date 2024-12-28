@@ -12,7 +12,7 @@ export default function Home() {
   }, []);
 
   const sqlTestBtn = () => {
-    axios({ url: "/api", method: "post" });
+    axios({ url: "/api/test", method: "post" });
   };
 
   return (
