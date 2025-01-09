@@ -11,10 +11,6 @@ export default function Home() {
     setIsLogin(Cookie.get("access") ? true : false);
   }, []);
 
-  const sqlTestBtn = () => {
-    axios({ url: "/api/test", method: "post" });
-  };
-
   return (
     <div className="w-full h-full flex flex-col justify-center items-center">
       <div
