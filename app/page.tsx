@@ -37,7 +37,7 @@ export default function Home() {
             {/* <button className="w-full h-12 border rounded text-white font-bold hover:bg-gray-300">
               About
             </button> */}
-            <button onClick={() => sqlTestBtn()}>SQL Test Button</button>
+            {/* <button onClick={() => sqlTestBtn()}>SQL Test Button</button> */}
           </div>
         </div>
       </div>
