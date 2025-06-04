@@ -10,13 +10,6 @@ export interface Tokens {
   refreshToken: string;
 }
 
-export interface LoginResponse {
-  message: string;
-  accessToken: string;
-  refreshToken: string;
-  email: string;
-}
-
 export interface LoginRequest {
   email: string;
   password: string;

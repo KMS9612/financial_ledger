@@ -1,11 +1,11 @@
 import { pool } from "@/app/src/lib/db/db";
 import { User } from "@/app/api/common/types/user.types";
-import { RowDataPacket } from "mysql2";
+import { RowDataPacket, ResultSetHeader } from "mysql2";
 
 export async function createUserTable() {
   try {
     const createUserTable = `CREATE TABLE IF NOT EXISTS users (
-    id VARCHAR(36) PRIMARY KEY,
+    id INT PRIMARY KEY AUTO_INCREMENT,
     email VARCHAR(255) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
     name VARCHAR(100) NOT NULL,
@@ -19,24 +19,21 @@ export async function createUserTable() {
   }
 }
 
-export async function createUserInDb(user: User) {
+export async function createUserInDb(user: Omit<User, "id">) {
   try {
     await createUserTable();
 
-    await pool.query(
-      "INSERT INTO users (id, email, password, name) VALUES (?, ?, ?, ?)",
-      [user.id, user.email, user.password, user.name]
+    const [result] = await pool.query<ResultSetHeader>(
+      "INSERT INTO users (email, password, name) VALUES (?, ?, ?)",
+      [user.email, user.password, user.name]
     );
-
-    const [rows] = await pool.query<RowDataPacket[]>(
-      "SELECT * FROM users WHERE id = ?",
-      [user.id]
-    );
-
-    console.log("DB 생성 결과:", rows[0]);
-    return rows[0];
+    // 생성된 id 반환
+    const insertId = result.insertId;
+    return { ...user, id: insertId };
   } catch (error) {
     console.error("사용자 생성 중 오류:", error);
+    // 생성 오류시 null을 보내 createUserService내부 validate에서 걸러짐
+    // DB의 오류코드를 받아 좀 더 상세한 오류를 보내는 방법으로 변환이 필요해보임
     return null;
   }
 }

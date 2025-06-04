@@ -1,7 +1,5 @@
-import { v4 as uuidv4 } from "uuid";
-
 import { hashPassword } from "@/app/api/common/services/password.service";
-import { User, ApiResponse } from "@/app/api/common/types/user.types";
+import { User } from "@/app/api/common/types/user.types";
 import { findUserByEmail } from "../../login/repositories/user.repository";
 import {
   createUserInDb,
@@ -14,15 +12,32 @@ interface createUserInterface {
   name: string;
 }
 
+type CreateUserErrorResult = {
+  success: false;
+  errorMessage: string;
+  status: number;
+};
+type CreateUserSuccessResult<T> = {
+  success: true;
+  data: T;
+  status: number;
+};
+
+type CreateUserResult =
+  | CreateUserErrorResult
+  | CreateUserSuccessResult<{ user: Omit<User, "password"> }>;
+
 export async function createUser({
   email,
   password,
   name,
-}: createUserInterface) {
+}: createUserInterface): Promise<CreateUserResult> {
   try {
     await createUserTable();
     // 이메일 중복 체크
     const existingUser = await findUserByEmail(email);
+
+    // 중복된 이메일이 있는 경우 반환
     if (existingUser) {
       return {
         success: false,
@@ -31,23 +46,15 @@ export async function createUser({
       };
     }
 
-    console.log("이메일 검증/유저테이블생성까지 완료");
-
     // 비밀번호 해싱
-    console.log("해시할 비밀번호:", password);
     const hashedPassword = await hashPassword(password);
 
-    console.log("비밀번호 해쉬 완료");
-
     // 사용자 생성
-    const user = await createUserInDb({
-      id: uuidv4(),
+    const user = (await createUserInDb({
       email,
       password: hashedPassword,
       name,
-    });
-
-    console.log("사용자 생성 완료", user);
+    })) as User;
 
     if (!user) {
       return {
@@ -57,7 +64,7 @@ export async function createUser({
       };
     }
 
-    const { password: userPassword, ...userWithoutPassword } = user;
+    const { password: _, ...userWithoutPassword } = user;
 
     return {
       success: true,

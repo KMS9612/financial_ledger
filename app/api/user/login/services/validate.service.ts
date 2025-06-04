@@ -1,6 +1,7 @@
 import { findUserByEmail } from "../repositories/user.repository";
 import { validatePassword } from "@/app/api/common/services/password.service";
-import { User, ApiResponse } from "@/app/api/common/types/user.types";
+import { User } from "@/app/api/common/types/user.types";
+import { ApiResponse } from "@/app/api/common/utils/apiResponse";
 
 export async function validateUser(
   email: string,
@@ -28,8 +29,10 @@ export async function validateUser(
     };
   }
 
+  // 모두 통과할 경우 리턴할 값에서 password제거
   const { password: _, ...userWithoutPassword } = user;
 
+  // 최종 리턴값
   return {
     success: true,
     data: {
