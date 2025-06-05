@@ -12,7 +12,7 @@ export async function findUserByEmail(email: string): Promise<User | null> {
 
   const user = rows[0];
   return {
-    id: Number(user.id),
+    id: user.id,
     email: user.email,
     password: user.password,
     name: user.name,

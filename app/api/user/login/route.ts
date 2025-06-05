@@ -31,7 +31,7 @@ export async function POST(request: NextRequest) {
 
     // --- login 프로세스 모두 성공 시 response ---
     // 토큰 생성
-    const tokens = generateTokens(data.user.id);
+    const tokens = generateTokens(data.user.email);
 
     return NextResponse.json(
       successResponse<LoginResponseData>(
