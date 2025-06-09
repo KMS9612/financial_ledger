@@ -1,3 +1,3 @@
 export type CreateUserResponseType = {
-  user: { id: string; email: string; name: string };
+  user: { id: number; email: string; name: string };
 };

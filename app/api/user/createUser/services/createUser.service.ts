@@ -33,7 +33,6 @@ export async function createUser({
   name,
 }: createUserInterface): Promise<CreateUserResult> {
   try {
-    await createUserTable();
     // 이메일 중복 체크
     const existingUser = await findUserByEmail(email);
 
@@ -50,11 +49,11 @@ export async function createUser({
     const hashedPassword = await hashPassword(password);
 
     // 사용자 생성
-    const user = (await createUserInDb({
+    const user = await createUserInDb({
       email,
       password: hashedPassword,
       name,
-    })) as User;
+    });
 
     if (!user) {
       return {

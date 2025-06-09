@@ -19,10 +19,10 @@ export async function createUserTable() {
   }
 }
 
-export async function createUserInDb(user: Omit<User, "id">) {
+export async function createUserInDb(
+  user: Omit<User, "id" | "created_at" | "updated_at">
+): Promise<Omit<User, "created_at" | "updated_at"> | null> {
   try {
-    await createUserTable();
-
     const [result] = await pool.query<ResultSetHeader>(
       "INSERT INTO users (email, password, name) VALUES (?, ?, ?)",
       [user.email, user.password, user.name]
